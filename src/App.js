@@ -4,7 +4,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 
 import Rxform from './components/Rxform';
-import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
+import { Routes, Route,  BrowserRouter } from 'react-router-dom';
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
 
     <>
 <BrowserRouter>
-      {/* <Router> */}
+      
 
         {/* <nav>
           <Link to="/Login">Login</Link>
@@ -29,7 +29,7 @@ function App() {
           <Route path='/Rx-form' element={<Rxform/>} />
 
         </Routes>
-      {/* </Router> */}
+      
       </BrowserRouter>
       <div><h1>HEllo World</h1></div>
     
