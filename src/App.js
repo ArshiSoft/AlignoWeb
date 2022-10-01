@@ -26,7 +26,7 @@ function App() {
           <Route path='/Login' element={<Login />} />
           <Route path='/Register' element={<Register />} />
           <Route path='/Dashboard' element={<Dashboard />} />
-          <Route path='/Rxform' element={<Rxform/>} />
+          <Route path='/Rx-form' element={<Rxform/>} />
 
         </Routes>
       {/* </Router> */}
