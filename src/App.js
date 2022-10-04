@@ -31,7 +31,6 @@ function App() {
         </Routes>
       
       </BrowserRouter>
-      <div><h1>HEllo World</h1></div>
     
 
     </>
