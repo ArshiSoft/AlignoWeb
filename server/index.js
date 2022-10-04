@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 
 
-mongoose.connect('mongodb://localhost:27017/rxform')
+mongoose.connect('mongodb://admin:mss%40Bq%24@95.216.54.221:2705/aligno?authMechanism=DEFAULT&authSource=admin')
 
 app.get('/hello', (req,res)=>{
   res.send('Hello World')
