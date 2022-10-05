@@ -69,7 +69,7 @@ function Rxform() {
 
 	async function rxData(event) {
 		event.preventDefault();
-		const response = await fetch('http://95.216.54.221:65001/api/rxform', {
+		const response = await fetch('https://server.aligno.co/api/rxform', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
