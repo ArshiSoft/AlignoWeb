@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 
 import '../components/Rxform.css';
 
@@ -64,7 +64,7 @@ function Rxform() {
 	const [aeot, setAEOT] = useState('');
 	const [etbt, setETBT] = useState('');
 
-	const history = useNavigate();
+	//const history = useNavigate();
 
 	async function rxData(event) {
 		event.preventDefault();
@@ -135,7 +135,7 @@ function Rxform() {
 		});
 		const data = await response.json();
 		if (data.status === 'ok') {
-			// history('/login');
+			//history('/rx-form');
 			console.log('success');
 		}
 		console.log(data);
