@@ -13,7 +13,6 @@ function Rxform() {
 	const [patientnumber, setPatientNumber] = useState('');
 	const [patientemail, setPatientEmail] = useState('');
 	const [gender, setGender] = useState('');
-	const [email, setEmail] = useState('');
 	const [archesvalue, setArchesValue] = useState('');
 	const [pcop, setPcop] = useState('');
 	const [lowermidlinemaintain, setLowerMidlineMaintain] = useState(false);
@@ -84,7 +83,6 @@ function Rxform() {
 				patientnumber,
 				patientemail,
 				gender,
-				email,
 				archesvalue,
 				lowermidlinemaintain,
 				lowermidlineimprove,
@@ -338,7 +336,7 @@ function Rxform() {
 										</div>
 										<div class='col'>
 											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cdg'>
+												{/*<label className='form-label' for='form3Example4cdg'>
 													Email <span>*</span>
 												</label>
 												<input
@@ -350,7 +348,7 @@ function Rxform() {
 													id='form3Example4cdg'
 													className='form-control form-control-lg'
 												/>
-												{/* <div className="text-danger">
+												 <div className="text-danger">
             {formik.errors.email ? formik.errors.email : null}
           </div> */}
 											</div>
