@@ -155,7 +155,7 @@ function Rxform() {
 									borderRadius: `10px`,
 									padding: `50px`,
 								}}>
-								<h2 class='text-uppercase text-center mb-5'>RX-FORM Case Submission</h2>
+								<h2 class='text-uppercase text-center mb-5'>Case Submission</h2>
 								<form onSubmit={rxData}>
 									<div class='row align-items-start'>
 										<div class='col'>
