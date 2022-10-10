@@ -1137,7 +1137,7 @@ function Rxform() {
 													for='form2Example3g'>
 													I agree all statements in{' '}
 													<a
-														href='https://aligno.co/terms-and-conditions/'
+														href='https://aligno.co/terms-and-conditions-doctors/'
 														target='_blank'
 														rel='noopener noreferrer'
 														className='text-body'>
