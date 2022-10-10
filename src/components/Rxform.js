@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Rxform.css';
 import { useEffect } from 'react';
+import "@fontsource/league-spartan"; // Defaults to weight 400.
+import "@fontsource/source-sans-pro"; // Defaults to weight 400.
 
 // const InnerForm = ({
 // 	handleSubmit,
@@ -791,8 +793,7 @@ function Rxform() {
 													class='form-check-input'
 													onChange={(e) => setOverbiteImprove(e.target.value)}
 													type='checkbox'
-													id='flexCheckDefault'
-												/>
+													id='flexCheckDefault'/>
 												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>

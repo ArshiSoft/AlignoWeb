@@ -1,3 +1,4 @@
+
 .gradient-custom-3 {
     /* fallback for old browsers */
     background: #01aba9;
@@ -42,5 +43,27 @@ width: 80%;
         min-width: 320px;
         padding:0px !important;
          }
+         label{
+            font-weight: 400;
+            font-family:Source Sans Pro !important;
+         }
+         h2{
+font-weight: 600 !important;
+font-family: League Spartan !important;
+         }
+         h1{
+            font-weight: 600 !important;
+            font-family: League Spartan !important;
+                     }
+                     h3{
+                        font-weight: 600 !important;
+                        font-family: League Spartan !important;
+                                 }
+                                 h5{
+                                    font-weight: 600 !important;
+                                    font-family: League Spartan !important;
+                                             }
+                                 
+                     
    
    
