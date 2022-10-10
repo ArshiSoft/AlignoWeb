@@ -21,26 +21,5 @@
     span{
         color: #ff0000;
     }
-    /* <style>
-    @media (min-width: 768px) {
-        .formwidth: {
-          {
-            width: 75%;
-          }
-        }
-        </style> */
-        /* .formwidth.col-12{
-            width: 100%;
-        } */
-        /* .formwidth.col-md-9{
-            width: 70%;
-        }
-    .formwidth.col-lg-7{
-width: 80%;
-    } */
-    .formwidth{
-        min-width: 560px;
-       
-    }
-   
-   
+
+    
