@@ -11,6 +11,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install --silent
+RUN npm install @fontsource/league-spartan --silent
+RUN npm install @fontsource/source-sans-pro --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 
 # add app
