@@ -212,7 +212,7 @@ function Rxform() {
 							style={{ width: `900px`}}>
 							<div
 								style={{
-									margin: `10px`,
+									// margin: `10px`,
 									backgroundColor: `white`,
 									borderRadius: `10px`,
 									padding: `50px`,
