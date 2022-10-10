@@ -1138,6 +1138,7 @@ function Rxform() {
 													I agree all statements in{' '}
 													<a
 														href='https://aligno.co/terms-and-conditions/'
+														target='_blank'
 														className='text-body'>
 														<u>Terms of service</u>
 													</a>
