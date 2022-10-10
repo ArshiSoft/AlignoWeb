@@ -1,7 +1,13 @@
 import React from "react"
-
+import { useEffect } from "react";
 
 function Thanks(){
+
+  // Tab Title
+	useEffect(() => {
+		document.title = "ALigno-Thanks";  
+	  }, []);
+
     return(
        <>
        <div class="jumbotron text-center">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components/Rxform.css';
+import { useEffect } from 'react';
 
 
 // const InnerForm = ({
@@ -51,6 +52,13 @@ import '../components/Rxform.css';
 
 
 function Rxform() {
+
+	// Tab Title
+	useEffect(() => {
+		document.title = "Aligno-Rx-Form";  
+	  }, []);
+
+
 	const [clinicname, setClinicName] = useState('');
 	const [doctorname, setDoctorName] = useState('');
 	const [doctornumber, setDoctorNumber] = useState('');
@@ -627,7 +635,7 @@ function Rxform() {
 											<label
 												className='form-label font-weight-bold'
 												for='form3Example1cg'>
-												Canine Relationship
+												Canine Relation
 											</label>
 
 											<div class='form-check mt-3'>
