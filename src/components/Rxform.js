@@ -1139,6 +1139,7 @@ function Rxform() {
 													<a
 														href='https://aligno.co/terms-and-conditions/'
 														target='_blank'
+														rel='noopener noreferrer'
 														className='text-body'>
 														<u>Terms of service</u>
 													</a>
