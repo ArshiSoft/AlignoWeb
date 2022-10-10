@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      #- run: docker stop alignoweb
+      - run: docker stop alignoweb
       #- run: docker rm alignoweb
       #- run: docker rmi alignoweb_alignoweb:latest
       - run: npm i
