@@ -206,13 +206,13 @@ function Rxform() {
 		<>
 			<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
 				<div className=' container h-100'>
-					<div className=' row d-flex justify-content-center align-items-center h-100'>
+					<div className='row d-flex justify-content-center align-items-center h-100'>
 						<div
 							className='col-12 col-sm-6 col-md-9 col-lg-7 col-sm-6 col-xl-6 formwidth'
-							style={{ width: `900px` }}>
+							style={{ width: `900px`, padding:`0px`, padding:`0px`}}>
 							<div
 								style={{
-									margin: `10px`,
+									// margin: `10px`,
 									backgroundColor: `white`,
 									borderRadius: `10px`,
 									padding: `50px`,
