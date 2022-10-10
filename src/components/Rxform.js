@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import '../components/Rxform.css';
 import { useEffect } from 'react';
 
-
 // const InnerForm = ({
 // 	handleSubmit,
 // 	setFieldValue,
@@ -39,25 +38,11 @@ import { useEffect } from 'react';
 // 	  isImageLoading, setIsImageLoading,
 // 	  newCustomer } = useIinventoryUIContext();
 
-
-
-
-
-
-
-
-
-
-
-
-
 function Rxform() {
-
 	// Tab Title
 	useEffect(() => {
-		document.title = "Aligno-Rx-Form";  
-	  }, []);
-
+		document.title = 'Aligno-Rx-Form';
+	}, []);
 
 	const [clinicname, setClinicName] = useState('');
 	const [doctorname, setDoctorName] = useState('');
@@ -106,8 +91,10 @@ function Rxform() {
 	const [archformmaintain, setArchFormMaintain] = useState(false);
 	const [archformimprove, setArchFormImprove] = useState(false);
 	const [archformideal, setArchFormIdeal] = useState(false);
-	const [posteriorcrossbitemaintain, setPosteriorCrossbiteMaintain] = useState(false);
-	const [posteriorcrossbiteimprove, setPosteriorCrossbiteImprove] = useState(false);
+	const [posteriorcrossbitemaintain, setPosteriorCrossbiteMaintain] =
+		useState(false);
+	const [posteriorcrossbiteimprove, setPosteriorCrossbiteImprove] =
+		useState(false);
 	const [posteriorcrossbiteideal, setPosteriorCrossbiteIdeal] = useState(false);
 	const [procline, setProcline] = useState('');
 	const [ipr, setIPR] = useState('');
@@ -118,10 +105,6 @@ function Rxform() {
 	const [etbt, setETBT] = useState('');
 
 	const history = useNavigate();
-
-
-
-
 
 	// const validateForm = (e) => {
 	// 	e.preventDefault();
@@ -137,7 +120,7 @@ function Rxform() {
 
 	async function rxData(event) {
 		event.preventDefault();
-		const response = await fetch('https://server.aligno.co/api/rxform',{
+		const response = await fetch('https://server.aligno.co/api/rxform', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -203,10 +186,9 @@ function Rxform() {
 			}),
 		});
 
-
 		const data = await response.json();
 		if (data.status === 'ok') {
-			history('/thanks')
+			history('/thanks');
 		}
 		console.log(data);
 	}
@@ -217,17 +199,16 @@ function Rxform() {
 					<div className='row d-flex justify-content-center align-items-center h-100'>
 						<div
 							className='col-12 col-sm-6 col-md-9 col-lg-7 col-sm-6 col-xl-6 formwidth'
-							style={{ width: `900px`}}>
+							style={{ width: `900px` }}>
 							<div
 								style={{
 									// margin: `10px`,
 									backgroundColor: `white`,
 									borderRadius: `10px`,
 									padding: `50px`,
-									}}>
+								}}>
 								<h2 class='text-uppercase text-center mb-5'>Case Submission</h2>
 								<form onSubmit={rxData}>
-
 									{/* <FormGroup style={RowSpacing} row>
           <Label style={LabelFont} md={3} lg={2} for="NAME" sm={1}>Name<span className="text-danger">*</span></Label>
           <Col sm={5} md={3} lg={4} >
@@ -264,24 +245,23 @@ function Rxform() {
           </Col>
                                           </FormGroup> */}
 
-
-
 									<div class='row align-items-start'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
-												<label className='form-label' for="validationCustom01">
+												<label className='form-label' for='validationCustom01'>
 													Name of Clinic <span>*</span>
 												</label>
 
 												<input
-													id="userNameInput"
+													id='userNameInput'
 													type='text'
 													onChange={(e) => setClinicName(e.target.value)}
 													value={clinicname}
 													// onBlur={formik.handleChange}
 													// value={formik.values.clinicname}
 													// name="clinicname"
-													className='form-control form-control-lg' required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.clinicname ? formik.errors.clinicname : null}
@@ -300,7 +280,8 @@ function Rxform() {
 													// value={formik.values.doctorname}
 													name='doctorname'
 													id='form3Example3cg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.doctorname ? formik.errors.doctorname : null}
@@ -321,7 +302,8 @@ function Rxform() {
 													// value={formik.values.doctornumber}
 													name='doctornumber'
 													id='form3Example1cg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.doctornumber ? formik.errors.doctornumber : null}
@@ -340,7 +322,8 @@ function Rxform() {
 													// value={formik.values.doctoremail}
 													name='doctoremail'
 													id='form3Example3cg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.doctoremail ? formik.errors.doctoremail : null}
@@ -361,7 +344,8 @@ function Rxform() {
 													// value={formik.values.patientid}
 													name='patientid'
 													id='form3Example1cg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.patientid ? formik.errors.patientid : null}
@@ -380,7 +364,8 @@ function Rxform() {
 													// value={formik.values.nameofpatient}
 													name='nameofpatient'
 													id='form3Example3cg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
@@ -401,7 +386,8 @@ function Rxform() {
 													// value={formik.values.patientnumber}
 													name='patientnumber'
 													id='form3Example4cg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.patientnumber ? formik.errors.patientnumber : null}
@@ -420,7 +406,8 @@ function Rxform() {
 													// value={formik.values.patientemail}
 													name='patientemail'
 													id='form3Example4cdg'
-													className='form-control form-control-lg'required
+													className='form-control form-control-lg'
+													required
 												/>
 												{/* <div className="text-danger">
             {formik.errors.patientemail ? formik.errors.patientemail : null}
@@ -435,7 +422,8 @@ function Rxform() {
 													Select Gender <span>*</span>
 												</label>
 												<select
-													className='form-select form-select-lg'required
+													className='form-select form-select-lg'
+													required
 													onChange={(e) => setGender(e.target.value)}
 													aria-label='Default select example'>
 													<option value='' disabled selected>
@@ -568,9 +556,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class I Right
-												</label>
+												<label class='form-check-label'>Class I Right</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -579,11 +565,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label'
-
-												>
-													Class I Left
-												</label>
+												<label class='form-check-label'>Class I Left</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -592,9 +574,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class II Right
-												</label>
+												<label class='form-check-label'>Class II Right</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -603,9 +583,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class II Left
-												</label>
+												<label class='form-check-label'>Class II Left</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -614,9 +592,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class III Right
-												</label>
+												<label class='form-check-label'>Class III Right</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -625,9 +601,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class III Left
-												</label>
+												<label class='form-check-label'>Class III Left</label>
 											</div>
 										</div>
 
@@ -645,9 +619,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class I Right
-												</label>
+												<label class='form-check-label'>Class I Right</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -656,9 +628,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class I Left
-												</label>
+												<label class='form-check-label'>Class I Left</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -667,9 +637,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class II Right
-												</label>
+												<label class='form-check-label'>Class II Right</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -678,9 +646,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class II Left
-												</label>
+												<label class='form-check-label'>Class II Left</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -689,9 +655,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class III Right
-												</label>
+												<label class='form-check-label'>Class III Right</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -700,9 +664,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Class III Left
-												</label>
+												<label class='form-check-label'>Class III Left</label>
 											</div>
 										</div>
 									</div>
@@ -744,9 +706,7 @@ function Rxform() {
 													}
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -757,9 +717,7 @@ function Rxform() {
 													}
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -768,9 +726,7 @@ function Rxform() {
 													onChange={(e) => setLowerMidlineIdeal(e.target.value)}
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 
@@ -790,9 +746,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -803,9 +757,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -814,9 +766,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 									</div>
@@ -834,9 +784,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -845,9 +793,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -856,9 +802,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 
@@ -876,9 +820,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -887,9 +829,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -898,9 +838,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 									</div>
@@ -920,9 +858,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -933,9 +869,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -946,9 +880,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 
@@ -967,9 +899,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -980,9 +910,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -993,9 +921,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label'>
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 									</div>
@@ -1013,9 +939,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -1024,9 +948,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -1035,9 +957,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 
@@ -1057,9 +977,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Maintain
-												</label>
+												<label class='form-check-label'>Maintain</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -1070,9 +988,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Improve
-												</label>
+												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>
 												<input
@@ -1083,9 +999,7 @@ function Rxform() {
 													type='checkbox'
 													id='flexCheckDefault'
 												/>
-												<label class='form-check-label' >
-													Ideal
-												</label>
+												<label class='form-check-label'>Ideal</label>
 											</div>
 										</div>
 									</div>
@@ -1213,15 +1127,18 @@ function Rxform() {
 										<div class='col'>
 											<div className='form-check d-flex  mb-5'>
 												<input
-													className='form-check-input me-2'required
+													className='form-check-input me-2'
+													required
 													type='checkbox'
 													id='form2Example3cg'
 												/>
 												<label
-													className='form-check-label' 
+													className='form-check-label'
 													for='form2Example3g'>
 													I agree all statements in{' '}
-													<a href='#!' className='text-body'>
+													<a
+														href='https://aligno.co/terms-and-conditions/'
+														className='text-body'>
 														<u>Terms of service</u>
 													</a>
 												</label>
@@ -1253,11 +1170,10 @@ function Rxform() {
 	);
 }
 
-
 // export const InventoryEditForm = withFormik({
 // 	enableReinitialize: true,
 // 	mapPropsToValues: ({ tempData }) => {
-// 	  // On tempData?.customerDetails all the details data is set except warehouse data, warehouse can be accessible on tempData[1]   
+// 	  // On tempData?.customerDetails all the details data is set except warehouse data, warehouse can be accessible on tempData[1]
 // 	  return ({
 // 		NAME: tempData?.customerDetails?.NAME || "",
 // 		CODE: tempData?.customerDetails?.CODE || "",
