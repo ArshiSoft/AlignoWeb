@@ -7,7 +7,7 @@
 // import jwt_decode from "jwt-decode";
 
 
-// ---------------------
+// // ---------------------
 
 // export default function Dashboard() {
 //   const history = useNavigate()
@@ -34,86 +34,86 @@
 //     window.location.href = '/Login'
 //   }
 
-// --------------------
+// // --------------------
 
 
 
-  // const [quote, setQuote] = useState('')
-  // const [tempQuote, setTempQuote] = useState('')
-  // const jwt = useJwt()
+//   const [quote, setQuote] = useState('')
+//   const [tempQuote, setTempQuote] = useState('')
+//   const jwt = useJwt()
 
 
 
-  // async function populateQoute() {
+//   async function populateQoute() {
 
-  //   const req = await fetch('http://localhost:/1337/api/quote',
-  //     {
-  //       headers: {
-  //         'x-access-token': localStorage.getItem('token'),
-  //       },
-  //     })
-  //   const data = await req.json()
-  //   if (data.status === 'ok') {
-  //     console.log('all done')
-  //   }
-  //   else {
-  //     alert(data.error)
-  //   }
-  // }
+//     const req = await fetch('http://localhost:/1337/api/quote',
+//       {
+//         headers: {
+//           'x-access-token': localStorage.getItem('token'),
+//         },
+//       })
+//     const data = await req.json()
+//     if (data.status === 'ok') {
+//       console.log('all done')
+//     }
+//     else {
+//       alert(data.error)
+//     }
+//   }
 
 
 
-  // Imporant
-// -----------------------
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token')
-  //   if (token) {
-  //     const user = jwt_decode(token, { header: true });
-  //     console.log(user)
-  //     if (!user) {
-  //       localStorage.removeItem('token')
-  //       history.replace('/login')
-  //     }
-  //     else {
+//   Imporant
+// // -----------------------
+//   useEffect(() => {
+//     const token = localStorage.getItem('token')
+//     if (token) {
+//       const user = jwt_decode(token, { header: true });
+//       console.log(user)
+//       if (!user) {
+//         localStorage.removeItem('token')
+//         history.replace('/login')
+//       }
+//       else {
         
-  //       // populateQoute()
-  //     }
-  //   }
-  // }, [])
+//         // populateQoute()
+//       }
+//     }
+//   }, [])
 
-// ---------------
-
-
+// // ---------------
 
 
 
 
-  // async function updateQuote(event) {
-  //   event.preventDefault()
-  //   const req = await fetch('http://localhost:/1337/api/quote',
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'x-access-token': localStorage.getItem('token'),
-  //       },
-  //       body: JSON.stringify({
-  //         quote: tempQuote,
-  //       }),
-  //     })
-  //   const data = await req.json()
-  //   if (data.status === 'ok') {
-  //     setTempQuote('')
-  //     setQuote(tempQuote)
-  //   }
-  //   else {
-  //     alert(data.error)
-  //   }
-  // }
-// ----
-  // }
-  // -----
-  // ---------
+
+
+//   async function updateQuote(event) {
+//     event.preventDefault()
+//     const req = await fetch('http://localhost:/1337/api/quote',
+//       {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'x-access-token': localStorage.getItem('token'),
+//         },
+//         body: JSON.stringify({
+//           quote: tempQuote,
+//         }),
+//       })
+//     const data = await req.json()
+//     if (data.status === 'ok') {
+//       setTempQuote('')
+//       setQuote(tempQuote)
+//     }
+//     else {
+//       alert(data.error)
+//     }
+//   }
+
+//   }
+
+
 // return (
   
 
@@ -467,4 +467,4 @@
 
 
 // }
-// ---------
+

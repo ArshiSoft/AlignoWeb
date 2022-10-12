@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../components/Rxform.css';
+import '../RxForm/Rxform.css';
 import { useEffect } from 'react';
 import "@fontsource/league-spartan"; // Defaults to weight 400.
 import "@fontsource/source-sans-pro"; // Defaults to weight 400.

@@ -1,0 +1,22 @@
+nav{
+   
+}
+a {
+    color: white !important;
+    text-decoration: none !important;
+    background-color: transparent;
+}
+
+    
+
+
+nav.navbar.navbar-expand-lg.navbar-dark.navclass {
+    background-color: #01aba9 ;
+}
+ul.dropdown-menu.show {
+    background-color: #01aba9 ;
+    color: #01aba9;
+}
+button.btn.btn-outline-success {
+color: white;
+}

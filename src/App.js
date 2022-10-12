@@ -1,11 +1,12 @@
 import './App.css';
 // import Login from './components/Login';
 // import Register from './components/Register';
-// import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 // import InventoryEditForm from './test';
 import Thanks from './components/Thanks';
-import Rxform from './components/Rxform';
+import Rxform from './components/RxForm/Rxform';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
 
 
 
@@ -27,6 +28,9 @@ function App() {
         <Routes>
           <Route path='/Rx-form' element={<Rxform />} />
           <Route path='/thanks' element={<Thanks />} />
+          <Route path='/Dashboard' element={<Dashboard/>} />
+          <Route path='/Navbar' element={<Navbar/>} />
+
       {/* <Route path='/test' element={<InventoryEditForm/>} /> */}
           {/* <Route path='/Login' element={<Login />} />
           <Route path='/Register' element={<Register />} />
