@@ -4,6 +4,7 @@ import '../RxForm/Rxform.css';
 import { useEffect } from 'react';
 import "@fontsource/league-spartan"; // Defaults to weight 400.
 import "@fontsource/source-sans-pro"; // Defaults to weight 400.
+import Navbar from '../Navbar/Navbar';
 
 // const InnerForm = ({
 // 	handleSubmit,
@@ -93,10 +94,8 @@ function Rxform() {
 	const [archformmaintain, setArchFormMaintain] = useState(false);
 	const [archformimprove, setArchFormImprove] = useState(false);
 	const [archformideal, setArchFormIdeal] = useState(false);
-	const [posteriorcrossbitemaintain, setPosteriorCrossbiteMaintain] =
-		useState(false);
-	const [posteriorcrossbiteimprove, setPosteriorCrossbiteImprove] =
-		useState(false);
+	const [posteriorcrossbitemaintain, setPosteriorCrossbiteMaintain] = useState(false);
+	const [posteriorcrossbiteimprove, setPosteriorCrossbiteImprove] = useState(false);
 	const [posteriorcrossbiteideal, setPosteriorCrossbiteIdeal] = useState(false);
 	const [procline, setProcline] = useState('');
 	const [ipr, setIPR] = useState('');
@@ -196,6 +195,7 @@ function Rxform() {
 	}
 	return (
 		<>
+		<Navbar/>
 			<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
 				<div className=' container h-100'>
 					<div className='row d-flex justify-content-center align-items-center h-100'>

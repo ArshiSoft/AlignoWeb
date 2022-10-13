@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 // import Rxform from '../RxForm/Rxform';
 import '../Navbar/Navbar.css';
+
  /* eslint-disable */
 
 
@@ -24,7 +25,8 @@ function Navbar(){
             </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" >Link</a>
+          <a className="nav-link" >
+          <Link  to="/Register">Register</Link></a>
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
