@@ -43,7 +43,7 @@ import "react-phone-input-2/lib/style.css";
 // 	  isImageLoading, setIsImageLoading,
 // 	  newCustomer } = useIinventoryUIContext();
 
-function Rxform() {
+function Rxform2() {
   // Tab Title
   useEffect(() => {
     document.title = "Aligno-Rx-Form";
@@ -1253,4 +1253,4 @@ function Rxform() {
 // 	},
 //   })(InnerForm);
 
-export default Rxform;
+export default Rxform2;
