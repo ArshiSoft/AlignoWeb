@@ -8,6 +8,8 @@ import Rxform from "./components/RxForm/Rxform";
 // import Rxform2 from "./components/RxForm2/Rxform2";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import RxTable from "./components/Rx-Form-Data/Modules/RxTable";
+import rxFormData from "./components/Rx-Form-Data/RxFormData";
 
 function App() {
   return (
@@ -21,12 +23,15 @@ function App() {
         </nav> */}
 
         <Routes>
-          <Route path="/Rx-form" element={<Rxform />} />
+        <Route path="/RxTable" element={<RxTable />} />
+        <Route path="/RxFormData" element={<rxFormData />} />
+        <Route path="/Rx-form" element={<Rxform />} />
           {/* <Route path="/Rx-form2" element={<Rxform2 />} /> */}
           <Route path="/thanks" element={<Thanks />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Navbar" element={<Navbar />} />
           <Route path="/Register" element={<Register />} />
+          
 
           {/* <Route path='/test' element={<InventoryEditForm/>} /> */}
           {/* <Route path='/Login' element={<Login />} />
