@@ -2,15 +2,20 @@ import React from "react";
 
 function RxTable(){
     return(
-<>
-<h1>HEllo World</h1>
-{/* <table class="table">
+
+<div className="col-lg-8 col-md-8 col-sm-6">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">DOctor Name</th>
+      <th scope="col">Patient Name</th>
+      <th scope="col">Doctor Email</th>
+      <th scope="col">Patient Email</th>
+      <th scope="col">Doctor Phone</th>
+      <th scope="col">Patient Phone</th>
+      <th scope="col">Doctor Email</th>
+      <th scope="col">Doctor Email</th>
     </tr>
   </thead>
   <tbody>
@@ -32,8 +37,8 @@ function RxTable(){
       <td>@twitter</td>
     </tr>
   </tbody>
-</table> */}
-</>
+</table>
+</div>
     )
 }
 export default RxTable;

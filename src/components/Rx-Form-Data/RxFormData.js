@@ -1,12 +1,13 @@
-
+import Navbar from "../Navbar/Navbar";
 import RxTable from "./Modules/RxTable";
 
 
-function rxFormData() {
-    return (
-       
-        <RxTable/>
-        
-    )
+function RxFormData() {
+  return (
+    <>
+    <Navbar/>
+   <RxTable/>
+   </>
+  )
 }
-export default rxFormData;
+export default RxFormData;
