@@ -2,7 +2,7 @@ import React from "react";
 
 function RxTable(){
     return(
-
+<>
 <div className="col-lg-8 col-md-8 col-sm-6">
 <table class="table table-bordered">
   <thead>
@@ -39,6 +39,7 @@ function RxTable(){
   </tbody>
 </table>
 </div>
+</>
     )
 }
 export default RxTable;

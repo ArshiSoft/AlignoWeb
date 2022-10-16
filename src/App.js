@@ -9,6 +9,7 @@ import Rxform2 from './components/RxForm2/Rxform2';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import RxFormData from './components/Rx-Form-Data/RxFormData';
+// import RxFormData from './components/Rx-Form-Data/RxFormData';
 
 function App() {
 	return (
