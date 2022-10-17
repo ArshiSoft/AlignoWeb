@@ -2,6 +2,7 @@ import './App.css';
 // import Login from './components/Login';
 import Register from './components/Register/Register';
 import Dashboard from './components/Dashboard/Dashboard';
+import Candidate from './components/Candidate/Candidate';
 // import InventoryEditForm from './test';
 import Thanks from './components/Thanks';
 import Rxform from './components/RxForm/Rxform';
@@ -29,7 +30,8 @@ function App() {
 					<Route path='/Dashboard' element={<Dashboard />} />
 					<Route path='/Navbar' element={<Navbar />} />
 					<Route path='/Register' element={<Register />} />
-          <Route path='/Rx-view' element={<RxFormData/>} />
+					<Route path='/Rx-view' element={<RxFormData />} />
+					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
 
 					{/* <Route path='/test' element={<InventoryEditForm/>} /> */}
 					{/* <Route path='/Login' element={<Login />} />
