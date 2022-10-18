@@ -834,9 +834,6 @@ function Candidate() {
 									</div>
 								</div>
 								<div class='wpforms-submit-container'>
-									<input type='hidden' name='wpforms[id]' value='1961' />
-									<input type='hidden' name='wpforms[author]' value='1' />
-									<input type='hidden' name='wpforms[post_id]' value='1968' />
 									<button
 										type='submit'
 										name='wpforms[submit]'
