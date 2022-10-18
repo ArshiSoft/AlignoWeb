@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../RxForm/Rxform.css';
 import { useEffect } from 'react';
-import "@fontsource/league-spartan"; // Defaults to weight 400.
-import "@fontsource/source-sans-pro"; // Defaults to weight 400.
+import '@fontsource/league-spartan'; // Defaults to weight 400.
+import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 
+import Input from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 // const InnerForm = ({
 // 	handleSubmit,
@@ -46,13 +48,15 @@ function Rxform() {
 	useEffect(() => {
 		document.title = 'Aligno-Rx-Form';
 	}, []);
-    const [clinicname, setClinicName] = useState('');
+	const [clinicname, setClinicName] = useState('');
 	const [doctorname, setDoctorName] = useState('');
 	const [doctornumber, setDoctorNumber] = useState('');
+	const [doctorNumberInputValue, setdoctorNumberInputValue] = useState('');
 	const [doctoremail, setDoctorEmail] = useState('');
 	const [patienid, setPatientId] = useState('');
 	const [patientname, setPatientName] = useState('');
 	const [patientnumber, setPatientNumber] = useState('');
+	const [patientNumberInputValue, setpatientNumberInputValue] = useState('');
 	const [patientemail, setPatientEmail] = useState('');
 	const [gender, setGender] = useState('');
 	const [archesvalue, setArchesValue] = useState('');
@@ -93,8 +97,10 @@ function Rxform() {
 	const [archformmaintain, setArchFormMaintain] = useState(false);
 	const [archformimprove, setArchFormImprove] = useState(false);
 	const [archformideal, setArchFormIdeal] = useState(false);
-	const [posteriorcrossbitemaintain, setPosteriorCrossbiteMaintain] = useState(false);
-	const [posteriorcrossbiteimprove, setPosteriorCrossbiteImprove] = useState(false);
+	const [posteriorcrossbitemaintain, setPosteriorCrossbiteMaintain] =
+		useState(false);
+	const [posteriorcrossbiteimprove, setPosteriorCrossbiteImprove] =
+		useState(false);
 	const [posteriorcrossbiteideal, setPosteriorCrossbiteIdeal] = useState(false);
 	const [procline, setProcline] = useState('');
 	const [ipr, setIPR] = useState('');
@@ -194,7 +200,7 @@ function Rxform() {
 	}
 	return (
 		<>
-		<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
+			<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
 				<div className=' container h-100'>
 					<div className='row d-flex justify-content-center align-items-center h-100'>
 						<div
@@ -257,7 +263,7 @@ function Rxform() {
 													type='text'
 													onChange={(e) => setClinicName(e.target.value)}
 													value={clinicname}
-													placeholder="Smile Hub"
+													placeholder='Smile Hub'
 													// onBlur={formik.handleChange}
 													// value={formik.values.clinicname}
 													// name="clinicname"
@@ -280,7 +286,7 @@ function Rxform() {
 													// onBlur={formik.handleChange}
 													// value={formik.values.doctorname}
 													name='doctorname'
-													placeholder="Dr Ali"
+													placeholder='Dr Ali'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 													required
@@ -294,6 +300,31 @@ function Rxform() {
 									<div class='row align-items-start'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Doctor's Phone Number <span>*</span>
+												</label>
+												<Input
+													country={'pk'}
+													value={doctornumber}
+													name='doctornumber'
+													onChange={
+														((e) => {
+															setdoctorNumberInputValue(e.target.value);
+														},
+														setDoctorNumber)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													required
+												/>
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
 													Doctors Number <span>*</span>
 												</label>
@@ -303,16 +334,16 @@ function Rxform() {
 													// onBlur={formik.handleChange}
 													// value={formik.values.doctornumber}
 													name='doctornumber'
-													placeholder="Enter Phone Number"
+													placeholder='Enter Phone Number'
 													id='form3Example1cg'
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
+												 <div className="text-danger">
             {formik.errors.doctornumber ? formik.errors.doctornumber : null}
-          </div> */}
+          </div> 
 											</div>
-										</div>
+										</div> */}
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
@@ -324,7 +355,7 @@ function Rxform() {
 													// onBlur={formik.handleChange}
 													// value={formik.values.doctoremail}
 													name='doctoremail'
-													placeholder="Enter Your Email"
+													placeholder='Enter Your Email'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 													required
@@ -347,7 +378,7 @@ function Rxform() {
 													// onBlur={formik.handleChange}
 													// value={formik.values.patientid}
 													name='patientid'
-													placeholder="Generated by the Introral Scanner"
+													placeholder='Generated by the Introral Scanner'
 													id='form3Example1cg'
 													className='form-control form-control-lg'
 													required
@@ -368,7 +399,7 @@ function Rxform() {
 													// onBlur={formik.handleChange}
 													// value={formik.values.nameofpatient}
 													name='nameofpatient'
-													placeholder="Ali"
+													placeholder='Ali'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 													required
@@ -385,22 +416,47 @@ function Rxform() {
 												<label className='form-label' for='form3Example4cg'>
 													Patient's Phone Number <span>*</span>
 												</label>
+												<Input
+													country={'pk'}
+													value={patientnumber}
+													name='patientnumber'
+													onChange={
+														((e) => {
+															setpatientNumberInputValue(e.target.value);
+														},
+														setPatientNumber)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													required
+												/>
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Patient's Phone Number <span>*</span>
+												</label>
 												<input
 													type='text'
 													onChange={(e) => setPatientNumber(e.target.value)}
 													// onBlur={formik.handleChange}
 													// value={formik.values.patientnumber}
 													name='patientnumber'
-													placeholder="Enter Phone Number"
+													placeholder='Enter Phone Number'
 													id='form3Example4cg'
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
+												 <div className="text-danger">
             {formik.errors.patientnumber ? formik.errors.patientnumber : null}
-          </div> */}
+          </div> 
 											</div>
-										</div>
+										</div> */}
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cdg'>
@@ -412,7 +468,7 @@ function Rxform() {
 													// onBlur={formik.handleChange}
 													// value={formik.values.patientemail}
 													name='patientemail'
-													placeholder="ali@gmail.com"
+													placeholder='ali@gmail.com'
 													id='form3Example4cdg'
 													className='form-control form-control-lg'
 													required
@@ -477,7 +533,7 @@ function Rxform() {
 													id='form3Example1cg'
 													onChange={(e) => setPcop(e.target.value)}
 													className='form-control form-control-lg'
-													placeholder="Crowding in lower arch/Diastema"
+													placeholder='Crowding in lower arch/Diastema'
 												/>
 											</div>
 										</div>
@@ -691,7 +747,7 @@ function Rxform() {
 											type='text'
 											id='form3Example1cg'
 											class='form-control form-control-lg'
-											placeholder="Please mention which teeth have bridges,implants etc so that are not moved in"
+											placeholder='Please mention which teeth have bridges,implants etc so that are not moved in'
 										/>
 									</div>
 									<div class='field field-wrap-elem-117'>
@@ -801,7 +857,8 @@ function Rxform() {
 													class='form-check-input'
 													onChange={(e) => setOverbiteImprove(e.target.value)}
 													type='checkbox'
-													id='flexCheckDefault'/>
+													id='flexCheckDefault'
+												/>
 												<label class='form-check-label'>Improve</label>
 											</div>
 											<div class='form-check mt-3'>

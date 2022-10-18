@@ -302,8 +302,6 @@ function Rxform2() {
 												<label className='form-label' for='form3Example4cg'>
 													Doctor's Phone Number <span>*</span>
 												</label>
-												{/* <div class="input-group input-group-lg">
-							</div> */}
 												<Input
 													country={'pk'}
 													value={doctornumber}

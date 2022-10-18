@@ -25,7 +25,6 @@ function App() {
 
 				<Routes>
 					<Route path='/Rx-form' element={<Rxform />} />
-					<Route path='/Rx-form2' element={<Rxform2 />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/Dashboard' element={<Dashboard />} />
 					<Route path='/Navbar' element={<Navbar />} />
