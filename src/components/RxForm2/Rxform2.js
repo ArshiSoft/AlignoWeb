@@ -108,7 +108,8 @@ function Rxform2() {
 	const [distalize, setDistalize] = useState('');
 	const [aeot, setAEOT] = useState('');
 	const [etbt, setETBT] = useState('');
-	const [inputValue, setinputValue] = useState();
+	const [doctorNumberInputValue, setdoctorNumberInputValue] = useState('');
+	const [patientNumberInputValue, setpatientNumberInputValue] = useState('');
 	const history = useNavigate();
 
 	// const validateForm = (e) => {
@@ -298,6 +299,34 @@ function Rxform2() {
 									<div class='row align-items-start'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Doctor's Phone Number <span>*</span>
+												</label>
+												{/* <div class="input-group input-group-lg">
+							</div> */}
+												<Input
+													country={'pk'}
+													value={doctornumber}
+													name='doctornumber'
+													onChange={
+														((e) => {
+															setdoctorNumberInputValue(e.target.value);
+														},
+														setDoctorNumber)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													className='input-tel-border-radius'
+													required
+												/>
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
 													Doctors Number <span>*</span>
 												</label>
@@ -311,11 +340,11 @@ function Rxform2() {
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
+												 <div className="text-danger">
             {formik.errors.doctornumber ? formik.errors.doctornumber : null}
-          </div> */}
+          </div> 
 											</div>
-										</div>
+										</div> */}
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
@@ -389,15 +418,14 @@ function Rxform2() {
 							</div> */}
 												<Input
 													country={'pk'}
-													value={inputValue}
+													value={patientnumber}
 													name='patientnumber'
-													id='form3Example4cg'
 													// onChange={setinputValue}
 													onChange={
 														((e) => {
-															setPatientNumber(e.target.value);
+															setpatientNumberInputValue(e.target.value);
 														},
-														setinputValue)
+														setPatientNumber)
 													}
 													inputStyle={{
 														width: '100%',
