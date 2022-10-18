@@ -400,8 +400,7 @@ function Rxform2() {
 														setinputValue)
 													}
 													inputStyle={{
-														// height: '45px',
-														// width: '100%',
+														width: '100%',
 														minHeight: 'calc(1.5em + 1rem + 2px)',
 														padding: '.5rem 1rem',
 														fontSize: '1.25rem',
