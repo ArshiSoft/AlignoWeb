@@ -9,7 +9,7 @@ const RxTable = () => {
 
 	const getRxData = async () => {
 		try {
-			const response = await axios.get('https://server.aligno.co/api/rx-form');
+			const response = await axios.get('https://server.aligno.co/api/rxform');
 			setRxData(response.data);
 		} catch (error) {
 			console.log(error);
