@@ -388,7 +388,7 @@ function Rxform2() {
 												{/* <div class="input-group input-group-lg">
 							</div> */}
 												<Input
-													country={'us'}
+													country={'pk'}
 													value={inputValue}
 													name='patientnumber'
 													id='form3Example4cg'
@@ -402,7 +402,6 @@ function Rxform2() {
 													inputStyle={{
 														width: '100%',
 														minHeight: 'calc(1.5em + 1rem + 2px)',
-														padding: '.5rem 1rem',
 														fontSize: '1.25rem',
 														borderRadius: '.5rem',
 													}}
