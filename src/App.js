@@ -10,6 +10,7 @@ import Rxform2 from './components/RxForm2/Rxform2';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import RxFormData from './components/Rx-Form-Data/RxFormData';
+import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
 // import RxFormData from './components/Rx-Form-Data/RxFormData';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         </nav> */}
 
 				<Routes>
+				    <Route path='/Rx-data' element={<RxDataView />} />
 					<Route path='/Rx-form' element={<Rxform />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/Dashboard' element={<Dashboard />} />

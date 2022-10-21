@@ -3,9 +3,17 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 const RxTable = () => {
-	const [rxdata, setRxData] = useState([]);
+	const [rxdata, setRxData] = useState([])
+
+
+
 
 	const getRxData = async () => {
 		try {
@@ -52,6 +60,15 @@ const RxTable = () => {
 				);
 			},
 		},
+		{
+			name: 'Full Data',
+			cell: ({ row }) => (
+				<button className='btn-sm btn btn-primary' onClick={e => history('/Rx-data')(e.row.rxdata.User)}>
+					Details
+				</button>
+			)
+		}
+
 		// {
 		// 	name: 'Patient Name',
 		// 	selector: (row) => <img width={50} height={50} src={row.flag} />,
@@ -60,7 +77,18 @@ const RxTable = () => {
 	useEffect(() => {
 		getRxData();
 	}, []);
+	const history = useNavigate();
 
-	return <DataTable columns={columns} data={rxdata.User} />;
+	return <DataTable
+		title="Rx-Data"
+		columns={columns}
+		data={rxdata.User}
+		pagination
+		pointerOnHover={true}
+		highlightOnHover={true}
+	
+	/>;
+
 };
+
 export default RxTable;
