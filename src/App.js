@@ -25,7 +25,7 @@ function App() {
         </nav> */}
 
 				<Routes>
-				    <Route path='/Rx-data' element={<RxDataView />} />
+				    <Route path='/Rx-data' element={<RxDataView/>}/> 
 					<Route path='/Rx-form' element={<Rxform />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/Dashboard' element={<Dashboard />} />

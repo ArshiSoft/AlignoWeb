@@ -1,7 +1,5 @@
 import Navbar from "../Navbar/Navbar";
 import RxTable from "./Modules/RxTable";
-import React from "react";
-
 
 function RxFormData() {
 
