@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import RxTable from "./Modules/RxTable";
 
 function RxFormData() {
-
+  useEffect(() => {
+		document.title = 'Aligno-Rx-view';
+	}, []);
 
   return (
     <>

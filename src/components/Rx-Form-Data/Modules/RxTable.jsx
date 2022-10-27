@@ -21,6 +21,10 @@ const RxTable = () => {
 	const [modalInfo, setModalInfo] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState(false);
+	const [search , setSearch ] = useState("");
+const [ filteredRxTable , setFilteredRxTable] = useState([]);
+	
+
     const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	// const [componentRef,setComponentRef] = useState([]);
@@ -66,6 +70,7 @@ const RxTable = () => {
 			// const response = await axios.get('http://localhost:3000/api/rxform');
 			const response = await axios.get('https://server.aligno.co/api/rxform');
 			setRxData(response.data.userdata);
+			setFilteredRxTable(response.data.userdata);
 		} catch (error) {
 			console.log(error);
 		}
@@ -79,6 +84,7 @@ const RxTable = () => {
 		{
 			name: 'Clinic Name',
 			selector: (row) => row.clinicname,
+			sortable : true,
 		},
 		{
 			name: 'Doctor Name',
@@ -152,6 +158,15 @@ const RxTable = () => {
 	useEffect(() => {
 		getRxData();
 	}, []);
+
+
+	useEffect(()=>{
+	const  result = rxdata.filter(rxdata=>{
+return rxdata.clinicname.toLowerCase().match(search.toLowerCase());
+	})
+	setFilteredRxTable(result);
+}, [search]);
+
 	const history = useNavigate();
 	// const ReactToPrint = useReactToPrint();
 
@@ -227,12 +242,22 @@ const RxTable = () => {
 	<DataTable
 		title="Rx-Data"
 		columns={columns}
-		data={rxdata}
+		data={filteredRxTable}
 		pagination
 		pointerOnHover={true}
 		highlightOnHover={true}
 		// rowEvent= {handleButtonClick}
 		progressPending={pending}
+		subHeader
+		subHeaderComponent={
+			<input type = "text" placeholder="search here" className="w-25 form-control"
+			value={search}
+			onChange={(e)=> setSearch(e.target.value)}
+			></input>
+		}
+		subHeaderAlign="left"
+		
+
 
 	
 		
