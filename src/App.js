@@ -6,9 +6,10 @@ import Candidate from './components/Candidate/Candidate';
 // import InventoryEditForm from './test';
 import Thanks from './components/Thanks';
 import Rxform from './components/RxForm/Rxform';
-import Rxform2 from './components/RxForm2/Rxform2';
+// import Rxform2 from './components/RxForm2/Rxform2';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
+import Login from './Login/Login'
 import RxFormData from './components/Rx-Form-Data/RxFormData';
 import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
 // import RxFormData from './components/Rx-Form-Data/RxFormData';
@@ -25,7 +26,8 @@ function App() {
         </nav> */}
 
 				<Routes>
-				    <Route path='/Rx-data' element={<RxDataView/>}/> 
+					<Route path='/Rx-data' element={<RxDataView />} />
+					<Route path='/Login' element={<Login />} />
 					<Route path='/Rx-form' element={<Rxform />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/Dashboard' element={<Dashboard />} />
