@@ -7,6 +7,7 @@ import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 
 import Input from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { getCurrentDate } from '../../class/clsGeneralVariables';
 
 // const InnerForm = ({
 // 	handleSubmit,
@@ -110,6 +111,16 @@ function Rxform() {
 	const [aeot, setAEOT] = useState('');
 	const [etbt, setETBT] = useState('');
 
+	const CaseApproved = false;
+	const CaseAlignerSendForManufacturing = false;
+	const CaseAlignerManufacturing = false;
+	const CaseAlignerManufactured = false;
+	const CaseAlignerDispached = false;
+	const CaseClosed = false;
+	const TotalAligners = 0;
+	const CurrentAligner = 0;
+	const CreatedDate = getCurrentDate();
+
 	const history = useNavigate();
 
 	// const validateForm = (e) => {
@@ -189,6 +200,15 @@ function Rxform() {
 				aeot,
 				etbt,
 				engagers,
+				CaseApproved,
+				CaseAlignerSendForManufacturing,
+				CaseAlignerManufacturing,
+				CaseAlignerManufactured,
+				CaseAlignerDispached,
+				CaseClosed,
+				TotalAligners,
+				CurrentAligner,
+				CreatedDate,
 			}),
 		});
 

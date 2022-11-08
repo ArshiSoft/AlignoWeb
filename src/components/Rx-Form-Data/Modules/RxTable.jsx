@@ -4,31 +4,25 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button,} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import './RxTable.css';
 import { Link } from 'react-router-dom';
 
 // import { useReactToPrint } from 'react-to-print';
 
-
-
-
-
 const RxTable = () => {
-	const [rxdata, setRxData] = useState([])
+	const [rxdata, setRxData] = useState([]);
 	const [pending, setPending] = React.useState(true);
 	const [rows, setRows] = React.useState([]);
 	const [modalInfo, setModalInfo] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState(false);
-	const [search , setSearch ] = useState("");
-const [ filteredRxTable , setFilteredRxTable] = useState([]);
-	
+	const [search, setSearch] = useState('');
+	const [filteredRxTable, setFilteredRxTable] = useState([]);
 
-    const handleClose = () => setShow(false);
+	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	// const [componentRef,setComponentRef] = useState([]);
-
 
 	React.useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -43,27 +37,23 @@ const [ filteredRxTable , setFilteredRxTable] = useState([]);
 	// 	console.log(row)
 	// }
 	// }
-	const handleButtonClick = (e, row) => {
+	const btnViewClick = (e, row) => {
 		e.preventDefault();
-		console.log("Row Id", row);
-		// setModalInfo(row)
-		// toggelTrueFalse();
-		history('/Rx-data?id='+row._id,row);
-// 		<Link
-//   to={{
-//     pathname: "/Rx-data",
-//     state: row // your data array of objects
-//   }}
-// ></Link>
-		
-		
+		history('/Rx-data?id=' + row._id);
+		// 		<Link
+		//   to={{
+		//     pathname: "/Rx-data",
+		//     state: row // your data array of objects
+		//   }}
+		// ></Link>
+	};
+	const btnApprove = (e, row) => {
+		e.preventDefault();
 	};
 
 	const toggelTrueFalse = () => {
 		setShowModal(handleShow);
 	};
-	
-
 
 	const getRxData = async () => {
 		try {
@@ -77,14 +67,10 @@ const [ filteredRxTable , setFilteredRxTable] = useState([]);
 	};
 
 	const columns = [
-		// {
-		// 	name: 'ID',
-		// 	selector: (row) => row._id,
-		// },
 		{
 			name: 'Clinic Name',
 			selector: (row) => row.clinicname,
-			sortable : true,
+			sortable: true,
 		},
 		{
 			name: 'Doctor Name',
@@ -93,10 +79,6 @@ const [ filteredRxTable , setFilteredRxTable] = useState([]);
 		{
 			name: 'Doctor Email',
 			selector: (row) => row.doctoremail,
-		},
-		{
-			name: 'Doctor Phone',
-			selector: (row) => row.doctornumber,
 		},
 		{
 			name: 'Patient Name',
@@ -117,26 +99,28 @@ const [ filteredRxTable , setFilteredRxTable] = useState([]);
 				);
 			},
 		},
-		// {
-		// 	name: 'Full Data',
-		// 	cell: ( row ) => (
-		// 		<button className='btn-sm btn btn-primary' onClick={(e) => history('/Rx-data')(e ,row._id)}>
-		// 			Details
-		// 		</button>
-		// 	)
-		// },
 		{
-			name: "Actions",
+			name: '',
 			button: true,
 			cell: (row) => (
 				<button
-					className="btn btn-outline btn-sm btn-primary"
-					onClick={(e) => handleButtonClick(e, row)}
-				>
+					className='btn btn-outline btn-sm btn-primary'
+					onClick={(e) => btnViewClick(e, row)}>
 					View
 				</button>
 			),
-		}
+		},
+		{
+			name: '',
+			button: true,
+			cell: (row) => (
+				<button
+					className='btn btn-outline btn-sm btn-primary'
+					onClick={(e) => btnApprove(e, row)}>
+					Approve
+				</button>
+			),
+		},
 		// {
 		// 	name:"Action",
 		//   cell: (row: { _id: any }) => (
@@ -159,115 +143,105 @@ const [ filteredRxTable , setFilteredRxTable] = useState([]);
 		getRxData();
 	}, []);
 
-
-	useEffect(()=>{
-	const  result = rxdata.filter(rxdata=>{
-return rxdata.clinicname.toLowerCase().match(search.toLowerCase());
-	})
-	setFilteredRxTable(result);
-}, [search]);
+	useEffect(() => {
+		const result = rxdata.filter((rxdata) => {
+			return rxdata.clinicname.toLowerCase().match(search.toLowerCase());
+		});
+		setFilteredRxTable(result);
+	}, [search]);
 
 	const history = useNavigate();
 	// const ReactToPrint = useReactToPrint();
 
 	const ModalContent = () => {
 		return (
-			<>
-			</>
+			<></>
 			// <Link to='Rx-data'>Data</Link>
-// 			<Modal  dialogClassName="my-modal" show={show} onHide={handleClose}>
-// 				<Modal.Header closeButton>
-// 					<Modal.Title></Modal.Title>
-// 					{/* <ReactToPrint 
-// 					trigger={() => {
-// 						return <button>Print</button>
-// 					}}
-// 					// content = {()=>componentRef}
-// 					documentTitle = 'new documnet'
-// 					pageStyle = "print"
-// 					onAfterPrint = {()=>{console.log('document printed')}}
-// 					/> */}
-					
-// 					</Modal.Header>
-// 				<Modal.Body>
-// 				{/* <div ref = {el=>(componentRef=el)}> */}
-// 					<div className='containder'>
-// 						<div className='row'>
-// 							<div className='col-lg-6'>
-// 								<h5>Clinic Name : {modalInfo.clinicname}</h5>
-// 								<ul>
-// 	<ol>Clinic Name : {modalInfo.clinicname}</ol>
-// 	<ol>Doctor Name : {modalInfo.doctorname}</ol>
-// 	<ol>Patient Name : {modalInfo.patientname}</ol>
-// 	<ol>Doctor Number :{modalInfo.doctornumber}</ol>
-// 	<ol>Paient Number : {modalInfo.patientnumber}</ol>
-// 	<ol>Patient ID : {modalInfo.patienid}</ol>
-// 	<ol>Doctor Email : {modalInfo.doctoremail}</ol>
-// 	<ol>Patient Email : {modalInfo.patientemail}</ol>
-// 	<ol>Gender : {modalInfo.gender}</ol>
-// 	<ol>Bridges Implant : {modalInfo.bridgesimplant}</ol>
-// 	<ol>MRCIR : {modalInfo.mrciil}</ol>
-// 	</ul></div>
-// 							<div className='col-lg-6'><ul>
-// 	<ol>Clinic Name : {modalInfo.clinicname}</ol>
-// 	<ol>Doctor Name : {modalInfo.doctorname}</ol>
-// 	<ol>Patient Name : {modalInfo.patientname}</ol>
-// 	<ol>Doctor Number :{modalInfo.doctornumber}</ol>
-// 	<ol>Paient Number : {modalInfo.patientnumber}</ol>
-// 	<ol>Patient ID : {modalInfo.patienid}</ol>
-// 	<ol>Doctor Email : {modalInfo.doctoremail}</ol>
-// 	<ol>Patient Email : {modalInfo.patientemail}</ol>
-// 	<ol>Gender : {modalInfo.gender}</ol>
-// 	<ol>Bridges Implant : {modalInfo.bridgesimplant}</ol>
-// 	<ol>MRCIR : {modalInfo.mrciil}</ol>
-// 	</ul></div>
-// 						</div>
-// 					</div>
+			// 			<Modal  dialogClassName="my-modal" show={show} onHide={handleClose}>
+			// 				<Modal.Header closeButton>
+			// 					<Modal.Title></Modal.Title>
+			// 					{/* <ReactToPrint
+			// 					trigger={() => {
+			// 						return <button>Print</button>
+			// 					}}
+			// 					// content = {()=>componentRef}
+			// 					documentTitle = 'new documnet'
+			// 					pageStyle = "print"
+			// 					onAfterPrint = {()=>{console.log('document printed')}}
+			// 					/> */}
 
-// {/* </div> */}
-// 				</Modal.Body>
-				
-// 				<Modal.Footer>
-// 					<Button variant="secondary" onClick={handleClose}>Close</Button>
-// 				</Modal.Footer>
+			// 					</Modal.Header>
+			// 				<Modal.Body>
+			// 				{/* <div ref = {el=>(componentRef=el)}> */}
+			// 					<div className='containder'>
+			// 						<div className='row'>
+			// 							<div className='col-lg-6'>
+			// 								<h5>Clinic Name : {modalInfo.clinicname}</h5>
+			// 								<ul>
+			// 	<ol>Clinic Name : {modalInfo.clinicname}</ol>
+			// 	<ol>Doctor Name : {modalInfo.doctorname}</ol>
+			// 	<ol>Patient Name : {modalInfo.patientname}</ol>
+			// 	<ol>Doctor Number :{modalInfo.doctornumber}</ol>
+			// 	<ol>Paient Number : {modalInfo.patientnumber}</ol>
+			// 	<ol>Patient ID : {modalInfo.patienid}</ol>
+			// 	<ol>Doctor Email : {modalInfo.doctoremail}</ol>
+			// 	<ol>Patient Email : {modalInfo.patientemail}</ol>
+			// 	<ol>Gender : {modalInfo.gender}</ol>
+			// 	<ol>Bridges Implant : {modalInfo.bridgesimplant}</ol>
+			// 	<ol>MRCIR : {modalInfo.mrciil}</ol>
+			// 	</ul></div>
+			// 							<div className='col-lg-6'><ul>
+			// 	<ol>Clinic Name : {modalInfo.clinicname}</ol>
+			// 	<ol>Doctor Name : {modalInfo.doctorname}</ol>
+			// 	<ol>Patient Name : {modalInfo.patientname}</ol>
+			// 	<ol>Doctor Number :{modalInfo.doctornumber}</ol>
+			// 	<ol>Paient Number : {modalInfo.patientnumber}</ol>
+			// 	<ol>Patient ID : {modalInfo.patienid}</ol>
+			// 	<ol>Doctor Email : {modalInfo.doctoremail}</ol>
+			// 	<ol>Patient Email : {modalInfo.patientemail}</ol>
+			// 	<ol>Gender : {modalInfo.gender}</ol>
+			// 	<ol>Bridges Implant : {modalInfo.bridgesimplant}</ol>
+			// 	<ol>MRCIR : {modalInfo.mrciil}</ol>
+			// 	</ul></div>
+			// 						</div>
+			// 					</div>
 
+			// {/* </div> */}
+			// 				</Modal.Body>
 
-// 			</Modal>
-			
+			// 				<Modal.Footer>
+			// 					<Button variant="secondary" onClick={handleClose}>Close</Button>
+			// 				</Modal.Footer>
+
+			// 			</Modal>
 		);
 	};
 
 	return (
 		<div className='modalcontent'>
-	<DataTable
-		title="Rx-Data"
-		columns={columns}
-		data={filteredRxTable}
-		pagination
-		pointerOnHover={true}
-		highlightOnHover={true}
-		// rowEvent= {handleButtonClick}
-		progressPending={pending}
-		subHeader
-		subHeaderComponent={
-			<input type = "text" placeholder="search here" className="w-25 form-control"
-			value={search}
-			onChange={(e)=> setSearch(e.target.value)}
-			></input>
-		}
-		subHeaderAlign="left"
-		
-
-
-	
-		
-	/>;
-		{ show ? <ModalContent/> : null }
-	</div>
+			<DataTable
+				title='Rx-Data'
+				columns={columns}
+				data={filteredRxTable}
+				pagination
+				pointerOnHover={true}
+				highlightOnHover={true}
+				// rowEvent= {handleButtonClick}
+				progressPending={pending}
+				subHeader
+				subHeaderComponent={
+					<input
+						type='text'
+						placeholder='search here'
+						className='w-25 form-control'
+						value={search}
+						onChange={(e) => setSearch(e.target.value)}></input>
+				}
+				subHeaderAlign='left'
+			/>
+			;{show ? <ModalContent /> : null}
+		</div>
 	);
-	
-
 };
-
 
 export default RxTable;
