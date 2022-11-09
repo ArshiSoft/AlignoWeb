@@ -15,6 +15,9 @@ RUN npm install @fontsource/league-spartan --silent
 RUN npm install @fontsource/source-sans-pro --silent
 RUN npm install react-phone-input-2 --silent
 RUN npm install react-data-table-component --silent
+RUN npm install antd --silent
+RUN npm install date-fns --silent
+RUN npm install react-to-print --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 
 # add app
