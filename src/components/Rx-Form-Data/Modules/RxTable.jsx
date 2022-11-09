@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import './RxTable.css';
 import { Link } from 'react-router-dom';
+import { $CombinedState } from 'redux';
 
 // import { useReactToPrint } from 'react-to-print';
 
@@ -66,7 +67,40 @@ const RxTable = () => {
 		}
 	};
 
+	const getActionButtonText = (row) => {
+		var rtnValue = 'Approve';
+		if (row.CaseApproved) {
+			rtnValue = 'Send 1 to Manufacture';
+		}
+		if (row.CaseAlignerSendForManufacturing) {
+			rtnValue = 'Start Manufacture';
+		}
+		if (row.CaseAlignerManufacturing) {
+			rtnValue = 'Complete Aligner';
+		}
+		if (row.CaseAlignerManufactured) {
+			rtnValue = 'Dispatch Aligner';
+		}
+		if (row.CaseAlignerDispached) {
+			if (row.TotalAligners <= row.CurrentAligner) {
+				rtnValue = 'Close Case';
+			} else {
+				rtnValue = 'Send 1 to Manufacture';
+			}
+		}
+		if (row.CaseClosed) {
+			rtnValue = 'Case Closed';
+		}
+		return rtnValue;
+	};
+
 	const columns = [
+		{
+			name: 'Date',
+			omit: false,
+			selector: (row) => row.CreatedDate,
+			sortable: true,
+		},
 		{
 			name: 'Clinic Name',
 			selector: (row) => row.clinicname,
@@ -75,14 +109,16 @@ const RxTable = () => {
 		{
 			name: 'Doctor Name',
 			selector: (row) => row.doctorname,
+			sortable: true,
 		},
-		{
-			name: 'Doctor Email',
-			selector: (row) => row.doctoremail,
-		},
+		// {
+		// 	name: 'Doctor Email',
+		// 	selector: (row) => row.doctoremail,
+		// },
 		{
 			name: 'Patient Name',
 			selector: (row) => row.patientname,
+			sortable: true,
 		},
 		{
 			name: 'Patient Email',
@@ -98,6 +134,42 @@ const RxTable = () => {
 					</a>
 				);
 			},
+		},
+		{
+			name: 'Case Status',
+			selector: (row) => {
+				var rtnValue = 'New';
+				if (row.CaseApproved) {
+					rtnValue = 'Case Approved';
+				}
+				if (row.CaseAlignerSendForManufacturing) {
+					rtnValue = 'Approved an aligner for Manufacturing';
+				}
+				if (row.CaseAlignerManufacturing) {
+					rtnValue = 'Aligner Manufacturing';
+				}
+				if (row.CaseAlignerManufactured) {
+					rtnValue = 'Aligner Manufactured';
+				}
+				if (row.CaseAlignerDispached) {
+					rtnValue = 'Aligner Dispatched';
+				}
+				if (row.CaseClosed) {
+					rtnValue = 'Case Closed';
+				}
+				return rtnValue;
+			},
+			sortable: true,
+		},
+		{
+			name: 'Total Aligners',
+			selector: (row) => row.TotalAligners,
+			sortable: true,
+		},
+		{
+			name: 'Current Aligner',
+			selector: (row) => row.CurrentAligner,
+			sortable: true,
 		},
 		{
 			name: '',
@@ -117,7 +189,7 @@ const RxTable = () => {
 				<button
 					className='btn btn-outline btn-sm btn-primary'
 					onClick={(e) => btnApprove(e, row)}>
-					Approve
+					{getActionButtonText(row)}
 				</button>
 			),
 		},
@@ -223,10 +295,10 @@ const RxTable = () => {
 				title='Rx-Data'
 				columns={columns}
 				data={filteredRxTable}
-				pagination
 				pointerOnHover={true}
 				highlightOnHover={true}
 				// rowEvent= {handleButtonClick}
+				expendableRows={true}
 				progressPending={pending}
 				subHeader
 				subHeaderComponent={
