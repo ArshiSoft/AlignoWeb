@@ -4,115 +4,247 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap';
 import './RxTable.css';
-import { Link } from 'react-router-dom';
-import { $CombinedState } from 'redux';
-import { message } from 'antd';
-
-// import { useReactToPrint } from 'react-to-print';
+import { InputNumber, message, Modal, Popconfirm, Space } from 'antd';
+import { tr } from 'date-fns/locale';
 
 const RxTable = () => {
-	const [rxdata, setRxData] = useState([]);
-	const [pending, setPending] = React.useState(true);
-	const [rows, setRows] = React.useState([]);
-	const [modalInfo, setModalInfo] = useState([]);
-	const [showModal, setShowModal] = useState(false);
-	const [show, setShow] = useState(false);
-	const [search, setSearch] = useState('');
-	const [filteredRxTable, setFilteredRxTable] = useState([]);
-	const [totalaligners, setTotalAligners] = useState(0);
-	// const [isPlanningModalOpen, setIsPlanningModalOpen] = useState(false);
+	// const api = 'http://localhost:1337/api/rxform/';
+	const api = 'https://server.aligno.co/api/rxform/';
+	const history = useNavigate();
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-	// const [componentRef,setComponentRef] = useState([]);
+	const [Patients, setPatientsList] = useState([]);
+	const [Patient, setPatient] = useState([]);
+	const [totalAligners, setTotalAligners] = useState(0);
+	const [approveLoading, setApproveLoading] = useState(false);
+	const [isPlanningModalOpen, setIsPlanningModalOpen] = useState(false);
 
 	React.useEffect(() => {
 		const timeout = setTimeout(() => {
-			setRows(rxdata);
-			setPending(false);
-		}, 2000);
+			getPatients();
+		}, 200);
 		return () => clearTimeout(timeout);
 	}, []);
 
-	// const showPlanningModal = () => {
-	// 	setIsPlanningModalOpen(true);
-	// };
-	// const btnPlanningModalOkClick = () => {
-	// 	setIsPlanningModalOpen(false);
-	// };
-	// const btnPlanningModalCancelClick = () => {
-	// 	setIsPlanningModalOpen(false);
-	// };
+	useEffect(() => {
+		getPatients();
+	}, []);
 
-	// const rowEvents = {
-	// onClick : (e ,row) => {
-	// 	console.log(row)
-	// }
-	// }
-	const btnViewClick = (e, row) => {
-		e.preventDefault();
-		history('/Rx-data?id=' + row._id);
-		// 		<Link
-		//   to={{
-		//     pathname: "/Rx-data",
-		//     state: row // your data array of objects
-		//   }}
-		// ></Link>
+	const showPlanningModal = () => {
+		setIsPlanningModalOpen(true);
 	};
-	const btnActionClick = (e, row) => {
-		e.preventDefault();
-		setModalInfo(row);
-		setTotalAligners(row.TotalAligners);
-		setShow(true);
+	const btnPlanningModalCancelClick = () => {
+		setIsPlanningModalOpen(false);
 	};
-	const btnApproveClick = (e) => {
+	const btnViewClick = (e, patient) => {
 		e.preventDefault();
-		if (totalaligners <= 0 || totalaligners > 30) {
-			setShow(false);
-			message.warning('Must enter between 1 to 30!');
+		history('/Rx-data?id=' + patient._id);
+	};
+	const btnActionClick = (e, patient) => {
+		e.preventDefault();
+		setPatient(patient);
+		var caseStatus = getCaseStatus(patient);
+		if (caseStatus == 'New') {
+			setTotalAligners(patient.TotalAligners);
+			showPlanningModal();
 			return;
+		} else if (caseStatus == 'Case Approved') {
+			Modal.confirm({
+				title: 'Are you sure to send one Aligner for Manufacturing?',
+				onOk: (e) => {
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							patient.CaseAlignerSendForManufacturing = true;
+							updatePatient(
+								patient,
+								`Aligner # ${
+									patient.CurrentAligner + 1
+								} sent for Manufacturing!`
+							);
+							resolve();
+						}, 1000);
+					}).catch(() => message.error('Something went wrong!'));
+				},
+			});
+		} else if (caseStatus == 'Approved for Manufacturing') {
+			Modal.confirm({
+				title: 'Are you sure to Start Manufacturing this Aligner?',
+				onOk: (e) => {
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							patient.CaseAlignerManufacturing = true;
+							updatePatient(
+								patient,
+								`Aligner # ${patient.CurrentAligner + 1} started Manufacturing!`
+							);
+							resolve();
+						}, 1000);
+					}).catch(() => message.error('Something went wrong!'));
+				},
+			});
+		} else if (caseStatus == 'Aligner Manufacturing') {
+			Modal.confirm({
+				title: 'Are you sure that Aligner is Complete?',
+				onOk: (e) => {
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							patient.CaseAlignerManufactured = true;
+							updatePatient(
+								patient,
+								`Aligner # ${patient.CurrentAligner + 1} Manufactured!`
+							);
+							resolve();
+						}, 1000);
+					}).catch(() => message.error('Something went wrong!'));
+				},
+			});
+		} else if (caseStatus == 'Aligner Manufactured') {
+			Modal.confirm({
+				title: 'Are you sure to dispatch Aligner?',
+				onOk: (e) => {
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							patient.CaseAlignerDispached = true;
+							patient.CurrentAligner += 1;
+							updatePatient(
+								patient,
+								`Aligner # ${patient.CurrentAligner} Dispatched!`
+							);
+							resolve();
+						}, 1000);
+					}).catch(() => message.error('Something went wrong!'));
+				},
+			});
+		} else if (caseStatus == 'Aligner Dispatched') {
+			Modal.confirm({
+				title: `Are you sure to ${
+					patient.CurrentAligner >= patient.TotalAligners
+						? 'Close the Case?'
+						: 'Send one more aligner for manufacturing?'
+				}?`,
+				onOk: (e) => {
+					return new Promise((resolve, reject) => {
+						setTimeout(() => {
+							if (patient.CurrentAligner >= patient.TotalAligners) {
+								patient.CaseClosed = true;
+								updatePatient(
+									patient,
+									`Patient's (${patient.patientname}) case has been closed!`
+								);
+							} else {
+								patient.CaseAlignerManufacturing = false;
+								patient.CaseAlignerManufactured = false;
+								patient.CaseAlignerDispached = false;
+								updatePatient(
+									patient,
+									`Aligner # ${
+										patient.CurrentAligner + 1
+									} sent for Manufacturing!`
+								);
+							}
+							resolve();
+						}, 1000);
+					}).catch(() => message.error('Something went wrong!'));
+				},
+			});
+		}
+	};
+	const btnPlanningModalApproveClick = (e) => {
+		e.preventDefault();
+		if (totalAligners <= 0 || totalAligners > 30) {
+			message.warning('Must enter between 1 and 30!');
+			return;
+		}
+		setApproveLoading(true);
+		// var patient = getPatient(Patient._id);
+		Patient.TotalAligners = totalAligners;
+		Patient.CaseApproved = true;
+		return setTimeout(() => {
+			updatePatient(Patient, `Plan approved for ${Patient.patientname}!`);
+			setApproveLoading(false);
+			setIsPlanningModalOpen(false);
+		}, 1000);
+	};
+
+	const updatePatient = async (patient, successMessage) => {
+		try {
+			var response = await axios.put(api + patient._id, patient);
+			if (response.status) {
+				getPatients();
+				message.success(successMessage);
+			} else {
+				message.error('Something went wrong!');
+			}
+		} catch (error) {
+			console.log(error);
+			message.error('An error occured. Retry!');
 		}
 	};
 
-	const toggelTrueFalse = () => {
-		setShowModal(handleShow);
+	const getCaseStatus = (patient) => {
+		var rtnValue = 'New';
+		if (patient.CaseApproved) {
+			rtnValue = 'Case Approved';
+		}
+		if (patient.CaseAlignerSendForManufacturing) {
+			rtnValue = 'Approved for Manufacturing';
+		}
+		if (patient.CaseAlignerManufacturing) {
+			rtnValue = 'Aligner Manufacturing';
+		}
+		if (patient.CaseAlignerManufactured) {
+			rtnValue = 'Aligner Manufactured';
+		}
+		if (patient.CaseAlignerDispached) {
+			rtnValue = 'Aligner Dispatched';
+		}
+		if (patient.CaseClosed) {
+			rtnValue = 'Case Closed';
+		}
+		return rtnValue;
 	};
 
-	const getRxData = async () => {
+	const getPatient = async (id) => {
 		try {
-			// const response = await axios.get('http://localhost:3000/api/rxform');
-			const response = await axios.get('https://server.aligno.co/api/rxform');
-			setRxData(response.data.userdata);
-			setFilteredRxTable(response.data.userdata);
+			var response = await axios.get(api + id);
+			return response.data.userdata;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	};
+
+	const getPatients = async () => {
+		try {
+			const response = await axios.get(api);
+			setPatientsList(response.data.userdata);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	const getActionButtonText = (row) => {
+	const getActionButtonText = (patient) => {
 		var rtnValue = 'Approve';
-		if (row.CaseApproved) {
+		if (patient.CaseApproved) {
 			rtnValue = 'Send 1 to Manufacture';
 		}
-		if (row.CaseAlignerSendForManufacturing) {
+		if (patient.CaseAlignerSendForManufacturing) {
 			rtnValue = 'Start Manufacture';
 		}
-		if (row.CaseAlignerManufacturing) {
+		if (patient.CaseAlignerManufacturing) {
 			rtnValue = 'Complete Aligner';
 		}
-		if (row.CaseAlignerManufactured) {
+		if (patient.CaseAlignerManufactured) {
 			rtnValue = 'Dispatch Aligner';
 		}
-		if (row.CaseAlignerDispached) {
-			if (row.TotalAligners <= row.CurrentAligner) {
+		if (patient.CaseAlignerDispached) {
+			if (patient.TotalAligners <= patient.CurrentAligner) {
 				rtnValue = 'Close Case';
 			} else {
 				rtnValue = 'Send 1 to Manufacture';
 			}
 		}
-		if (row.CaseClosed) {
+		if (patient.CaseClosed) {
 			rtnValue = 'Case Closed';
 		}
 		return rtnValue;
@@ -122,86 +254,63 @@ const RxTable = () => {
 		{
 			name: 'Date',
 			omit: false,
-			selector: (row) => row.CreatedDate,
+			selector: (patient) => patient.CreatedDate,
 			sortable: true,
 		},
 		{
 			name: 'Clinic Name',
-			selector: (row) => row.clinicname,
+			selector: (patient) => patient.clinicname,
 			sortable: true,
 		},
 		{
 			name: 'Doctor Name',
-			selector: (row) => row.doctorname,
+			selector: (patient) => patient.doctorname,
 			sortable: true,
 		},
-		// {
-		// 	name: 'Doctor Email',
-		// 	selector: (row) => row.doctoremail,
-		// },
 		{
 			name: 'Patient Name',
-			selector: (row) => row.patientname,
+			selector: (patient) => patient.patientname,
 			sortable: true,
 		},
 		{
 			name: 'Patient Email',
-			selector: (row) => row.patientemail,
+			selector: (patient) => patient.patientemail,
 		},
 		{
 			name: 'Patient Phone',
-			selector: (row) => {
-				var link = 'http://wa.me/' + row.patientnumber;
+			selector: (patient) => {
+				var link = 'http://wa.me/' + patient.patientnumber;
 				return (
 					<a href={link} target='_blank'>
-						{row.patientnumber}
+						{patient.patientnumber}
 					</a>
 				);
 			},
 		},
 		{
 			name: 'Case Status',
-			selector: (row) => {
-				var rtnValue = 'New';
-				if (row.CaseApproved) {
-					rtnValue = 'Case Approved';
-				}
-				if (row.CaseAlignerSendForManufacturing) {
-					rtnValue = 'Approved an aligner for Manufacturing';
-				}
-				if (row.CaseAlignerManufacturing) {
-					rtnValue = 'Aligner Manufacturing';
-				}
-				if (row.CaseAlignerManufactured) {
-					rtnValue = 'Aligner Manufactured';
-				}
-				if (row.CaseAlignerDispached) {
-					rtnValue = 'Aligner Dispatched';
-				}
-				if (row.CaseClosed) {
-					rtnValue = 'Case Closed';
-				}
-				return rtnValue;
+			selector: (patient) => {
+				return getCaseStatus(patient);
 			},
 			sortable: true,
 		},
 		{
 			name: 'Total Aligners',
-			selector: (row) => row.TotalAligners,
+			selector: (patient) => patient.TotalAligners,
 			sortable: true,
 		},
 		{
 			name: 'Current Aligner',
-			selector: (row) => row.CurrentAligner,
+			selector: (patient) => patient.CurrentAligner,
 			sortable: true,
 		},
 		{
 			name: '',
 			button: true,
-			cell: (row) => (
+			cell: (patient) => (
 				<button
 					className='btn btn-outline btn-sm btn-primary'
-					onClick={(e) => btnViewClick(e, row)}>
+					onClick={(e) => btnViewClick(e, patient)}>
 					View
 				</button>
 			),
@@ -209,53 +318,23 @@ const RxTable = () => {
 		{
 			name: '',
 			button: true,
-			cell: (row) => (
+			cell: (patient) => (
 				<button
 					className='btn btn-outline btn-sm btn-primary'
-					onClick={(e) => btnActionClick(e, row)}>
-					{getActionButtonText(row)}
+					onClick={(e) => btnActionClick(e, patient)}>
+					{getActionButtonText(patient)}
 				</button>
 			),
 		},
-		// {
-		// 	name:"Action",
-		//   cell: (row: { _id: any }) => (
-		// 	  <>
-		// 	<span onClick={() => handleButtonClick(row._id)} className='btn btn-primary'><Pencil/></span>{'     '}
-		// 	<span onClick={() => handleButtonClick(row._id)} className='btn btn-danger'><Trash/></span>
-		// 	</>
-		//   ),
-
-		//   ignoreRowClick: true,
-		//   allowOverflow: true,
-		//   button: true,
-		// },{/*end*/}
-		// {
-		// 	name: 'Patient Name',
-		// 	selector: (row) => <img width={50} height={50} src={row.flag} />,
-		// },
 	];
-	useEffect(() => {
-		getRxData();
-	}, []);
-
-	useEffect(() => {
-		const result = rxdata.filter((rxdata) => {
-			return rxdata.clinicname.toLowerCase().match(search.toLowerCase());
-		});
-		setFilteredRxTable(result);
-	}, [search]);
-
-	const history = useNavigate();
-	// const ReactToPrint = useReactToPrint();
 
 	const ModalContent = () => {
 		return (
 			<>
-				<Modal dialogClassName='my-modal' show={show} onHide={handleClose}>
+				{/* <Modal dialogClassName='my-modal' show={show} onHide={handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title></Modal.Title>
-						{/* <ReactToPrint
+						 <ReactToPrint
 								trigger={() => {
 									return <button>Print</button>
 								}}
@@ -263,23 +342,16 @@ const RxTable = () => {
 								documentTitle = 'new documnet'
 								pageStyle = "print"
 								onAfterPrint = {()=>{console.log('document printed')}}
-								/> */}
+								/> 
 					</Modal.Header>
 					<Modal.Body>
-						{/* <div ref = {el=>(componentRef=el)}> */}
 						<div className='container'>
-							<div className='row'>
+							<div className='patient'>
 								<div className='col-lg-4'>
-									<h5>Set Aligners Plan for {modalInfo.patientname}</h5>
-									{/* <ul>
-										<ol>
-											Total Aligners :
-											<input type='number' className='form-control' />
-										</ol>
-									</ul> */}
+									<h5>Set Aligners Plan for {patient.patientname}</h5>
 									<br />
 									<br />
-									<div class='row align-items-start'>
+									<div class='patient align-items-start'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label'>
@@ -288,11 +360,9 @@ const RxTable = () => {
 
 												<input
 													type='number'
-													placeholder='Minimum 1'
 													onChange={(e) => setTotalAligners(e.target.value)}
-													value={totalaligners}
+													value={totalAligners}
 													className='form-control form-control-lg'
-													required
 												/>
 											</div>
 										</div>
@@ -301,7 +371,6 @@ const RxTable = () => {
 							</div>
 						</div>
 
-						{/* </div> */}
 					</Modal.Body>
 
 					<Modal.Footer>
@@ -312,49 +381,52 @@ const RxTable = () => {
 							Approve Plan
 						</Button>
 					</Modal.Footer>
-				</Modal>
+				</Modal> */}
 			</>
 		);
 	};
 
-	const success = () => {
-		message.success('This is a success message');
-	};
-
 	return (
 		<>
-			<button onClick={success}>Show Success</button>
 			<div className='modalcontent'>
 				<DataTable
-					title='Rx-Data'
+					title='Patients'
 					columns={columns}
-					data={filteredRxTable}
+					data={Patients}
 					pointerOnHover={true}
 					highlightOnHover={true}
-					// rowEvent= {handleButtonClick}
 					expendableRows={true}
-					progressPending={pending}
-					subHeader
-					subHeaderComponent={
-						<input
-							type='text'
-							placeholder='search here'
-							className='w-25 form-control'
-							value={search}
-							onChange={(e) => setSearch(e.target.value)}></input>
-					}
-					subHeaderAlign='left'
+					progressPending={false}
+					// subHeader
+					// subHeaderComponent={
+					// 	<input
+					// 		type='text'
+					// 		placeholder='search here'
+					// 		className='w-25 form-control'
+					// 		value={search}
+					// 		onChange={(e) => setSearch(e.target.value)}></input>
+					// }
+					// subHeaderAlign='left'
 				/>
-				;{show ? <ModalContent /> : null}
-				{/* <Modal
-				title='Planning'
-				open={isPlanningModalOpen}
-				onOk={btnPlanningModalOkClick}
-				onCancel={btnPlanningModalCancelClick}>
-				<p>Some contents...</p>
-				<p>Some contents...</p>
-				<p>Some contents...</p>
-			</Modal> */}
+				<Modal
+					title={'Set Aligners Plan for ' + Patient.patientname}
+					okText='Approve'
+					open={isPlanningModalOpen}
+					confirmLoading={approveLoading}
+					onOk={btnPlanningModalApproveClick}
+					onCancel={btnPlanningModalCancelClick}>
+					<Space>
+						<label className='form-label'>
+							Total Aligners: <span className='required'>*</span>
+						</label>
+						<InputNumber
+							onChange={(value) => setTotalAligners(value)}
+							value={totalAligners}
+							min={1}
+							max={30}
+						/>
+					</Space>
+				</Modal>
 			</div>
 		</>
 	);
