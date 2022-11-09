@@ -275,7 +275,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='validationCustom01'>
-													Name of Clinic <span>*</span>
+													Name of Clinic <span className='required'>*</span>
 												</label>
 
 												<input
@@ -298,7 +298,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
-													Name of Doctor <span>*</span>
+													Name of Doctor <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -321,7 +321,8 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cg'>
-													Doctor's Phone Number <span>*</span>
+													Doctor's Phone Number{' '}
+													<span className='required'>*</span>
 												</label>
 												<Input
 													country={'pk'}
@@ -346,7 +347,7 @@ function Rxform() {
 										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Doctors Number <span>*</span>
+													Doctors Number <span className='required'>*</span>
 												</label>
 												<input
 													type='tel'
@@ -367,7 +368,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
-													Doctor's Email <span>*</span>
+													Doctor's Email <span className='required'>*</span>
 												</label>
 												<input
 													type='email'
@@ -390,7 +391,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Patient's ID <span>*</span>
+													Patient's ID <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -411,7 +412,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
-													Patients Name <span>*</span>
+													Patients Name <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -434,7 +435,8 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cg'>
-													Patient's Phone Number <span>*</span>
+													Patient's Phone Number{' '}
+													<span className='required'>*</span>
 												</label>
 												<Input
 													country={'pk'}
@@ -459,7 +461,7 @@ function Rxform() {
 										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cg'>
-													Patient's Phone Number <span>*</span>
+													Patient's Phone Number <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -480,7 +482,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cdg'>
-													Patient's Email <span>*</span>
+													Patient's Email <span className='required'>*</span>
 												</label>
 												<input
 													type='email'
@@ -503,7 +505,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cdg'>
-													Select Gender <span>*</span>
+													Select Gender <span className='required'>*</span>
 												</label>
 												<select
 													className='form-select form-select-lg'
@@ -521,7 +523,7 @@ function Rxform() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												{/*<label className='form-label' for='form3Example4cdg'>
-													Email <span>*</span>
+													Email <span className='required'>*</span>
 												</label>
 												<input
 													type='email'
