@@ -1,4 +1,5 @@
 import './App.css';
+import 'antd/dist/antd.css';
 // import Login from './components/Login';
 import Register from './components/Register/Register';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -9,7 +10,7 @@ import Rxform from './components/RxForm/Rxform';
 // import Rxform2 from './components/RxForm2/Rxform2';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import Login from './Login/Login'
+import Login from './Login/Login';
 import RxFormData from './components/Rx-Form-Data/RxFormData';
 import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
 // import RxFormData from './components/Rx-Form-Data/RxFormData';

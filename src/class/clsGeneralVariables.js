@@ -8,3 +8,9 @@ export function getCurrentDate(separator = '-') {
 		month < 10 ? `0${month}` : `${month}`
 	}${separator}${date}`;
 }
+
+export function formatDate(date) {
+	let strDate =
+		date.getDate() + '-' + parseInt(date.getMonth()) + '-' + date.getFullYear();
+	return strDate;
+}

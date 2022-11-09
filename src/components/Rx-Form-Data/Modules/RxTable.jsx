@@ -8,6 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 import './RxTable.css';
 import { Link } from 'react-router-dom';
 import { $CombinedState } from 'redux';
+import { message } from 'antd';
 
 // import { useReactToPrint } from 'react-to-print';
 
@@ -20,6 +21,8 @@ const RxTable = () => {
 	const [show, setShow] = useState(false);
 	const [search, setSearch] = useState('');
 	const [filteredRxTable, setFilteredRxTable] = useState([]);
+	const [totalaligners, setTotalAligners] = useState(0);
+	// const [isPlanningModalOpen, setIsPlanningModalOpen] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -32,6 +35,16 @@ const RxTable = () => {
 		}, 2000);
 		return () => clearTimeout(timeout);
 	}, []);
+
+	// const showPlanningModal = () => {
+	// 	setIsPlanningModalOpen(true);
+	// };
+	// const btnPlanningModalOkClick = () => {
+	// 	setIsPlanningModalOpen(false);
+	// };
+	// const btnPlanningModalCancelClick = () => {
+	// 	setIsPlanningModalOpen(false);
+	// };
 
 	// const rowEvents = {
 	// onClick : (e ,row) => {
@@ -48,8 +61,19 @@ const RxTable = () => {
 		//   }}
 		// ></Link>
 	};
-	const btnApprove = (e, row) => {
+	const btnActionClick = (e, row) => {
 		e.preventDefault();
+		setModalInfo(row);
+		setTotalAligners(row.TotalAligners);
+		setShow(true);
+	};
+	const btnApproveClick = (e) => {
+		e.preventDefault();
+		if (totalaligners <= 0 || totalaligners > 30) {
+			setShow(false);
+			message.warning('Must enter between 1 to 30!');
+			return;
+		}
 	};
 
 	const toggelTrueFalse = () => {
@@ -188,7 +212,7 @@ const RxTable = () => {
 			cell: (row) => (
 				<button
 					className='btn btn-outline btn-sm btn-primary'
-					onClick={(e) => btnApprove(e, row)}>
+					onClick={(e) => btnActionClick(e, row)}>
 					{getActionButtonText(row)}
 				</button>
 			),
@@ -227,92 +251,112 @@ const RxTable = () => {
 
 	const ModalContent = () => {
 		return (
-			<></>
-			// <Link to='Rx-data'>Data</Link>
-			// 			<Modal  dialogClassName="my-modal" show={show} onHide={handleClose}>
-			// 				<Modal.Header closeButton>
-			// 					<Modal.Title></Modal.Title>
-			// 					{/* <ReactToPrint
-			// 					trigger={() => {
-			// 						return <button>Print</button>
-			// 					}}
-			// 					// content = {()=>componentRef}
-			// 					documentTitle = 'new documnet'
-			// 					pageStyle = "print"
-			// 					onAfterPrint = {()=>{console.log('document printed')}}
-			// 					/> */}
+			<>
+				<Modal dialogClassName='my-modal' show={show} onHide={handleClose}>
+					<Modal.Header closeButton>
+						<Modal.Title></Modal.Title>
+						{/* <ReactToPrint
+								trigger={() => {
+									return <button>Print</button>
+								}}
+								// content = {()=>componentRef}
+								documentTitle = 'new documnet'
+								pageStyle = "print"
+								onAfterPrint = {()=>{console.log('document printed')}}
+								/> */}
+					</Modal.Header>
+					<Modal.Body>
+						{/* <div ref = {el=>(componentRef=el)}> */}
+						<div className='container'>
+							<div className='row'>
+								<div className='col-lg-4'>
+									<h5>Set Aligners Plan for {modalInfo.patientname}</h5>
+									{/* <ul>
+										<ol>
+											Total Aligners :
+											<input type='number' className='form-control' />
+										</ol>
+									</ul> */}
+									<br />
+									<br />
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label'>
+													Total Aligners: <span className='required'>*</span>
+												</label>
 
-			// 					</Modal.Header>
-			// 				<Modal.Body>
-			// 				{/* <div ref = {el=>(componentRef=el)}> */}
-			// 					<div className='containder'>
-			// 						<div className='row'>
-			// 							<div className='col-lg-6'>
-			// 								<h5>Clinic Name : {modalInfo.clinicname}</h5>
-			// 								<ul>
-			// 	<ol>Clinic Name : {modalInfo.clinicname}</ol>
-			// 	<ol>Doctor Name : {modalInfo.doctorname}</ol>
-			// 	<ol>Patient Name : {modalInfo.patientname}</ol>
-			// 	<ol>Doctor Number :{modalInfo.doctornumber}</ol>
-			// 	<ol>Paient Number : {modalInfo.patientnumber}</ol>
-			// 	<ol>Patient ID : {modalInfo.patienid}</ol>
-			// 	<ol>Doctor Email : {modalInfo.doctoremail}</ol>
-			// 	<ol>Patient Email : {modalInfo.patientemail}</ol>
-			// 	<ol>Gender : {modalInfo.gender}</ol>
-			// 	<ol>Bridges Implant : {modalInfo.bridgesimplant}</ol>
-			// 	<ol>MRCIR : {modalInfo.mrciil}</ol>
-			// 	</ul></div>
-			// 							<div className='col-lg-6'><ul>
-			// 	<ol>Clinic Name : {modalInfo.clinicname}</ol>
-			// 	<ol>Doctor Name : {modalInfo.doctorname}</ol>
-			// 	<ol>Patient Name : {modalInfo.patientname}</ol>
-			// 	<ol>Doctor Number :{modalInfo.doctornumber}</ol>
-			// 	<ol>Paient Number : {modalInfo.patientnumber}</ol>
-			// 	<ol>Patient ID : {modalInfo.patienid}</ol>
-			// 	<ol>Doctor Email : {modalInfo.doctoremail}</ol>
-			// 	<ol>Patient Email : {modalInfo.patientemail}</ol>
-			// 	<ol>Gender : {modalInfo.gender}</ol>
-			// 	<ol>Bridges Implant : {modalInfo.bridgesimplant}</ol>
-			// 	<ol>MRCIR : {modalInfo.mrciil}</ol>
-			// 	</ul></div>
-			// 						</div>
-			// 					</div>
+												<input
+													type='number'
+													placeholder='Minimum 1'
+													onChange={(e) => setTotalAligners(e.target.value)}
+													value={totalaligners}
+													className='form-control form-control-lg'
+													required
+												/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-			// {/* </div> */}
-			// 				</Modal.Body>
+						{/* </div> */}
+					</Modal.Body>
 
-			// 				<Modal.Footer>
-			// 					<Button variant="secondary" onClick={handleClose}>Close</Button>
-			// 				</Modal.Footer>
-
-			// 			</Modal>
+					<Modal.Footer>
+						<Button variant='secondary' onClick={handleClose}>
+							Close
+						</Button>
+						<Button variant='primary' onClick={btnApproveClick}>
+							Approve Plan
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			</>
 		);
 	};
 
+	const success = () => {
+		message.success('This is a success message');
+	};
+
 	return (
-		<div className='modalcontent'>
-			<DataTable
-				title='Rx-Data'
-				columns={columns}
-				data={filteredRxTable}
-				pointerOnHover={true}
-				highlightOnHover={true}
-				// rowEvent= {handleButtonClick}
-				expendableRows={true}
-				progressPending={pending}
-				subHeader
-				subHeaderComponent={
-					<input
-						type='text'
-						placeholder='search here'
-						className='w-25 form-control'
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}></input>
-				}
-				subHeaderAlign='left'
-			/>
-			;{show ? <ModalContent /> : null}
-		</div>
+		<>
+			<button onClick={success}>Show Success</button>
+			<div className='modalcontent'>
+				<DataTable
+					title='Rx-Data'
+					columns={columns}
+					data={filteredRxTable}
+					pointerOnHover={true}
+					highlightOnHover={true}
+					// rowEvent= {handleButtonClick}
+					expendableRows={true}
+					progressPending={pending}
+					subHeader
+					subHeaderComponent={
+						<input
+							type='text'
+							placeholder='search here'
+							className='w-25 form-control'
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}></input>
+					}
+					subHeaderAlign='left'
+				/>
+				;{show ? <ModalContent /> : null}
+				{/* <Modal
+				title='Planning'
+				open={isPlanningModalOpen}
+				onOk={btnPlanningModalOkClick}
+				onCancel={btnPlanningModalCancelClick}>
+				<p>Some contents...</p>
+				<p>Some contents...</p>
+				<p>Some contents...</p>
+			</Modal> */}
+			</div>
+		</>
 	);
 };
 
