@@ -1,5 +1,5 @@
 import './App.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 // import Login from './components/Login';
 import Register from './components/Register/Register';
 import Dashboard from './components/Dashboard/Dashboard';

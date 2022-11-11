@@ -19,7 +19,7 @@ function Login() {
 
 
 
-    const [doctoremail, setDoctorEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
     const history = useNavigate();
@@ -34,7 +34,7 @@ function Login() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                doctoremail,
+                email,
                 password,
             }),
         })
@@ -77,12 +77,12 @@ function Login() {
                                                 </label>
                                                 <input
                                                     type='email'
-                                                    onChange={(e) => setDoctorEmail(e.target.value)}
+                                                    onChange={(e) => setEmail(e.target.value)}
                                                     // onBlur={formik.handleChange}
                                                     // value={formik.values.doctoremail}
-                                                    name='doctoremail'
+                                                    name='email'
                                                     placeholder='Enter Your Email'
-                                                    value={doctoremail}
+                                                    value={email}
                                                     id='form3Example3cg'
                                                     className='form-control form-control-lg'
                                                     required

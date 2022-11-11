@@ -8,6 +8,9 @@ import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 
 import Input from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+// import { useForm } from 'react-hook-form'
+// import { yupResolver } from '@hookform/resolvers/yup'
+// import * as Yup from 'yup'
 
 
 
@@ -16,24 +19,55 @@ function Register() {
 	useEffect(() => {
 		document.title = 'Aligno-Register';
 	}, []);
-	const [clinicname, setClinicName] = useState('');
-	const [doctorname, setDoctorName] = useState('');
-	const [doctornumber, setDoctorNumber] = useState('');
-	const [doctorNumberInputValue, setdoctorNumberInputValue] = useState('');
-	const [doctoremail, setDoctorEmail] = useState('');
-	const [patienid, setPatientId] = useState('');
-	const [patientname, setPatientName] = useState('');
-	const [patientnumber, setPatientNumber] = useState('');
-	const [patientNumberInputValue, setpatientNumberInputValue] = useState('');
-	const [patientemail, setPatientEmail] = useState('');
+	const [firstname,setFirstName] = useState('');
+	const [lastname, setLastName] = useState('');
 	const [gender, setGender] = useState('');
-	const [password, setPassword] = useState('')
+	const [degree, setDegree] = useState('');
+	const [email, setEmail] = useState('');
+    const [speciality, setSpeciality] = useState('');
+	const [completecases, setCompleteCases] = useState('');
+	const [country, setCountry] = useState('');
+	const [state, setState] = useState('');
+	const [address, setAddress] = useState('');
+	const [city, setCity] = useState('');
+	const [phoneinputvalue,setPhoneInputValue] = useState('');
+	const [phone,setPhone] = useState('');
+	const [zip, setZip] = useState('');
+	const [password, setPassword] = useState('');
+	const [showhide, setShowHide] = useState('');
+
+	// const formSchema = Yup.object().shape({
+	// 	password: Yup.string()
+	// 	  .required('Password is mendatory')
+	// 	  .min(3, 'Password must be at 3 char long'),
+	// 	confirmPwd: Yup.string()
+	// 	  .required('Password is mendatory')
+	// 	  .oneOf([Yup.ref('password')], 'Passwords does not match'),
+	//   })
+	//   const formOptions = { resolver: yupResolver(formSchema) }
+	//   const { register, formState } = useForm(formOptions)
+	//   const { errors } = formState
+
+	//   function regData(data) {
+	// 	console.log(JSON.stringify(data, null, 4))
+	// 	return false
+	//   }
+	 
+
+	const handleshowhide=(event)=>{
+		const getuser = event.target.value;
+		setShowHide(getuser)
+	}
 	
 	const history = useNavigate();
 
 
 
 	async function regData(event) {
+
+		
+		
+		
 		event.preventDefault();
 		const response = await fetch('https://server.aligno.co/api/regform', {
 			method: 'POST',
@@ -41,14 +75,18 @@ function Register() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				clinicname,
-				doctorname,
-				doctornumber,
-				doctoremail,
-				patienid,
-				patientname,
-				patientnumber,
-				patientemail,
+				firstname,
+				lastname,
+				degree,
+				speciality,
+				completecases,
+				email,
+				country,
+				state,
+				address,
+				city,
+				phone,
+				zip,
 				gender,
 				password,
 				
@@ -60,7 +98,16 @@ function Register() {
 			history('/thanks');
 		}
 		console.log(data);
+
+		// const getuser = event.target.value;
+		// setShowHide(getuser)
+
+		
+		
+		
+		
 	}
+	
 	return (
 		<>
 			<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
@@ -68,7 +115,7 @@ function Register() {
 					<div className='row d-flex justify-content-center align-items-center h-100'>
 						<div
 							className='col-12 col-sm-6 col-md-9 col-lg-7 col-sm-6 col-xl-6 formwidth'
-							style={{ width: `900px` ,height : `920px`}}>
+							style={{ width: `900px` ,height : `1500px`}}>
 							<div
 								style={{
 									// margin: `10px`,
@@ -113,20 +160,204 @@ function Register() {
             </div>
           </Col>
                                           </FormGroup> */}
-
+<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-9 col-lg-9 col-xl-9'>
+											
+										</div>
+										<div class='col-sm-12 col-12 col-md-3 col-lg-3 col-xl-3'>
+										<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Categories
+												</label>
+												<select
+													onChange={(e) => (handleshowhide(e))}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder=''>
+													<option value='' disabled selected>
+														Categories
+													</option>
+													<option value='1'>Doctor</option>
+													<option value='2'>Patient</option>
+													<option value='3'>Staff/CS Department</option>
+													<option value='4'>Planning Department</option>
+													<option value='5'>Manufacturing Department</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									{ showhide ==='1' && (
+										<div>
+									
+									
+									
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Degree
+												</label>
+												<select
+													onChange={(e) => setDegree(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Degree'>
+													<option value='' disabled selected>
+														Degree
+													</option>
+													<option value='DDS'>DDS</option>
+													<option value='DMD'>DMD</option>
+													<option value='MDS'>MDS</option>
+													<option value='Not Applicable'>Not Applicable</option>
+												</select>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Speciality
+												</label>
+												<select
+													onChange={(e) => setSpeciality(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Speciality'>
+													<option value='' disabled selected>
+														Speciality
+													</option>
+													<option value='General Practitioner'>General Practitioner</option>
+													<option value='Orthodontist'>Orthodontist</option>
+													<option value='Other specialist'>Other specialist</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Completed aligner cases
+												</label>
+												<select
+													onChange={(e) => setCompleteCases(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Completed aligner cases'>
+													<option value='' disabled selected>
+													Completed aligner cases
+													</option>
+													<option value='Centered'>None Completed</option>
+													<option value='Shifted Right'>1-10</option>
+													<option value='Shifted Left'>11-50</option>
+													<option value='Shifted Left'>51-100</option>
+												</select>
+											</div>
+										</div>
+										
+											<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+												Email <span className='required'>*</span>
+												</label>
+												<input
+													type='email'
+													onChange={(e) => setEmail(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctoremail}
+													name='email'
+													placeholder='Enter Your Email'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+									<div class='row align-items-start'>
+										
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+													Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													// {...register('password')}
+													onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												 {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+												Confirm	Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													{...register('confirmPwd')}
+													// onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className={`form-control form-control-lg ${errors.confirmPwd ? 'is-invalid' : ''}`}
+													required
+												/>
+												<div className="invalid-feedback">{errors.confirmPwd?.message}</div>
+											</div>
+										</div> */}
+									</div>
+								
+									{/* <div class='row align-items-start  mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="Dental Licenese"  readonly="readonly" />
+      </div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="NPI"  readonly="readonly" />
+      </div>
+										</div>
+									</div>
+									<div class='row align-items-start mt-4'>
+									<div>
+        <input type="text" className='form-input-dotted' class='form-input-dotted' placeholder="Tax ID"  readonly="readonly" />
+      </div>
+										
+									</div> */}
+									
+									
+									</div>
+)}
+	{ showhide ==='2' && (
+										<div>
 									<div class='row align-items-start'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='validationCustom01'>
-													Name of Clinic <span>*</span>
+													First Name<span>*</span>
 												</label>
 
 												<input
 													id='userNameInput'
 													type='text'
-													onChange={(e) => setClinicName(e.target.value)}
-													value={clinicname}
-													placeholder='Smile Hub'
+													onChange={(e) => setFirstName(e.target.value)}
+													value={firstname}
+													placeholder='First Name'
 													// onBlur={formik.handleChange}
 													// value={formik.values.clinicname}
 													// name="clinicname"
@@ -141,15 +372,15 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
-													Name of Doctor <span>*</span>
+													Last Name <span>*</span>
 												</label>
 												<input
 													type='text'
-													onChange={(e) => setDoctorName(e.target.value)}
+													onChange={(e) => setLastName(e.target.value)}
 													// onBlur={formik.handleChange}
 													// value={formik.values.doctorname}
-													name='doctorname'
-													placeholder='Dr Ali'
+													name='lastname'
+													placeholder='Last Name'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 													required
@@ -160,191 +391,12 @@ function Register() {
 											</div>
 										</div>
 									</div>
+									
+									
+									
 									<div class='row align-items-start'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cg'>
-													Doctor's Phone Number <span>*</span>
-												</label>
-												<Input
-													country={'pk'}
-													value={doctornumber}
-													name='doctornumber'
-													onChange={
-														((e) => {
-															setdoctorNumberInputValue(e.target.value);
-														},
-														setDoctorNumber)
-													}
-													inputStyle={{
-														width: '100%',
-														minHeight: 'calc(1.5em + 1rem + 2px)',
-														fontSize: '1.25rem',
-														borderRadius: '.5rem',
-													}}
-													required
-												/>
-											</div>
-										</div>
-										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Doctors Number <span>*</span>
-												</label>
-												<input
-													type='tel'
-													onChange={(e) => setDoctorNumber(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.doctornumber}
-													name='doctornumber'
-													placeholder='Enter Phone Number'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												 <div className="text-danger">
-            {formik.errors.doctornumber ? formik.errors.doctornumber : null}
-          </div> 
-											</div>
-										</div> */}
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													Doctor's Email <span>*</span>
-												</label>
-												<input
-													type='email'
-													onChange={(e) => setDoctorEmail(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.doctoremail}
-													name='doctoremail'
-													placeholder='Enter Your Email'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Patient's ID <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setPatientId(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='patientid'
-													placeholder='Generated by the Introral Scanner'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													Patients Name <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setPatientName(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='Ali'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cg'>
-													Patient's Phone Number <span>*</span>
-												</label>
-												<Input
-													country={'pk'}
-													value={patientnumber}
-													name='patientnumber'
-													onChange={
-														((e) => {
-															setpatientNumberInputValue(e.target.value);
-														},
-														setPatientNumber)
-													}
-													inputStyle={{
-														width: '100%',
-														minHeight: 'calc(1.5em + 1rem + 2px)',
-														fontSize: '1.25rem',
-														borderRadius: '.5rem',
-													}}
-													required
-												/>
-											</div>
-										</div>
-										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cg'>
-													Patient's Phone Number <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setPatientNumber(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientnumber}
-													name='patientnumber'
-													placeholder='Enter Phone Number'
-													id='form3Example4cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												 <div className="text-danger">
-            {formik.errors.patientnumber ? formik.errors.patientnumber : null}
-          </div> 
-											</div>
-										</div> */}
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cdg'>
-													Patient's Email <span>*</span>
-												</label>
-												<input
-													type='email'
-													onChange={(e) => setPatientEmail(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientemail}
-													name='patientemail'
-													placeholder='ali@gmail.com'
-													id='form3Example4cdg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientemail ? formik.errors.patientemail : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
+										<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cdg'>
 													Select Gender <span>*</span>
 												</label>
@@ -361,6 +413,191 @@ function Register() {
 												</select>
 											</div>
 										</div>
+										
+											<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+												Email <span className='required'>*</span>
+												</label>
+												<input
+													type='email'
+													onChange={(e) => setEmail(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctoremail}
+													name='email'
+													placeholder='Enter Your Email'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+								
+									{/* <div class='row align-items-start  mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="Dental Licenese"  readonly="readonly" />
+      </div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="NPI"  readonly="readonly" />
+      </div>
+										</div>
+									</div>
+									<div class='row align-items-start mt-4'>
+									<div>
+        <input type="text" className='form-input-dotted' class='form-input-dotted' placeholder="Tax ID"  readonly="readonly" />
+      </div>
+										
+									</div> */}
+									
+									<div class='row align-items-start mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Country
+												</label>
+												<select
+													onChange={(e) => setCountry(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Country'>
+													<option value='' disabled selected>
+													Country
+													</option>
+													<option value='Pakistan'>Pakistan</option>
+													<option value='Afghanistan'>Afghanistan</option>
+													<option value='Nepal'>Nepal</option>
+													<option value='Iran'>Iran</option>
+												</select>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													State or Province
+												</label>
+												<select
+													onChange={(e) => setState(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='State or Province'>
+													<option value='' disabled selected>
+													State or Province
+													</option>
+													<option value='Centered'>Punjab</option>
+													<option value='Shifted Right'>Sindh</option>
+													<option value='Shifted Left'>Balochistan</option>
+													<option value='Shifted Left'>California</option>
+													<option value='Shifted Left'>Arizona</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Address <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setAddress(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='patientid'
+													placeholder='Address'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													City <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setCity(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='City'
+													placeholder='City'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+									<div class='row align-items-start'>
+									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Phone Number <span>*</span>
+												</label>
+												<Input
+													country={'pk'}
+													value={phone}
+													name='patientnumber'
+													onChange={
+														((e) => {
+															setPhoneInputValue(e.target.value);
+														},
+														setPhone)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													required
+												/>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													ZIP/Postal code <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setZip(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='ZIP/Postal code'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
+          </div> */}
+											</div>
+										</div>
+									</div>
+									
+								
+									
+									<div class='row align-items-start'>
+										
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 											<label className='form-label' for='form3Example3cg'>
@@ -368,6 +605,7 @@ function Register() {
 												</label>
 												<input
 													type='password'
+													// {...register('password')}
 													onChange={(e) => setPassword(e.target.value)}
 													// onBlur={formik.handleChange}
 													// value={formik.values.nameofpatient}
@@ -377,9 +615,928 @@ function Register() {
 													className='form-control form-control-lg'
 													required
 												/>
+												 {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+												Confirm	Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													{...register('confirmPwd')}
+													// onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className={`form-control form-control-lg ${errors.confirmPwd ? 'is-invalid' : ''}`}
+													required
+												/>
+												<div className="invalid-feedback">{errors.confirmPwd?.message}</div>
+											</div>
+										</div> */}
+									</div>
+									</div>
+)}
+{ showhide ==='3' && (
+										<div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='validationCustom01'>
+													First Name<span>*</span>
+												</label>
+
+												<input
+													id='userNameInput'
+													type='text'
+													onChange={(e) => setFirstName(e.target.value)}
+													value={firstname}
+													placeholder='First Name'
+													// onBlur={formik.handleChange}
+													// value={formik.values.clinicname}
+													// name="clinicname"
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.clinicname ? formik.errors.clinicname : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													Last Name <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setLastName(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctorname}
+													name='lastname'
+													placeholder='Last Name'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctorname ? formik.errors.doctorname : null}
+          </div> */}
 											</div>
 										</div>
 									</div>
+									
+									
+									
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cdg'>
+													Select Gender <span>*</span>
+												</label>
+												<select
+													className='form-select form-select-lg'
+													required
+													onChange={(e) => setGender(e.target.value)}
+													aria-label='Default select example'>
+													<option value='' disabled selected>
+														Gender
+													</option>
+													<option value='Male'>Male</option>
+													<option value='Female'>Female</option>
+												</select>
+											</div>
+										</div>
+										
+											<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+												Email <span className='required'>*</span>
+												</label>
+												<input
+													type='email'
+													onChange={(e) => setEmail(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctoremail}
+													name='email'
+													placeholder='Enter Your Email'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+								
+									{/* <div class='row align-items-start  mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="Dental Licenese"  readonly="readonly" />
+      </div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="NPI"  readonly="readonly" />
+      </div>
+										</div>
+									</div>
+									<div class='row align-items-start mt-4'>
+									<div>
+        <input type="text" className='form-input-dotted' class='form-input-dotted' placeholder="Tax ID"  readonly="readonly" />
+      </div>
+										
+									</div> */}
+									
+									<div class='row align-items-start mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Country
+												</label>
+												<select
+													onChange={(e) => setCountry(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Country'>
+													<option value='' disabled selected>
+													Country
+													</option>
+													<option value='Pakistan'>Pakistan</option>
+													<option value='Afghanistan'>Afghanistan</option>
+													<option value='Nepal'>Nepal</option>
+													<option value='Iran'>Iran</option>
+												</select>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													State or Province
+												</label>
+												<select
+													onChange={(e) => setState(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='State or Province'>
+													<option value='' disabled selected>
+													State or Province
+													</option>
+													<option value='Centered'>Punjab</option>
+													<option value='Shifted Right'>Sindh</option>
+													<option value='Shifted Left'>Balochistan</option>
+													<option value='Shifted Left'>California</option>
+													<option value='Shifted Left'>Arizona</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Address <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setAddress(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='patientid'
+													placeholder='Address'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													City <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setCity(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='City'
+													placeholder='City'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+									<div class='row align-items-start'>
+									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Phone Number <span>*</span>
+												</label>
+												<Input
+													country={'pk'}
+													value={phone}
+													name='patientnumber'
+													onChange={
+														((e) => {
+															setPhoneInputValue(e.target.value);
+														},
+														setPhone)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													required
+												/>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													ZIP/Postal code <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setZip(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='ZIP/Postal code'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
+          </div> */}
+											</div>
+										</div>
+									</div>
+									
+								
+									
+									<div class='row align-items-start'>
+										
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+													Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													// {...register('password')}
+													onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												 {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+												Confirm	Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													{...register('confirmPwd')}
+													// onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className={`form-control form-control-lg ${errors.confirmPwd ? 'is-invalid' : ''}`}
+													required
+												/>
+												<div className="invalid-feedback">{errors.confirmPwd?.message}</div>
+											</div>
+										</div> */}
+									</div>
+									</div>
+)}
+{ showhide ==='4' && (
+										<div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='validationCustom01'>
+													First Name<span>*</span>
+												</label>
+
+												<input
+													id='userNameInput'
+													type='text'
+													onChange={(e) => setFirstName(e.target.value)}
+													value={firstname}
+													placeholder='First Name'
+													// onBlur={formik.handleChange}
+													// value={formik.values.clinicname}
+													// name="clinicname"
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.clinicname ? formik.errors.clinicname : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													Last Name <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setLastName(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctorname}
+													name='lastname'
+													placeholder='Last Name'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctorname ? formik.errors.doctorname : null}
+          </div> */}
+											</div>
+										</div>
+									</div>
+									
+									
+									
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cdg'>
+													Select Gender <span>*</span>
+												</label>
+												<select
+													className='form-select form-select-lg'
+													required
+													onChange={(e) => setGender(e.target.value)}
+													aria-label='Default select example'>
+													<option value='' disabled selected>
+														Gender
+													</option>
+													<option value='Male'>Male</option>
+													<option value='Female'>Female</option>
+												</select>
+											</div>
+										</div>
+										
+											<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+												Email <span className='required'>*</span>
+												</label>
+												<input
+													type='email'
+													onChange={(e) => setEmail(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctoremail}
+													name='email'
+													placeholder='Enter Your Email'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+								
+									{/* <div class='row align-items-start  mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="Dental Licenese"  readonly="readonly" />
+      </div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="NPI"  readonly="readonly" />
+      </div>
+										</div>
+									</div>
+									<div class='row align-items-start mt-4'>
+									<div>
+        <input type="text" className='form-input-dotted' class='form-input-dotted' placeholder="Tax ID"  readonly="readonly" />
+      </div>
+										
+									</div> */}
+									
+									<div class='row align-items-start mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Country
+												</label>
+												<select
+													onChange={(e) => setCountry(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Country'>
+													<option value='' disabled selected>
+													Country
+													</option>
+													<option value='Pakistan'>Pakistan</option>
+													<option value='Afghanistan'>Afghanistan</option>
+													<option value='Nepal'>Nepal</option>
+													<option value='Iran'>Iran</option>
+												</select>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													State or Province
+												</label>
+												<select
+													onChange={(e) => setState(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='State or Province'>
+													<option value='' disabled selected>
+													State or Province
+													</option>
+													<option value='Centered'>Punjab</option>
+													<option value='Shifted Right'>Sindh</option>
+													<option value='Shifted Left'>Balochistan</option>
+													<option value='Shifted Left'>California</option>
+													<option value='Shifted Left'>Arizona</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Address <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setAddress(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='patientid'
+													placeholder='Address'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													City <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setCity(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='City'
+													placeholder='City'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+									<div class='row align-items-start'>
+									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Phone Number <span>*</span>
+												</label>
+												<Input
+													country={'pk'}
+													value={phone}
+													name='patientnumber'
+													onChange={
+														((e) => {
+															setPhoneInputValue(e.target.value);
+														},
+														setPhone)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													required
+												/>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													ZIP/Postal code <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setZip(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='ZIP/Postal code'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
+          </div> */}
+											</div>
+										</div>
+									</div>
+									
+								
+									
+									<div class='row align-items-start'>
+										
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+													Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													// {...register('password')}
+													onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												 {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+												Confirm	Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													{...register('confirmPwd')}
+													// onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className={`form-control form-control-lg ${errors.confirmPwd ? 'is-invalid' : ''}`}
+													required
+												/>
+												<div className="invalid-feedback">{errors.confirmPwd?.message}</div>
+											</div>
+										</div> */}
+									</div>
+									</div>
+)}
+
+{ showhide ==='5' && (
+										<div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='validationCustom01'>
+													First Name<span>*</span>
+												</label>
+
+												<input
+													id='userNameInput'
+													type='text'
+													onChange={(e) => setFirstName(e.target.value)}
+													value={firstname}
+													placeholder='First Name'
+													// onBlur={formik.handleChange}
+													// value={formik.values.clinicname}
+													// name="clinicname"
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.clinicname ? formik.errors.clinicname : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													Last Name <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setLastName(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctorname}
+													name='lastname'
+													placeholder='Last Name'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctorname ? formik.errors.doctorname : null}
+          </div> */}
+											</div>
+										</div>
+									</div>
+									
+									
+									
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cdg'>
+													Select Gender <span>*</span>
+												</label>
+												<select
+													className='form-select form-select-lg'
+													required
+													onChange={(e) => setGender(e.target.value)}
+													aria-label='Default select example'>
+													<option value='' disabled selected>
+														Gender
+													</option>
+													<option value='Male'>Male</option>
+													<option value='Female'>Female</option>
+												</select>
+											</div>
+										</div>
+										
+											<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+												Email <span className='required'>*</span>
+												</label>
+												<input
+													type='email'
+													onChange={(e) => setEmail(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.doctoremail}
+													name='email'
+													placeholder='Enter Your Email'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+								
+									{/* <div class='row align-items-start  mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="Dental Licenese"  readonly="readonly" />
+      </div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+										<div>
+        <input type="text" className='form-input-dotted ' class='form-input-dotted' placeholder="NPI"  readonly="readonly" />
+      </div>
+										</div>
+									</div>
+									<div class='row align-items-start mt-4'>
+									<div>
+        <input type="text" className='form-input-dotted' class='form-input-dotted' placeholder="Tax ID"  readonly="readonly" />
+      </div>
+										
+									</div> */}
+									
+									<div class='row align-items-start mt-4'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Country
+												</label>
+												<select
+													onChange={(e) => setCountry(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='Country'>
+													<option value='' disabled selected>
+													Country
+													</option>
+													<option value='Pakistan'>Pakistan</option>
+													<option value='Afghanistan'>Afghanistan</option>
+													<option value='Nepal'>Nepal</option>
+													<option value='Iran'>Iran</option>
+												</select>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													State or Province
+												</label>
+												<select
+													onChange={(e) => setState(e.target.value)}
+													class='form-select form-select-lg'
+													aria-label='Default select example'
+													placeholder='State or Province'>
+													<option value='' disabled selected>
+													State or Province
+													</option>
+													<option value='Centered'>Punjab</option>
+													<option value='Shifted Right'>Sindh</option>
+													<option value='Shifted Left'>Balochistan</option>
+													<option value='Shifted Left'>California</option>
+													<option value='Shifted Left'>Arizona</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class='row align-items-start'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													Address <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setAddress(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='patientid'
+													placeholder='Address'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example1cg'>
+													City <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setCity(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.patientid}
+													name='City'
+													placeholder='City'
+													id='form3Example1cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.patientid ? formik.errors.patientid : null}
+          </div> */}
+											</div>
+										</div>
+										
+									</div>
+									<div class='row align-items-start'>
+									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example4cg'>
+													Phone Number <span>*</span>
+												</label>
+												<Input
+													country={'pk'}
+													value={phone}
+													name='patientnumber'
+													onChange={
+														((e) => {
+															setPhoneInputValue(e.target.value);
+														},
+														setPhone)
+													}
+													inputStyle={{
+														width: '100%',
+														minHeight: 'calc(1.5em + 1rem + 2px)',
+														fontSize: '1.25rem',
+														borderRadius: '.5rem',
+													}}
+													required
+												/>
+											</div>
+										</div>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+												<label className='form-label' for='form3Example3cg'>
+													ZIP/Postal code <span>*</span>
+												</label>
+												<input
+													type='text'
+													onChange={(e) => setZip(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='ZIP/Postal code'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												{/* <div className="text-danger">
+            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
+          </div> */}
+											</div>
+										</div>
+									</div>
+									
+								
+									
+									<div class='row align-items-start'>
+										
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+													Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													// {...register('password')}
+													onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className='form-control form-control-lg'
+													required
+												/>
+												 {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
+											</div>
+										</div>
+										{/* <div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
+											<div className='form-outline mb-4'>
+											<label className='form-label' for='form3Example3cg'>
+												Confirm	Password <span>*</span>
+												</label>
+												<input
+													type='password'
+													{...register('confirmPwd')}
+													// onChange={(e) => setPassword(e.target.value)}
+													// onBlur={formik.handleChange}
+													// value={formik.values.nameofpatient}
+													name='nameofpatient'
+													placeholder='Enter Password'
+													id='form3Example3cg'
+													className={`form-control form-control-lg ${errors.confirmPwd ? 'is-invalid' : ''}`}
+													required
+												/>
+												<div className="invalid-feedback">{errors.confirmPwd?.message}</div>
+											</div>
+										</div> */}
+									</div>
+									</div>
+)}
+
 
 									<div class='row align-items-start'>
 										<div class='col'>
