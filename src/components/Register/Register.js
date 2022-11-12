@@ -138,7 +138,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='validationCustom01'>
-													First Name<span>*</span>
+													First Name<span className='required'>*</span>
 												</label>
 
 												<input
@@ -161,7 +161,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
-													Last Name <span>*</span>
+													Last Name <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -208,12 +208,13 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cg'>
-													Phone Number <span>*</span>
+													Phone Number <span className='required'>*</span>
 												</label>
 												<Input
 													country={'pk'}
 													value={phone}
 													name='patientnumber'
+													required
 													onChange={
 														((e) => {
 															setPhoneInputValue(e.target.value);
@@ -226,7 +227,7 @@ function Register() {
 														fontSize: '1.25rem',
 														borderRadius: '.5rem',
 													}}
-													required
+													
 												/>
 											</div>
 										</div>
@@ -235,7 +236,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 										<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example4cdg'>
-													Select Gender <span>*</span>
+													Select Gender  <span className='required'>*</span>
 												</label>
 												<select
 													className='form-select form-select-lg'
@@ -253,21 +254,21 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 										<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Department
+													Department <span className='required'>*</span>
 												</label>
 												<select
-												
+												className='form-select form-select-lg'
+												required
 												onChange={(e) => {handleshowhide(e);setDepartment(e.target.value);}}
-												
-													class='form-select form-select-lg'
-													aria-label='Default select example'
+												aria-label='Default select example'
 													placeholder=''>
-													<option selected disabled>Select Department</option>
+														<option value="" disabled selected>Select Department</option>
 													<option value='1'>Doctor</option>
-													<option value='2' >Patient</option>
+													<option value='2'>Patient</option>
 													<option value='3'>Staff/CS Department</option>
 													<option value='4'>Planning Department</option>
 													<option value='5'>Manufacturing Department</option>
+													
 												</select>
 											</div>
 										</div>
@@ -282,11 +283,12 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Degree
+													Degree <span className='required'>*</span>
 												</label>
 												<select
 													onChange={(e) => setDegree(e.target.value)}
-													class='form-select form-select-lg'
+													className='form-select form-select-lg'
+													required
 													aria-label='Default select example'
 													placeholder='Degree'>
 													<option value='' disabled selected>
@@ -302,16 +304,16 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Speciality
+													Speciality <span className='required'>*</span>
 												</label>
 												<select
 													onChange={(e) => setSpeciality(e.target.value)}
-													
-													class='form-select form-select-lg'
+													className='form-select form-select-lg'
+													required
 													aria-label='Default select example'
 													placeholder='Speciality'>
 													<option value='' disabled selected>
-														Speciality
+														Speciality 
 													</option>
 													<option value='General Practitioner'>General Practitioner</option>
 													<option value='Orthodontist'>Orthodontist</option>
@@ -324,20 +326,21 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Completed aligner cases
+													Completed aligner cases <span className='required'>*</span>
 												</label>
 												<select
 													onChange={(e) => setCompleteCases(e.target.value)}
 													class='form-select form-select-lg'
+													required
 													aria-label='Default select example'
 													placeholder='Completed aligner cases'>
 													<option value='' disabled selected>
 													Completed aligner cases
 													</option>
-													<option value='Centered'>None Completed</option>
-													<option value='Shifted Right'>1-10</option>
-													<option value='Shifted Left'>11-50</option>
-													<option value='Shifted Left'>51-100</option>
+													<option value='None Completed'>None Completed</option>
+													<option value='1-10'>1-10</option>
+													<option value='11-50'>11-50</option>
+													<option value='51-100'>51-100</option>
 												</select>
 											</div>
 										</div>
@@ -351,11 +354,12 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Country
+													Country  <span className='required'>*</span>
 												</label>
 												<select
 													onChange={(e) => setCountry(e.target.value)}
 													class='form-select form-select-lg'
+													required
 													aria-label='Default select example'
 													placeholder='Country'>
 													<option value='' disabled selected>
@@ -371,21 +375,22 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													State or Province
+													State or Province  <span className='required'>*</span>
 												</label>
 												<select
 													onChange={(e) => setState(e.target.value)}
 													class='form-select form-select-lg'
+													required
 													aria-label='Default select example'
 													placeholder='State or Province'>
 													<option value='' disabled selected>
 													State or Province
 													</option>
-													<option value='Centered'>Punjab</option>
-													<option value='Shifted Right'>Sindh</option>
-													<option value='Shifted Left'>Balochistan</option>
-													<option value='Shifted Left'>California</option>
-													<option value='Shifted Left'>Arizona</option>
+													<option value='Punjab'>Punjab</option>
+													<option value='Sindh'>Sindh</option>
+													<option value='Balochistan'>Balochistan</option>
+													<option value='California'>California</option>
+													<option value='Arizona'>Arizona</option>
 												</select>
 											</div>
 										</div>
@@ -394,7 +399,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													Address <span>*</span>
+													Address   <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -419,7 +424,7 @@ function Register() {
 									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
-													City <span>*</span>
+													City  <span className='required'>*</span>
 												</label>
 												<input
 													type='text'
@@ -440,7 +445,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example3cg'>
-													ZIP/Postal code <span>*</span>
+													ZIP/Postal code 
 												</label>
 												<input
 													type='text'
@@ -451,7 +456,7 @@ function Register() {
 													placeholder='ZIP/Postal code'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
-													required
+													
 												/>
 												{/* <div className="text-danger">
             {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
@@ -467,7 +472,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 											<label className='form-label' for='form3Example3cg'>
-													Password <span>*</span>
+													Password  <span className='required'>*</span>
 												</label>
 												<input
 													type='password'
@@ -487,7 +492,7 @@ function Register() {
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
 											<label className='form-label' for='form3Example3cg'>
-												Confirm	Password <span>*</span>
+												Confirm	Password  <span className='required'>*</span>
 												</label>
 												<input
 													type='password'
@@ -514,681 +519,7 @@ function Register() {
 									
 									
 
-	{ showhide ==='2' && (
-										<div>
-								
-									
-								<div class='row align-items-start mt-4'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Country
-												</label>
-												<select
-													onChange={(e) => setCountry(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='Country'>
-													<option value='' disabled selected>
-													Country
-													</option>
-													<option value='Pakistan'>Pakistan</option>
-													<option value='Afghanistan'>Afghanistan</option>
-													<option value='Nepal'>Nepal</option>
-													<option value='Iran'>Iran</option>
-												</select>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													State or Province
-												</label>
-												<select
-													onChange={(e) => setState(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='State or Province'>
-													<option value='' disabled selected>
-													State or Province
-													</option>
-													<option value='Centered'>Punjab</option>
-													<option value='Shifted Right'>Sindh</option>
-													<option value='Shifted Left'>Balochistan</option>
-													<option value='Shifted Left'>California</option>
-													<option value='Shifted Left'>Arizona</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Address <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setAddress(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='patientid'
-													placeholder='Address'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										
-										
-									</div>
-									<div class='row align-items-start'>
-									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													City <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setCity(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='City'
-													placeholder='City'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													ZIP/Postal code <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setZip(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='ZIP/Postal code'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									
-								
-									
-									<div class='row align-items-start'>
-										
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-													Password <span>*</span>
-												</label>
-												<input
-													type='password'
-												    onKeyUp={()=>validate()}
-													onChange={(e) => setPassword(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='Enter Password'
-													id='pass1'
-													className='form-control form-control-lg'
-													required
-												/>
-												
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-												Confirm	Password <span>*</span>
-												</label>
-												<input
-													type='password'
-													onKeyUp={()=>validate()}
-													onChange={(e) => set(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name=''
-													placeholder='Enter Password'
-													id='pass2'
-													className={`form-control form-control-lg `}
-													required
-												/>
-											
-												
-													<p  style={{color:`red`,marginLeft:`7px`}} id="Match"> Password not Match</p>
-												
-											
-											
-											</div>
-											
-										</div>
-									</div>
-									</div>
-)}
-{ showhide ==='3' && (
-										<div>
-									<div class='row align-items-start mt-4'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Country
-												</label>
-												<select
-													onChange={(e) => setCountry(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='Country'>
-													<option value='' disabled selected>
-													Country
-													</option>
-													<option value='Pakistan'>Pakistan</option>
-													<option value='Afghanistan'>Afghanistan</option>
-													<option value='Nepal'>Nepal</option>
-													<option value='Iran'>Iran</option>
-												</select>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													State or Province
-												</label>
-												<select
-													onChange={(e) => setState(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='State or Province'>
-													<option value='' disabled selected>
-													State or Province
-													</option>
-													<option value='Centered'>Punjab</option>
-													<option value='Shifted Right'>Sindh</option>
-													<option value='Shifted Left'>Balochistan</option>
-													<option value='Shifted Left'>California</option>
-													<option value='Shifted Left'>Arizona</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Address <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setAddress(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='patientid'
-													placeholder='Address'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										
-										
-									</div>
-									<div class='row align-items-start'>
-									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													City <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setCity(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='City'
-													placeholder='City'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													ZIP/Postal code <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setZip(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='ZIP/Postal code'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									
-								
-									
-									<div class='row align-items-start'>
-										
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-													Password <span>*</span>
-												</label>
-												<input
-													type='password'
-												    onKeyUp={()=>validate()}
-													onChange={(e) => setPassword(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='Enter Password'
-													id='pass1'
-													className='form-control form-control-lg'
-													required
-												/>
-												
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-												Confirm	Password <span>*</span>
-												</label>
-												<input
-													type='password'
-													onKeyUp={()=>validate()}
-													onChange={(e) => set(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name=''
-													placeholder='Enter Password'
-													id='pass2'
-													className={`form-control form-control-lg `}
-													required
-												/>
-											
-												
-													<p  style={{color:`red`,marginLeft:`7px`}} id="Match"> Password not Match</p>
-												
-											
-											
-											</div>
-											
-										</div>
-									</div>
-									</div>
-)}
-{ showhide ==='4' && (
-										<div>
-									<div class='row align-items-start mt-4'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Country
-												</label>
-												<select
-													onChange={(e) => setCountry(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='Country'>
-													<option value='' disabled selected>
-													Country
-													</option>
-													<option value='Pakistan'>Pakistan</option>
-													<option value='Afghanistan'>Afghanistan</option>
-													<option value='Nepal'>Nepal</option>
-													<option value='Iran'>Iran</option>
-												</select>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													State or Province
-												</label>
-												<select
-													onChange={(e) => setState(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='State or Province'>
-													<option value='' disabled selected>
-													State or Province
-													</option>
-													<option value='Centered'>Punjab</option>
-													<option value='Shifted Right'>Sindh</option>
-													<option value='Shifted Left'>Balochistan</option>
-													<option value='Shifted Left'>California</option>
-													<option value='Shifted Left'>Arizona</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Address <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setAddress(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='patientid'
-													placeholder='Address'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										
-										
-									</div>
-									<div class='row align-items-start'>
-									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													City <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setCity(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='City'
-													placeholder='City'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													ZIP/Postal code <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setZip(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='ZIP/Postal code'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									
-								
-									
-									<div class='row align-items-start'>
-										
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-													Password <span>*</span>
-												</label>
-												<input
-													type='password'
-												    onKeyUp={()=>validate()}
-													onChange={(e) => setPassword(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='Enter Password'
-													id='pass1'
-													className='form-control form-control-lg'
-													required
-												/>
-												
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-												Confirm	Password <span>*</span>
-												</label>
-												<input
-													type='password'
-													onKeyUp={()=>validate()}
-													onChange={(e) => set(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name=''
-													placeholder='Enter Password'
-													id='pass2'
-													className={`form-control form-control-lg `}
-													required
-												/>
-											
-												
-													<p  style={{color:`red`,marginLeft:`7px`}} id="Match"> Password not Match</p>
-												
-											
-											
-											</div>
-											
-										</div>
-									</div>
-									</div>
-)}
-
-{ showhide ==='5' && (
-										<div>
-									<div class='row align-items-start mt-4'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Country
-												</label>
-												<select
-													onChange={(e) => setCountry(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='Country'>
-													<option value='' disabled selected>
-													Country
-													</option>
-													<option value='Pakistan'>Pakistan</option>
-													<option value='Afghanistan'>Afghanistan</option>
-													<option value='Nepal'>Nepal</option>
-													<option value='Iran'>Iran</option>
-												</select>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													State or Province
-												</label>
-												<select
-													onChange={(e) => setState(e.target.value)}
-													class='form-select form-select-lg'
-													aria-label='Default select example'
-													placeholder='State or Province'>
-													<option value='' disabled selected>
-													State or Province
-													</option>
-													<option value='Centered'>Punjab</option>
-													<option value='Shifted Right'>Sindh</option>
-													<option value='Shifted Left'>Balochistan</option>
-													<option value='Shifted Left'>California</option>
-													<option value='Shifted Left'>Arizona</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Address <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setAddress(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='patientid'
-													placeholder='Address'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										
-										
-									</div>
-									<div class='row align-items-start'>
-									<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													City <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setCity(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
-													name='City'
-													placeholder='City'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													ZIP/Postal code <span>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setZip(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='ZIP/Postal code'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-												{/* <div className="text-danger">
-            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
-          </div> */}
-											</div>
-										</div>
-									</div>
-									
-								
-									
-									<div class='row align-items-start'>
-										
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-													Password <span>*</span>
-												</label>
-												<input
-													type='password'
-												    onKeyUp={()=>validate()}
-													onChange={(e) => setPassword(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name='nameofpatient'
-													placeholder='Enter Password'
-													id='pass1'
-													className='form-control form-control-lg'
-													required
-												/>
-												
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-											<label className='form-label' for='form3Example3cg'>
-												Confirm	Password <span>*</span>
-												</label>
-												<input
-													type='password'
-													onKeyUp={()=>validate()}
-													onChange={(e) => set(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
-													name=''
-													placeholder='Enter Password'
-													id='pass2'
-													className={`form-control form-control-lg `}
-													required
-												/>
-											
-												
-													<p  style={{color:`red`,marginLeft:`7px`}} id="Match"> Password not Match</p>
-												
-											
-											
-											</div>
-											
-										</div>
-									</div>
-									</div>
-)}
+	{/*  */}
 	<div class='row align-items-start'>
 										<div class='col'>
 											<div className='form-check d-flex  mb-5'>

@@ -73,7 +73,7 @@ function Login() {
                                         <div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
                                             <div className='form-outline mb-4'>
                                                 <label className='form-label' for='form3Example3cg'>
-                                                    Email <span>*</span>
+                                                    Email <span className='required'>*</span>
                                                 </label>
                                                 <input
                                                     type='email'
@@ -95,7 +95,7 @@ function Login() {
                                         <div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
                                             <div className='form-outline mb-4'>
                                                 <label className='form-label' for='form3Example3cg'>
-                                                    Password <span>*</span>
+                                                    Password <span className='required'>*</span>
                                                 </label>
                                                 <input
                                                     type='password'
