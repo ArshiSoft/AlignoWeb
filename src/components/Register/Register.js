@@ -250,13 +250,7 @@ function Register() {
 												</select>
 											</div>
 										</div>
-										
-											
-									</div>
-								
-									<div class='row align-items-start'>
-										
-										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
+										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 										<div className='form-outline mb-4'>
 												<label className='form-label' for='form3Example1cg'>
 													Department
@@ -277,7 +271,11 @@ function Register() {
 												</select>
 											</div>
 										</div>
+										
+											
 									</div>
+								
+									
 									{ showhide ==='1' && (
 										<div>
 											<div class='row align-items-start'>
@@ -347,7 +345,8 @@ function Register() {
 											
 										
 									</div>
-									
+									</div>
+									)}
 									<div class='row align-items-start mt-4'>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
 											<div className='form-outline mb-4'>
@@ -513,8 +512,8 @@ function Register() {
 										</div>
 									</div>
 									
-									</div>
-)}
+									
+
 	{ showhide ==='2' && (
 										<div>
 								
@@ -1219,7 +1218,7 @@ function Register() {
 											type='submit'
 											value='Register'
 											className='btn btn-success btn-block btn-lg gradient-custom-4 text-body'>
-											Submit
+											Register
 										</button>
 									</div>
 

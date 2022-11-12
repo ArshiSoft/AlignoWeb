@@ -116,7 +116,7 @@ function Login() {
                                         </div>
                                     </div>
 
-                                    <div class='row align-items-start'>
+                                    {/* <div class='row align-items-start'>
                                         <div class='col'>
                                             <div className='form-check d-flex  mb-5'>
                                                 <input
@@ -140,7 +140,7 @@ function Login() {
                                                 </label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className='d-flex justify-content-center'>
                                         <button
                                             type='submit'
