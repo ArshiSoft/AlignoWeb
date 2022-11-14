@@ -13,6 +13,7 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './Login/Login';
 import RxFormData from './components/Rx-Form-Data/RxFormData';
 import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
+import Activate from './components/Register/Activate';
 // import RxFormData from './components/Rx-Form-Data/RxFormData';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
 					<Route path='/Register' element={<Register />} />
 					<Route path='/Rx-view' element={<RxFormData />} />
 					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
+					<Route path='/activate' element={<Activate />} />
 
 					{/* <Route path='/test' element={<InventoryEditForm/>} /> */}
 					{/* <Route path='/Login' element={<Login />} />
