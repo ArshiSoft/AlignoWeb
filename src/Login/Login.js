@@ -30,6 +30,9 @@ function Login() {
     // Tab Title
     useEffect(() => {
         document.title = 'Aligno-Login';
+        if(localStorage.getItem('token')){
+                   navigate('/');
+        }
     }, []);
 
     

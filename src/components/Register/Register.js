@@ -10,7 +10,7 @@ import Input from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 // import { useForm } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup'
+// import { yupResolver } from '@hookform/resolvers/yup
 // import * as Yup from 'yup'
 
 function validate() {
@@ -96,7 +96,7 @@ function Register() {
 		});
 
 		const data = await response.json();
-		if (data.status === 'ok') {
+		if (data.status) {
 			const mailResponse = await fetch(
 				'https://server.aligno.co/api/sendmail-noreply',
 				{
