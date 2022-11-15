@@ -42,7 +42,7 @@ import { getCurrentDate } from '../../class/clsGeneralVariables';
 // 	  confirmationTitle, setConfirmationTitle,
 // 	  confirmationBody, setConfirmationBody,
 // 	  isImageLoading, setIsImageLoading,
-// 	  newCustomer } = useIinventoryUIContext();
+// 	  newCustomer } = useIinventoryUIContext()
 
 function Rxform() {
 
