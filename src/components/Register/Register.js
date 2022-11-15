@@ -24,10 +24,10 @@ function validate() {
 }
 
 function Register() {
-	// Tab Title
-	useEffect(() => {
-		document.title = 'Aligno - Register';
-	}, []);
+
+	const navigate = useNavigate()
+
+	
 	const [firstname, setFirstName] = useState('');
 	const [lastname, setLastName] = useState('');
 	const [gender, setGender] = useState('');
@@ -46,11 +46,26 @@ function Register() {
 	const [password, setPassword] = useState('');
 	const [showhide, setShowHide] = useState('');
 
+	// Tab Title
+	useEffect(() => {
+		document.title = 'Aligno - Register';
+	}, []);
+
+
+	
+	
+
+
+
+
 	const handleshowhide = (event) => {
 		const getuser = event.target.value;
 
 		setShowHide(getuser);
 	};
+
+
+
 
 	const history = useNavigate();
 

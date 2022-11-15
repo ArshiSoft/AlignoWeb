@@ -1,7 +1,16 @@
 import Navbar from '../Navbar/Navbar';
 import '../Candidate/Candidate.css';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Candidate() {
+	const navigate = useNavigate()
+  useEffect(()=>{
+if(!localStorage.getItem('token')){
+  navigate('/Login')
+}
+  
+},[])
 	return (
 		<>
 			<head>

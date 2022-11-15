@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import Rxform from '../RxForm/Rxform';
 import '../Navbar/Navbar.css';
 
 /* eslint-disable */
 
 function Navbar() {
+	const navigate = useNavigate()
 	return (
 		<nav className='navbar navbar-expand-lg navbar-dark navclass '>
 			<div className='container-fluid'>
@@ -47,16 +48,24 @@ function Navbar() {
 								<Link to='/Register'>Register</Link>
 							</a>
 						</li>
-						<li className='nav-item dropdown'>
+						<li className='nav-item '>
+							<a className='nav-link'>
+							<p className='m-0' onClick={()=>{
+								localStorage.removeItem('token')
+								navigate('/Login')
+							}}>Logout</p>
+							</a>
+						</li>
+						{/* <li className='nav-item dropdown'>
 							<a
 								className='nav-link dropdown-toggle'
 								id='navbarDropdown'
 								role='button'
 								data-bs-toggle='dropdown'
 								aria-expanded='false'>
-								Dropdown
+								Profile
 							</a>
-							<ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
+							<ul className='dropdown-menu ' aria-labelledby='navbarDropdown'>
 								<li>
 									<a className='dropdown-item'>Action</a>
 								</li>
@@ -70,7 +79,7 @@ function Navbar() {
 									<a className='dropdown-item'>Something else here</a>
 								</li>
 							</ul>
-						</li>
+						</li> */}
 					</ul>
 					{/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

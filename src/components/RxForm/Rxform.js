@@ -45,6 +45,15 @@ import { getCurrentDate } from '../../class/clsGeneralVariables';
 // 	  newCustomer } = useIinventoryUIContext();
 
 function Rxform() {
+
+	const navigate = useNavigate()
+  useEffect(()=>{
+if(!localStorage.getItem('token')){
+  navigate('/Login')
+}
+  
+},[])
+
 	// Tab Title
 	useEffect(() => {
 		document.title = 'Aligno-Rx-Form';

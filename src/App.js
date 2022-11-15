@@ -14,9 +14,14 @@ import Login from './Login/Login';
 import RxFormData from './components/Rx-Form-Data/RxFormData';
 import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
 import Activate from './components/Register/Activate';
+
 // import RxFormData from './components/Rx-Form-Data/RxFormData';
 
 function App() {
+
+	
+
+	
 	return (
 		<>
 			<BrowserRouter>
@@ -28,13 +33,16 @@ function App() {
         </nav> */}
 
 				<Routes>
+				<Route path='/Register' element={<Register />} />
+				<Route path='/Login' element={<Login />} />
+				
 					<Route path='/Rx-data' element={<RxDataView />} />
-					<Route path='/Login' element={<Login />} />
+					
 					<Route path='/Rx-form' element={<Rxform />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/Dashboard' element={<Dashboard />} />
 					<Route path='/Navbar' element={<Navbar />} />
-					<Route path='/Register' element={<Register />} />
+					
 					<Route path='/Rx-view' element={<RxFormData />} />
 					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
 					<Route path='/activate' element={<Activate />} />
@@ -43,6 +51,7 @@ function App() {
 					{/* <Route path='/Login' element={<Login />} />
           
           <Route path='/Dashboard' element={<Dashboard />} /> */}
+		
 				</Routes>
 			</BrowserRouter>
 		</>

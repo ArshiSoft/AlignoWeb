@@ -8,21 +8,38 @@ import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 
 // import Input from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { Redirect } from 'react-router-dom';
 
 
 
 function Login() {
+    const navigate = useNavigate();
+
+    // const isLoggedIn = window.localStorage.getItem('token');
+
+    // if (isLoggedIn) 
+    // <Redirect to="/Dashboard" />
+
+    // useEffect(()=>{
+    //     if(localStorage.getItem('token')){
+    //       navigate('/Dashboard')
+    //     }
+          
+    //     },[])
+
     // Tab Title
     useEffect(() => {
         document.title = 'Aligno-Login';
     }, []);
+
+    
 
 
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
-    const history = useNavigate();
+  
 
 
 
@@ -38,17 +55,19 @@ function Login() {
                 password,
             }),
         })
-        const data = await response.json()
-
-        if (data.user) {
-            localStorage.setItem('token', data.user)
+        
+        const result = await response.json()
+        console.log(result)
+        if (result) {
+            
+            localStorage.setItem('token', result.user)
             alert('login successfull')
-            window.location.href = '/Dashboard'
+           navigate('/Dashboard')
 
         }
         else {
             alert('please check your username and password')
-            window.location.href = '/Login'
+            navigate('/Login')
         }
 
     }

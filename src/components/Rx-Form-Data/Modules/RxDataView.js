@@ -1,10 +1,17 @@
 /* eslint-disable */
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function RxDataView() {
+    const navigate = useNavigate()
+  useEffect(()=>{
+if(!localStorage.getItem('token')){
+  navigate('/Login')
+}
+  
+},[])
     const location = useLocation()
     const params = new URLSearchParams(location.search);
 
