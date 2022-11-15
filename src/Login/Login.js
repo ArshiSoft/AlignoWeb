@@ -13,36 +13,23 @@ import { Redirect } from 'react-router-dom';
 
 
 function Login() {
+
+
     const navigate = useNavigate();
-
-    // const isLoggedIn = window.localStorage.getItem('token');
-
-    // if (isLoggedIn) 
-    // <Redirect to="/Dashboard" />
-
-    // useEffect(()=>{
-    //     if(localStorage.getItem('token')){
-    //       navigate('/Dashboard')
-    //     }
-          
-    //     },[])
-
-    // Tab Title
-    useEffect(() => {
-        document.title = 'Aligno-Login';
-        if(localStorage.getItem('token')){
-                   navigate('/');
-        }
-    }, []);
-
-    
-
 
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
-  
+
+
+    // Tab Title
+    useEffect(() => {
+        document.title = 'Aligno-Login';
+        if (localStorage.getItem('token')) {
+            navigate('/');
+        }
+    }, []);
 
 
 
@@ -58,14 +45,14 @@ function Login() {
                 password,
             }),
         })
-        
+
         const result = await response.json()
         console.log(result)
         if (result) {
-            
+
             localStorage.setItem('token', result.user)
             alert('login successfull')
-           navigate('/Dashboard')
+            navigate('/')
 
         }
         else {
@@ -81,10 +68,9 @@ function Login() {
                     <div className='row d-flex justify-content-center align-items-center h-100'>
                         <div
                             className='col-12 col-sm-6 col-md-9 col-lg-7 col-sm-6 col-xl-6 formwidth mt-5'
-                            style={{ width: `600px` ,height : `920px` }}>
+                            style={{ width: `600px`, height: `920px` }}>
                             <div
                                 style={{
-                                    // margin: `10px`,
                                     backgroundColor: `white`,
                                     borderRadius: `10px`,
                                     padding: `50px`,
@@ -100,8 +86,6 @@ function Login() {
                                                 <input
                                                     type='email'
                                                     onChange={(e) => setEmail(e.target.value)}
-                                                    // onBlur={formik.handleChange}
-                                                    // value={formik.values.doctoremail}
                                                     name='email'
                                                     placeholder='Enter Your Email'
                                                     value={email}
@@ -109,9 +93,7 @@ function Login() {
                                                     className='form-control form-control-lg'
                                                     required
                                                 />
-                                                {/* <div className="text-danger">
-            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
-          </div> */}
+
                                             </div>
                                         </div>
                                         <div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
@@ -122,8 +104,7 @@ function Login() {
                                                 <input
                                                     type='password'
                                                     onChange={(e) => setPassword(e.target.value)}
-                                                    // onBlur={formik.handleChange}
-                                                    // value={formik.values.doctoremail}
+
                                                     name='password'
                                                     value={password}
                                                     placeholder='Enter Password'
@@ -131,13 +112,13 @@ function Login() {
                                                     className='form-control form-control-lg'
                                                     required
                                                 />
-                                                {/* <div className="text-danger">
-            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
-          </div> */}
+
                                             </div>
                                         </div>
                                     </div>
 
+
+                                    {/* TERMS AND CONDITIONS  */}
                                     {/* <div class='row align-items-start'>
                                         <div class='col'>
                                             <div className='form-check d-flex  mb-5'>

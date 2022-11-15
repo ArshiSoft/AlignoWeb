@@ -5,13 +5,8 @@ import '../Register/Register.css';
 import { useEffect } from 'react';
 import '@fontsource/league-spartan'; // Defaults to weight 400.
 import '@fontsource/source-sans-pro'; // Defaults to weight 400.
-
 import Input from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-
-// import { useForm } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup
-// import * as Yup from 'yup'
 
 function validate() {
 	const pass1 = document.getElementById('pass1');
@@ -26,8 +21,6 @@ function validate() {
 function Register() {
 
 	const navigate = useNavigate()
-
-	
 	const [firstname, setFirstName] = useState('');
 	const [lastname, setLastName] = useState('');
 	const [gender, setGender] = useState('');
@@ -49,23 +42,16 @@ function Register() {
 	// Tab Title
 	useEffect(() => {
 		document.title = 'Aligno - Register';
+		if (localStorage.getItem('token')) {
+			navigate('/');
+		}
 	}, []);
-
-
-	
-	
-
-
-
 
 	const handleshowhide = (event) => {
 		const getuser = event.target.value;
 
 		setShowHide(getuser);
 	};
-
-
-
 
 	const history = useNavigate();
 
@@ -574,8 +560,6 @@ function Register() {
 		}
 		console.log(data);
 
-		// const getuser = event.target.value;
-		// setShowHide(getuser)
 	}
 
 	return (
@@ -608,15 +592,10 @@ function Register() {
 													onChange={(e) => setFirstName(e.target.value)}
 													value={firstname}
 													placeholder='First Name'
-													// onBlur={formik.handleChange}
-													// value={formik.values.clinicname}
-													// name="clinicname"
+
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
-            {formik.errors.clinicname ? formik.errors.clinicname : null}
-          </div> */}
 											</div>
 										</div>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
@@ -627,17 +606,12 @@ function Register() {
 												<input
 													type='text'
 													onChange={(e) => setLastName(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.doctorname}
 													name='lastname'
 													placeholder='Last Name'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
-            {formik.errors.doctorname ? formik.errors.doctorname : null}
-          </div> */}
 											</div>
 										</div>
 									</div>
@@ -651,17 +625,12 @@ function Register() {
 												<input
 													type='email'
 													onChange={(e) => setEmail(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.doctoremail}
 													name='email'
 													placeholder='Enter Your Email'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
-            {formik.errors.doctoremail ? formik.errors.doctoremail : null}
-          </div> */}
 											</div>
 										</div>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
@@ -678,7 +647,7 @@ function Register() {
 														((e) => {
 															setPhoneInputValue(e.target.value);
 														},
-														setPhone)
+															setPhone)
 													}
 													inputStyle={{
 														width: '100%',
@@ -869,17 +838,12 @@ function Register() {
 												<input
 													type='text'
 													onChange={(e) => setAddress(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
 													name='patientid'
 													placeholder='Address'
 													id='form3Example1cg'
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
 											</div>
 										</div>
 									</div>
@@ -892,17 +856,12 @@ function Register() {
 												<input
 													type='text'
 													onChange={(e) => setCity(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.patientid}
 													name='City'
 													placeholder='City'
 													id='form3Example1cg'
 													className='form-control form-control-lg'
 													required
 												/>
-												{/* <div className="text-danger">
-            {formik.errors.patientid ? formik.errors.patientid : null}
-          </div> */}
 											</div>
 										</div>
 										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
@@ -913,16 +872,11 @@ function Register() {
 												<input
 													type='text'
 													onChange={(e) => setZip(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
 													name='nameofpatient'
 													placeholder='ZIP/Postal code'
 													id='form3Example3cg'
 													className='form-control form-control-lg'
 												/>
-												{/* <div className="text-danger">
-            {formik.errors.nameofpatient ? formik.errors.nameofpatient : null}
-          </div> */}
 											</div>
 										</div>
 									</div>
@@ -937,8 +891,6 @@ function Register() {
 													type='password'
 													onKeyUp={() => validate()}
 													onChange={(e) => setPassword(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
 													name='nameofpatient'
 													placeholder='Enter Password'
 													id='pass1'
@@ -956,15 +908,12 @@ function Register() {
 													type='password'
 													onKeyUp={() => validate()}
 													onChange={(e) => set(e.target.value)}
-													// onBlur={formik.handleChange}
-													// value={formik.values.nameofpatient}
 													name=''
 													placeholder='Enter Password'
 													id='pass2'
 													className={`form-control form-control-lg `}
 													required
 												/>
-
 												<p
 													style={{ color: `red`, marginLeft: `7px` }}
 													id='Match'>
@@ -1025,46 +974,6 @@ function Register() {
 	);
 }
 
-// export const InventoryEditForm = withFormik({
-// 	enableReinitialize: true,
-// 	mapPropsToValues: ({ tempData }) => {
-// 	  // On tempData?.customerDetails all the details data is set except warehouse data, warehouse can be accessible on tempData[1]
-// 	  return ({
-// 		NAME: tempData?.customerDetails?.NAME || "",
-// 		CODE: tempData?.customerDetails?.CODE || "",
-// 		//SUPPLIER_DESCRIPTION: tempData?.customerDetails?.SUPPLIER_DESCRIPTION || "",
-// 		CITY: tempData?.customerDetails?.CITY || "",
-// 		ADDRESS_1: tempData?.customerDetails?.ADDRESS_1 || "",
-// 		POSTAL_CODE: tempData?.customerDetails?.POSTAL_CODE || "",
-// 		PHONE_1: tempData?.customerDetails?.PHONE_1 || "",
-// 		EMAIL: tempData?.customerDetails?.EMAIL || "",
-// 		//COUNTRY: tempData?.customerDetails?.COUNTRY || "",
-// 		//PROVINCE: tempData?.customerDetails?.PROVINCE || "",
-// 		NOTES: tempData?.customerDetails?.NOTES || "",
-// 		ACTIVE_FLAG: tempData?.customerDetails?.ACTIVE_FLAG || ""
-// 	  })
-// 	},
-// 	validationSchema: Yup.object().shape({
-// 	  NAME: Yup.string().required("Name is a required field"),
-// 	  POSTAL_CODE: Yup.string().required("Postal Code is a required field"),
-// 	  PHONE_1: Yup.string().min(10, "Phone Number is not valid").required("Phone is a required field"),
-// 	  EMAIL: Yup.string().email('Invalid email format').required("Email is a required field"),
-// 	  ADDRESS_1: Yup.string().required("Address is required field"),
-// 	  COUNTRY: Yup.string().required("Country is required field"),
-// 	  //PROVINCE: Yup.string().required("Province/State is a required field"),
-// 	  CITY: Yup.string().required("City/Town  is a required feild"),
-// 	  // POSTAL_CODE:Yup.string().required("Postal Code is a required field").matches("([A-Z]{1}[0-9]{1}){3}")
-// 	}),
 
-// 	handleSubmit: (values, { props: { submitFormHandler }, setSubmitting, resetForm }) => {
-// 	  setSubmitting(true);
-
-// 	  setTimeout(() => {
-// 		setSubmitting(false);
-// 	  }, 1000);
-
-// 	  submitFormHandler({ payload: values, setSubmitting, resetForm });
-// 	},
-//   })(InnerForm);
 
 export default Register;

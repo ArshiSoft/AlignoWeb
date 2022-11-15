@@ -5,12 +5,12 @@ import { useEffect } from 'react';
 
 function Candidate() {
 	const navigate = useNavigate()
-  useEffect(()=>{
-if(!localStorage.getItem('token')){
-  navigate('/Login')
-}
-  
-},[])
+	useEffect(() => {
+		if (!localStorage.getItem('token')) {
+			navigate('/Login')
+		}
+
+	}, [])
 	return (
 		<>
 			<head>
