@@ -12,7 +12,7 @@ import RxFormData from './components/Rx-Form-Data/RxFormData';
 import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
 import Activate from './components/Register/Activate';
 import PageNotFound from './components/Default/PageNotFound';
-
+import Dashboard2 from './components/Dashboard/Dashboard2'
 
 function App() {
 
@@ -26,6 +26,7 @@ function App() {
 					<Route path='/Rx-form' element={<Rxform />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/' element={<Dashboard />} />
+					<Route path='/Dashboard2' element={<Dashboard2 />} />
 					<Route path='/Navbar' element={<Navbar />} />
 					<Route path='/Rx-view' element={<RxFormData />} />
 					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
