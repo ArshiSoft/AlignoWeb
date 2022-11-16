@@ -5,13 +5,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 function Activate() {
-	const navigate = useNavigate()
-	useEffect(() => {
-		if (!localStorage.getItem('token')) {
-			navigate('/Login')
-		}
+	// const navigate = useNavigate()
+	// useEffect(() => {
+	// 	if (!localStorage.getItem('token')) {
+	// 		navigate('/Login')
+	// 	}
 
-	}, [])
+	// }, [])
 	const location = useLocation();
 	const params = new URLSearchParams(location.search);
 	const userID = params.get('id');
