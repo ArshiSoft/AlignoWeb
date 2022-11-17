@@ -1,0 +1,68 @@
+nav {
+}
+.navbar a {
+	color: white !important;
+	text-decoration: none !important;
+	background-color: transparent;
+}
+
+nav.navbar.navbar-expand-lg.navbar-dark.navclass {
+	/* background-color: #01aba9 ; */
+	background: #01aba9;
+
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(
+		to right,
+		#01aba9,
+		rgba(143, 211, 244, 0.5)
+	);
+
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, #01aba9, rgba(143, 211, 244, 0.5));
+}
+.gradient-custom-4 {
+	/* fallback for old browsers */
+	background: #01aba9;
+
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(
+		to right,
+		#01aba9,
+		rgba(143, 211, 244, 1)
+	);
+
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, #01aba9, #01aba9);
+}
+ul.dropdown-menu.show {
+	/* background-color: #01aba9 ;
+    color: #01aba9; */
+	background: #01aba9;
+
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(
+		to right,
+		#01aba9,
+		rgba(143, 211, 244, 0.5)
+	);
+
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, #01aba9, rgba(143, 211, 244, 0.5));
+}
+.gradient-custom-4 {
+	/* fallback for old browsers */
+	background: #01aba9;
+
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(
+		to right,
+		#01aba9,
+		rgba(143, 211, 244, 1)
+	);
+
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, #01aba9, #01aba9);
+}
+button.btn.btn-outline-success {
+	color: white;
+}

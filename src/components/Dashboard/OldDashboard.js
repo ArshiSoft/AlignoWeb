@@ -1,11 +1,11 @@
 import '../Dashboard/Dashboard.css';
-import Header2 from '../Header/Header2';
+import Header from '../Header/Header';
 import {useNavigate }from 'react-router-dom'
 import { useEffect } from 'react';
 
 
 
-function Dashboard2() {
+function Dashboard() {
   const navigate = useNavigate()
   useEffect(()=>{
 if(!localStorage.getItem('token')){
@@ -15,7 +15,7 @@ if(!localStorage.getItem('token')){
 },[])
 
   return (
-   <Header2/>
+   <Header/>
   )
 }
-export default Dashboard2;
+export default Dashboard;

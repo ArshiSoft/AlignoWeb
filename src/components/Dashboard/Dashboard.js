@@ -1,4 +1,3 @@
-import '../Dashboard/Dashboard.css';
 import Header from '../Header/Header';
 import {useNavigate }from 'react-router-dom'
 import { useEffect } from 'react';
