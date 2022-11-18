@@ -12,10 +12,22 @@ import RxFormData from './components/Rx-Form-Data/RxFormData';
 import RxDataView from './components/Rx-Form-Data/Modules/RxDataView';
 import Activate from './components/Register/Activate';
 import PageNotFound from './components/Default/PageNotFound';
+// import { Jwt } from 'jsonwebtoken';
+import { useEffect } from 'react';
 
 
 function App() {
 
+	// if(localStorage.JwtToken){
+	// 	jwt.verify(localStorage.JwtToken,'secret123'function(err,decode){
+	// 		if(err){
+	// 			console.log(err);
+	// 		}
+	// 		else{
+	// 			console.log
+	// 		}
+	// 	})
+// }
 	return (
 		<>
 			<BrowserRouter>

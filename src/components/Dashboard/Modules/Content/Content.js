@@ -24,7 +24,7 @@ const DashContent = () => {
                     style={{
                         padding: 10,
                         margin: 0,
-                        minHeight: 400,
+                        minHeight: 500,
                     }}
                     >
 

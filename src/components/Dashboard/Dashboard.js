@@ -16,7 +16,9 @@ function Dashboard() {
   useEffect(()=>{
 if(!localStorage.getItem('token')){
   navigate('/Login')
+  
 }
+document.title = 'Aligno-Dashboard';
   
 },[])
 
@@ -25,10 +27,10 @@ if(!localStorage.getItem('token')){
 <Header/>,
 <Layout>
 <Row gutter={[8, 8]}>
-  <Col span={2} >
+  <Col style={{flex:` 0 0 0`}} span={4} >
   <AsideMenu/>
   </Col>
-  <Col span={22} >
+  <Col span={20} >
   <Content/>
   </Col>
 </Row>

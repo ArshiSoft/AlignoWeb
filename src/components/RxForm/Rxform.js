@@ -15,10 +15,11 @@ function Rxform() {
 
 	// Tab Title
 	useEffect(() => {
-		document.title = 'Aligno-Rx-Form';
+		
 		if (!localStorage.getItem('token')) {
 			navigate('/Login')
 		}
+		document.title = 'Aligno-Rx-Form';
 	}, []);
 	const [clinicname, setClinicName] = useState('');
 	const [doctorname, setDoctorName] = useState('');

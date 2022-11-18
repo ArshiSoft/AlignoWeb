@@ -9,8 +9,10 @@ function Candidate() {
 		if (!localStorage.getItem('token')) {
 			navigate('/Login')
 		}
+		document.title = 'Aligno-Candidate';
 
 	}, [])
+	
 	return (
 		<>
 			<head>
