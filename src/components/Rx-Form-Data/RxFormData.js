@@ -6,14 +6,17 @@ import Header from '../Dashboard/Modules/Header/Header'
 // import Content from '../Dashboard/Modules/Content/Content'
 import Footer from '../Dashboard/Modules/Footer/Footer'
 import { Col, Layout, Row } from 'antd';
-import DashContent from "../Dashboard/Modules/Content/Content";
+// import Content from "../Dashboard/Modules/Content/Content";
+const { Content } = Layout;
 function RxFormData() {
   const navigate = useNavigate()
   useEffect(() => {
-    document.title = 'Aligno-Rx-view';
+    
     if (!localStorage.getItem('token')) {
       navigate('/Login')
+      document.title = 'Aligno-Rx-view';
     }
+    document.title = 'Aligno-Rx-view';
 
   }, [])
 
@@ -26,16 +29,13 @@ function RxFormData() {
 <Header/>,
 <Layout>
 <Row gutter={[8, 8]}>
-  <Col span={4} >
+  <Col  style={{flex:` 0 0 0`}}  span={4} >
   <AsideMenu/>
   </Col>
   <Col span={20} >
-  <DashContent>
-    
+  <Content>
     <RxTable/>
-    
- 
-    </DashContent>
+    </Content>
   </Col>
 </Row>
 </Layout>

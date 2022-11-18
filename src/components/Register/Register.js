@@ -41,10 +41,12 @@ function Register() {
 
 	// Tab Title
 	useEffect(() => {
-		document.title = 'Aligno - Register';
+		
 		if (localStorage.getItem('token')) {
 			navigate('/');
+			
 		}
+		document.title = 'Aligno - Register';
 	}, []);
 
 	const handleshowhide = (event) => {

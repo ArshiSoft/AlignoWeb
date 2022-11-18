@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PageNotFound = () => {
 	const history = useNavigate();
+	
 
 	return (
 		<Result

@@ -5,7 +5,7 @@ import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 
-const {  Sider,Content } = Layout;
+const {  Sider } = Layout;
 
 function getItem(label, key, icon, children, type) {
 	return {
