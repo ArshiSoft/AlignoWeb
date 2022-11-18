@@ -4,9 +4,8 @@ import './Navbar.css'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown } from 'antd';
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Space } from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
+import { SmileOutlined } from '@ant-design/icons';
+
 
 
 const { Header, Footer, Sider, Content } = Layout;
