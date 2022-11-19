@@ -14,10 +14,9 @@ import Activate from './components/Register/Activate';
 import PageNotFound from './components/Default/PageNotFound';
 // import { Jwt } from 'jsonwebtoken';
 import { useEffect } from 'react';
-
+import Example from './components/PrintTesting/Example';
 
 function App() {
-
 	// if(localStorage.JwtToken){
 	// 	jwt.verify(localStorage.JwtToken,'secret123'function(err,decode){
 	// 		if(err){
@@ -27,7 +26,7 @@ function App() {
 	// 			console.log
 	// 		}
 	// 	})
-// }
+	// }
 	return (
 		<>
 			<BrowserRouter>
@@ -42,6 +41,7 @@ function App() {
 					<Route path='/Rx-view' element={<RxFormData />} />
 					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
 					<Route path='/activate' element={<Activate />} />
+					<Route path='/exampleprint' element={<Example />} />
 					<Route path='*' element={<PageNotFound />} />
 				</Routes>
 			</BrowserRouter>
