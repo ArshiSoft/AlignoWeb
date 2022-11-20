@@ -25,7 +25,19 @@ function RxFormData() {
 
   return (
     <>
-       <Layout>
+
+
+<Layout>
+   <AsideMenu/>
+    <Layout>
+      <Header />
+      <Content>
+        <RxTable/>
+      </Content>
+      <Footer/>
+     </Layout>
+  </Layout>
+       {/* <Layout>
 <Header/>,
 <Layout>
 <Row gutter={[8, 8]}>
@@ -40,7 +52,7 @@ function RxFormData() {
 </Row>
 </Layout>
 <Footer/>,
-</Layout>
+</Layout> */}
 
     </>
   );

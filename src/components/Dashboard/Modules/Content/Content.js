@@ -20,14 +20,25 @@ const DashContent = () => {
         <>
             <Layout>
                 <Content 
-                className="site-layout-background"
+                // className="site-layout-background"
+                //     style={{
+                //         padding: 10,
+                //         // margin: 0,
+                //         minHeight: 500,
+                //         margin: '24px 16px 0',
+                //     }}
+                style={{
+                    margin: '24px 16px 0',
+                  }}
+                >
+                  <div
+                    className="site-layout-background"
                     style={{
-                        padding: 10,
-                        margin: 0,
-                        minHeight: 500,
+                      padding: 24,
+                      minHeight: 360,
                     }}
                     >
-
+  </div>
                 </Content>
             </Layout>
         </>

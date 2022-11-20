@@ -10,6 +10,7 @@ import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 import 'react-phone-input-2/lib/style.css';
 import { Redirect } from 'react-router-dom';
 import { message } from 'antd';
+import { createToken, isToken, removeToken } from '../class/clsSession';
 
 function Login() {
 	const navigate = useNavigate();
@@ -19,14 +20,19 @@ function Login() {
 
 	// Tab Title
 	useEffect(() => {
-		if (localStorage.getItem('token')) {
+		if (isToken()) {
 			navigate('/');
+		}
+		else
+		{
+			removeToken();
 		}
 		document.title = 'Aligno-Login';
 	}, []);
 
 	async function loginUser(event) {
 		event.preventDefault();
+		
 		const response = await fetch('https://server.aligno.co/api/login', {
 			method: 'POST',
 			headers: {
@@ -41,7 +47,7 @@ function Login() {
 		const result = await response.json();
 		console.log(result);
 		if (result) {
-			localStorage.setItem('token', result.user);
+			createToken(result.user);
 			message.success('login successfull');
 			navigate('/');
 		} else {

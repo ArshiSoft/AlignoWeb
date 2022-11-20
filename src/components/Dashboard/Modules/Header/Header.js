@@ -12,11 +12,16 @@ const { Header } = Layout;
 const DashHeader = ()=>{
     return(
         <Layout>
-        <Header className="header">
+        <Header 
+		  className="site-layout-sub-header-background header"
+		  style={{
+			padding: 0,
+		  }}
+		>
 					<Row gutter={[8, 16]}>
 						<Col span={8} />
 						<Col span={8} >
-							<h3 className='title mt-3'>Aligno</h3>
+							<h3 className='title mt-3' >Aligno</h3>
 						</Col>
 						<Col span={8} >
 						<Avatar size="large" style={{ backgroundColor: `#87d068` }} icon={<UserOutlined />} />

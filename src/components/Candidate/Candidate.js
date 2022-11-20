@@ -2,7 +2,13 @@ import Navbar from '../Navbar/Navbar';
 import '../Candidate/Candidate.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import Header from '../Dashboard/Modules/Header/Header'
+import Footer from '../Dashboard/Modules/Footer/Footer'
+// import Content from '../Dashboard/Modules/Content/Content'
+import AsideMenu from '../Dashboard/Modules/Aside/AsideMenu';
+import { Col, Layout, Row } from 'antd';
 
+const { Content } = Layout;
 function Candidate() {
 	const navigate = useNavigate()
 	useEffect(() => {
@@ -15,7 +21,12 @@ function Candidate() {
 	
 	return (
 		<>
-			<head>
+		<Layout>
+   <AsideMenu/>
+    <Layout>
+      <Header />
+      <Content>
+	  <head>
 				<link
 					rel='stylesheet'
 					id='dashicons-css'
@@ -66,7 +77,7 @@ function Candidate() {
 					media='all'
 				/>
 			</head>
-			<Navbar />
+			
 			<div class='znColumnElement-innerContent'>
 				<div class='zn-widget-module eluid0b7dec12'>
 					<div class='widget wpforms-widget'>
@@ -862,6 +873,11 @@ function Candidate() {
 					</div>
 				</div>
 			</div>
+	  </Content>
+      <Footer/>
+     </Layout>
+  </Layout>
+			
 		</>
 	);
 }

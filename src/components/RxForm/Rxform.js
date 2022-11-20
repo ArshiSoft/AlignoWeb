@@ -7,8 +7,11 @@ import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 import Input from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { getCurrentDate } from '../../class/clsGeneralVariables';
-
-
+import { Layout, Menu   } from 'antd';
+import Header from '../Dashboard/Modules/Header/Header'
+import AsideMenu from '../Dashboard/Modules/Aside/AsideMenu'
+import Footer from '../Dashboard/Modules/Footer/Footer'
+const { Content } = Layout;
 function Rxform() {
 
 	const navigate = useNavigate()
@@ -178,7 +181,12 @@ function Rxform() {
 	}
 	return (
 		<>
-			<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
+		 <Layout>
+   <AsideMenu/>
+    <Layout>
+      <Header />
+      <Content>
+	  <div className='mask d-flex align-items-center h-100 gradient-custom-3'>
 				<div className=' container h-100'>
 					<div className='row d-flex justify-content-center align-items-center h-100'>
 						<div
@@ -1095,6 +1103,11 @@ function Rxform() {
 					</div>
 				</div>
 			</div>
+		</Content>
+      <Footer/>
+     </Layout>
+  </Layout>
+			
 		</>
 	);
 }

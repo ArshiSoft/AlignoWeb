@@ -15,18 +15,32 @@ import PageNotFound from './components/Default/PageNotFound';
 // import { Jwt } from 'jsonwebtoken';
 import { useEffect } from 'react';
 import Example from './components/PrintTesting/Example';
+import OldNavbar from './components/Navbar/OldNavbar';
 
 function App() {
 	// if(localStorage.JwtToken){
-	// 	jwt.verify(localStorage.JwtToken,'secret123'function(err,decode){
+	// 	jwt.verify(localStorage.JwtToken,'secret123',function(err,decode){
 	// 		if(err){
 	// 			console.log(err);
 	// 		}
 	// 		else{
-	// 			console.log
+	// 			localStorage.removeItem('token')
+	// 			navigate('/Login')
 	// 		}
 	// 	})
-	// }
+	// } 
+	const token = localStorage.getItem('token') || '';
+	setInterval(() => {
+	  // you need to check If have token then you call the API
+	  if (token) {
+		try {
+		  // here you call refresh token API
+		} catch (error) {
+		  console.log("error", error)
+		}
+	  }
+	}, 5000);
+  
 	return (
 		<>
 			<BrowserRouter>
@@ -38,6 +52,7 @@ function App() {
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/' element={<Dashboard />} />
 					<Route path='/Navbar' element={<Navbar />} />
+					<Route path='/OldNavbar' element={<OldNavbar />} />
 					<Route path='/Rx-view' element={<RxFormData />} />
 					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
 					<Route path='/activate' element={<Activate />} />

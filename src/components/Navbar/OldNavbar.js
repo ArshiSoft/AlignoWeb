@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { removeToken } from '../../class/clsSession';
 // import Rxform from '../RxForm/Rxform';
-import '../Navbar/Navbar.css';
+import '../Navbar/OldNavbar.css';
 
 /* eslint-disable */
 
-function Navbar() {
+function OldNavbar() {
 	const navigate = useNavigate()
 	return (
 		<nav className='navbar navbar-expand-lg navbar-dark navclass '>
@@ -51,7 +52,7 @@ function Navbar() {
 						<li className='nav-item '>
 							<a className='nav-link'>
 							<p className='m-0' onClick={()=>{
-								localStorage.removeItem('token')
+								removeToken();
 								navigate('/Login')
 							}}>Logout</p>
 							</a>
@@ -90,4 +91,4 @@ function Navbar() {
 		</nav>
 	);
 }
-export default Navbar;
+export default OldNavbar;
