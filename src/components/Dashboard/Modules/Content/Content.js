@@ -28,7 +28,9 @@ const DashContent = () => {
                 //         margin: '24px 16px 0',
                 //     }}
                 style={{
-                    margin: '24px 16px 0',
+                    // margin: `24px 16px 0`,
+                    // padding : 100,      
+                  
                   }}
                 >
                   <div

@@ -16,6 +16,8 @@ import PageNotFound from './components/Default/PageNotFound';
 import { useEffect } from 'react';
 import Example from './components/PrintTesting/Example';
 import OldNavbar from './components/Navbar/OldNavbar';
+import ClinicForm from './components/Clinic/ClinicForm';
+import ClinicData from './components/Clinic/ClinicData';
 
 function App() {
 	// if(localStorage.JwtToken){
@@ -45,6 +47,8 @@ function App() {
 		<>
 			<BrowserRouter>
 				<Routes>
+					<Route path ='/Clinic-form' element ={<ClinicForm/>}/>
+					<Route path ='/Clinic' element={<ClinicData/>} />
 					<Route path='/Register' element={<Register />} />
 					<Route path='/Login' element={<Login />} />
 					<Route path='/Rx-data' element={<RxDataView />} />

@@ -24,7 +24,7 @@ const DashHeader = ()=>{
 							<h3 className='title mt-3' >Aligno</h3>
 						</Col>
 						<Col span={8} >
-						<Avatar size="large" style={{ backgroundColor: `#87d068` }} icon={<UserOutlined />} />
+						{/* <Avatar size="large" style={{ backgroundColor: `#87d068` }} icon={<UserOutlined />} /> */}
 						</Col>
 
 						{/* <Col span={8} />
