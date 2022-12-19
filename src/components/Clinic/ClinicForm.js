@@ -23,7 +23,7 @@ function ClinicForm() {
   }, []);
   async function clinicData(event) {
     event.preventDefault();
-    const response = await fetch("https://server.aligno.co/api/clinicform", {
+    const response = await fetch("http://localhost:1337/api/clinicform", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
