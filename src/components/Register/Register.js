@@ -60,6 +60,7 @@ function Register() {
 	async function regData(event) {
 		event.preventDefault();
 		const response = await fetch('https://server.aligno.co/api/regform', {
+		// const response = await fetch('http://localhost:1337/api/regform', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
