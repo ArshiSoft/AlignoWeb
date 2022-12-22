@@ -32,9 +32,14 @@ const items = [
     "",
     "empty",
     <Avatar className="ml-5" size="large" icon={<UserOutlined />} />,
-    [ getItem("Logout",  "", <LogoutOutlined  onClick={() => { 
-		removeToken();
-		// <Link to="/Login"></Link>
+    [
+      getItem(
+        "Logout",
+        "",
+        <LogoutOutlined
+          onClick={() => {
+            removeToken();
+            // <Link to="/Login"></Link>
           }}
         />
       ),
@@ -50,40 +55,40 @@ const items = [
     // getItem('Item 2', 'g2', null, [getItem('NO', '3',[<Link to='/Rx-view'/>]), getItem('Option 4', '4',[<Link to='/Rx-form'/>])], 'group'),
   ),
   getItem("Form", "sub2", <MailOutlined />, [
-    getItem(
-      "Form1",
-      "g1",
-      null,
-      [
-        getItem("Clinic Form", "1", [<Link to="/Clinic-form" />]),
-        getItem("Rx Form", "2", [<Link to="/Rx-form" />]),
-      ],
-      "group"
-    ),
-    getItem(
-      "Data View",
-      "g2",
-      null,
-      [
-        getItem("Rx-View", "3", [<Link to="/Rx-view" />]),
-        getItem("CLinic-View", "4", [<Link to="/Clinic" />]),
-      ],
-      "group"
-    ),
-  ]),
-  getItem("Candidate", "sub3", <AppstoreOutlined />, [
+    // getItem(
+    //   "Form1",
+    //   "g1",
+    //   null,
+    getItem("Rx Form", "2", [<Link to="/Rx-form" />]),
+    getItem("Clinic Form", "1", [<Link to="/Clinic-form" />]),
+
     getItem("Candidate", "5", [<Link to="/Am-I-a-Candidate" />]),
-    getItem("Option 6", "6"),
-    getItem("Submenu", "sub4", null, [
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
+    // "group"
+    // ),
+    // getItem(
+    //   "Data View",
+    //   "g2",
+    //   null,
+    //   [
+
+    //   ],
+    //   "group"
+    // ),
   ]),
-  getItem("Navigation Three", "sub5", <SettingOutlined />, [
+  getItem("Data View", "sub3", <AppstoreOutlined />, [
+    getItem("Rx-View", "3", [<Link to="/Rx-view" />]),
+    getItem("CLinic-View", "4", [<Link to="/Clinic" />]),
+
+    // getItem("Submenu", "sub4", null, [
+    //   getItem("Option 7", "7"),
+    //   getItem("Option 8", "8"),
+    // ]),
+  ]),
+  getItem("Navigation Three", "sub4", <SettingOutlined />, [
     getItem("Option 9", "9"),
-    getItem("Option 10", "10"),
-    getItem("Option 11", "11"),
-    getItem("Option 12", "12"),
+    // getItem("Option 10", "10"),
+    // getItem("Option 11", "11"),
+    // getItem("Option 12", "12"),
   ]),
 ];
 
@@ -105,6 +110,9 @@ const AsideMenu = () => {
         }}>
         <div className="logo" />
         <Menu
+          defaultOpenKeys={["sub2"] + ["sub3"] + ["sub4"]}
+          // defaultOpenKeys2={['sub3']}
+          // defaultOpenKeys3={['sub4']}
           theme="dark"
           mode="inline"
           // defaultSelectedKeys={['4']}

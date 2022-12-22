@@ -1,7 +1,9 @@
 import { message } from "antd";
 import { getCurrentDate, getCurrentDateTime } from "./clsGeneralVariables";
 
+
 export function isToken() {
+ 
   var rtnValue = true;
 
   if (!localStorage.getItem("token")) rtnValue = false;
@@ -30,6 +32,9 @@ export function createToken(token) {
 }
 
 export function removeToken() {
+  
   localStorage.removeItem("token");
   localStorage.removeItem("expiry");
+ 
+  
 }
