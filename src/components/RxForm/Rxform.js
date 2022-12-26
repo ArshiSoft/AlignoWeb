@@ -121,8 +121,8 @@ function Rxform() {
 
   async function rxData(event) {
     event.preventDefault();
-    // const response = await fetch("https://server.aligno.co/api/rxform", {
-    const response = await fetch("http://localhost:1337/api/rxform", {
+    const response = await fetch("https://server.aligno.co/api/rxform", {
+    // const response = await fetch("http://localhost:1337/api/rxform", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
