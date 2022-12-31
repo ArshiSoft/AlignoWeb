@@ -108,10 +108,6 @@ form#wpforms-form-1961
 .wpforms-container form#wpforms-form-1961 h3 {
 	margin-top: 150px;
 }
-
-.wpforms-container form#wpforms-form-1853 input[type='email'],
-.wpforms-container form#wpforms-form-1853 input[type='tel'],
-.wpforms-container form#wpforms-form-1853 input[type='text'],
 .wpforms-container form#wpforms-form-1961 input[type='email'],
 .wpforms-container form#wpforms-form-1961 input[type='tel'] {
 	font-size: 16px;
@@ -129,19 +125,6 @@ form#wpforms-form-1961
 	border: 1.5px solid transparent;
 	transition: all 0.15s ease-out;
 }
-
-.wpforms-container form#wpforms-form-1853 input[type='email'],
-.wpforms-container form#wpforms-form-1853 input[type='tel'],
-.wpforms-container form#wpforms-form-1853 input[type='text'] {
-	border: 0.5px solid lightsteelblue;
-}
-
-.wpforms-container form#wpforms-form-1853 input[type='email']:focus,
-.wpforms-container form#wpforms-form-1853 input[type='tel']:focus,
-.wpforms-container form#wpforms-form-1853 input[type='text']:focus,
-.wpforms-container form#wpforms-form-1853 input[type='text']:active,
-.wpforms-container form#wpforms-form-1853 input[type='email']:active,
-.wpforms-container form#wpforms-form-1853 input[type='tel']:active,
 .wpforms-container form#wpforms-form-1961 input[type='email']:focus,
 .wpforms-container form#wpforms-form-1961 input[type='tel']:focus,
 .wpforms-container form#wpforms-form-1961 input[type='email']:active,
@@ -149,7 +132,6 @@ form#wpforms-form-1961
 	border-color: #a2b1c1;
 }
 
-.wpforms-container form#wpforms-form-1853 button[type='submit'],
 .wpforms-container form#wpforms-form-1961 button[type='submit'] {
 	display: inline-block;
 	vertical-align: middle;
@@ -177,12 +159,6 @@ form#wpforms-form-1961
 	max-width: 100%;
 	transition: background 0.3s, color 0.3s;
 }
-
-.wpforms-container form#wpforms-form-1853 button[type='submit'] {
-	min-width: 150px;
-}
-
-.wpforms-container form#wpforms-form-1853 button[type='submit']:hover,
 .wpforms-container form#wpforms-form-1961 button[type='submit']:hover {
 	background: #32343e;
 }

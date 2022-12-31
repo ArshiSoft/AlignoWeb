@@ -6,11 +6,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RxTable.css';
 import { InputNumber, message, Modal, Popconfirm, Space } from 'antd';
-import { tr } from 'date-fns/locale';
+import { API } from '../../../class/clsGlobalVariables';
 
 const RxTable = () => {
-	// const api = 'http://localhost:1337/api/rxform/';
-	const api = 'https://server.aligno.co/api/rxform/';
+	const api = API + 'rxform/';
 	const history = useNavigate();
 
 	const [Patients, setPatientsList] = useState([]);

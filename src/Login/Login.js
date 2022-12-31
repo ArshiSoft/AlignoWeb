@@ -11,6 +11,8 @@ import 'react-phone-input-2/lib/style.css';
 import { Redirect } from 'react-router-dom';
 import { message } from 'antd';
 import { createToken, isToken, removeToken } from '../class/clsSession';
+import { API } from '../class/clsGlobalVariables';
+import { SetUserInfoInLocalStorage } from '../class/clsStorage';
 
 function Login() {
 	const navigate = useNavigate();
@@ -22,37 +24,43 @@ function Login() {
 	useEffect(() => {
 		if (isToken()) {
 			navigate('/');
-		}
-		else
-		{
+		} else {
 			removeToken();
 		}
-		document.title = 'Aligno-Login';
+		document.title = 'Aligno Login';
 	}, []);
 
 	async function loginUser(event) {
 		event.preventDefault();
-		const response = await fetch('https://server.aligno.co/api/login', {
-		// const response = await fetch('http://localhost:1337/api/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		});
+		try {
+			const response = await fetch(API + 'login/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email,
+					password,
+				}),
+			});
 
-		const result = await response.json();
-		console.log(result);
-		if (result) {
-			createToken(result.user);
-			message.success('login successfull');
-			navigate('/');
-		} else {
-			message.warning('please check your username and password');
-			navigate('/Login');
+			var result = await response.json();
+
+			if (result) {
+				if (result.status === 'ok') {
+					createToken(result.token);
+					SetUserInfoInLocalStorage(result.user);
+					navigate('/');
+				} else if (result.status === 'error') {
+					message.warning(result.error);
+				}
+				console.log(result);
+			} else {
+				message.error('Something went wrong Result!');
+			}
+		} catch (ex) {
+			message.error('Connection problem!');
+			console.log(ex);
 		}
 	}
 	return (
