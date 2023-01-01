@@ -80,12 +80,21 @@ function Rxform() {
 			}
 		}
 	}
+
+	const propsCheckboxItem = {
+		valuePropName: 'checked',
+		style: {
+			margin: 0,
+		},
+	};
+
+	const propsCheckbox = {};
 	return (
 		<>
 			<Layout>
 				<AsideMenu />
 				<Layout>
-					<Header/>
+					<Header />
 					<Content>
 						<Col
 							style={{ alignItems: `center`, height: `100` }}
@@ -694,46 +703,34 @@ function Rxform() {
 													<Title level={5}> Molar Relation</Title>
 													<Row>
 														<Col span={24}>
-															<Form.Item name='MRCIR' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRCIR' style={{ margin: 0 }}>
-																		Class I Right
-																	</label>
+															<Form.Item name='MRCIR' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class I Right
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRCIL' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRCIL' style={{ margin: 0 }}>
-																		Class I Left
-																	</label>
+															<Form.Item name='MRCIL' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class I Left
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRCIIR' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRCIIR' style={{ margin: 0 }}>
-																		Class II Right
-																	</label>
+															<Form.Item name='MRCIIR' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class II Right
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRCIIL' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRCIIL' style={{ margin: 0 }}>
-																		Class II Left
-																	</label>
+															<Form.Item name='MRCIIL' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class II Left
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRCIIIR' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRCIIIR' style={{ margin: 0 }}>
-																		Class III Right
-																	</label>
+															<Form.Item name='MRCIIIR' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class III Right
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRCIIIL' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRCIIIL' style={{ margin: 0 }}>
-																		Class III Left
-																	</label>
+															<Form.Item name='MRCIIIL' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class III Left
 																</Checkbox>
 															</Form.Item>
 														</Col>
@@ -743,12 +740,12 @@ function Rxform() {
 												<Col
 													style={{ marginBottom: `5px`, justifyContent: `end` }}
 													xs={{
-														span: 11,
-														offset: 2,
+														span: 12,
+														offset: 0,
 													}}
 													sm={{
-														span: 11,
-														offset: 2,
+														span: 12,
+														offset: 0,
 													}}
 													md={{
 														span: 11,
@@ -761,46 +758,34 @@ function Rxform() {
 													<Title level={5}> Canine Relation</Title>
 													<Row>
 														<Col span={24}>
-															<Form.Item name='CRCIR' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRCIR' style={{ margin: 0 }}>
-																		Class I Right
-																	</label>
+															<Form.Item name='CRCIR' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class I Right
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRCIL' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRCIL' style={{ margin: 0 }}>
-																		Class I Left
-																	</label>
+															<Form.Item name='CRCIL' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class I Left
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRCIIR' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRCIIR' style={{ margin: 0 }}>
-																		Class II Right
-																	</label>
+															<Form.Item name='CRCIIR' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class II Right
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRCIIL' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRCIIL' style={{ margin: 0 }}>
-																		Class II Left
-																	</label>
+															<Form.Item name='CRCIIL' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class II Left
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRCIIIR' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRCIIIR' style={{ margin: 0 }}>
-																		Class III Right
-																	</label>
+															<Form.Item name='CRCIIIR' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class III Right
 																</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRCIIIL' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRCIIIL' style={{ margin: 0 }}>
-																		Class III Left
-																	</label>
+															<Form.Item name='CRCIIIL' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>
+																	Class III Left
 																</Checkbox>
 															</Form.Item>
 														</Col>
@@ -837,10 +822,14 @@ function Rxform() {
 											</Row>
 											<Divider orientation='left'></Divider>
 
-											<Title style={{ marginTop: `5px` }} level={4}>
+											<Title
+												style={{
+													marginBottom: `15px`,
+												}}
+												level={3}>
 												TREATMENT GOALS
 											</Title>
-											<Row style={{ alignItems: `start` }}>
+											<Row style={{ alignItems: 'center' }}>
 												<Col
 													style={{ marginBottom: `5px` }}
 													xs={{
@@ -866,26 +855,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='LMMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='LMMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='LMImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='LMImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='LMImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='LMIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='LMIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='LMIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -898,26 +877,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='OBMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='OBMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='OBImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='OBImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='OBImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='OBIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='OBIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='OBIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -930,26 +899,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='MRMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='MRImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='MRIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='MRIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='MRIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -962,26 +921,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='AFMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='AFMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='AFImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='AFImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='AFImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='AFIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='AFIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='AFIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -1011,26 +960,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='UMMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='UMMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='UMImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='UMImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='UMImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='UMIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='UMIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='UMIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -1043,26 +982,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='OJMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='OJMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='OJImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='OJImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='OJImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='OJIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='OJIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='OJIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -1075,26 +1004,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='CRMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='CRImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='CRIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='CRIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='CRIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -1107,26 +1026,16 @@ function Rxform() {
 														<Col span={24}>
 															<Form.Item
 																name='PCMaintain'
-																style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='PCMaintain' style={{ margin: 0 }}>
-																		Maintain
-																	</label>
-																</Checkbox>
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Maintain</Checkbox>
 															</Form.Item>
-															<Form.Item name='PCImprove' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='PCImprove' style={{ margin: 0 }}>
-																		Improve
-																	</label>
-																</Checkbox>
+															<Form.Item
+																name='PCImprove'
+																{...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Improve</Checkbox>
 															</Form.Item>
-															<Form.Item name='PCIdeal' style={{ margin: 0 }}>
-																<Checkbox>
-																	<label for='PCIdeal' style={{ margin: 0 }}>
-																		Ideal
-																	</label>
-																</Checkbox>
+															<Form.Item name='PCIdeal' {...propsCheckboxItem}>
+																<Checkbox {...propsCheckbox}>Ideal</Checkbox>
 															</Form.Item>
 														</Col>
 													</Row>
@@ -1383,24 +1292,26 @@ function Rxform() {
 														offset: 0,
 													}}>
 													<Form.Item
+														name='agreement'
+														{...propsCheckboxItem}
 														rules={[
 															{
-																required: true,
-																message:
-																	'You Must agree to Terms & Conditions!',
+																validator: (_, value) =>
+																	value
+																		? Promise.resolve()
+																		: Promise.reject(
+																				new Error('Must accept agreement!')
+																		  ),
 															},
 														]}>
-														<Checkbox>
-															<label for='DoctorNotes'>
-																I agree all statements in{' '}
-																<a
-																	href='https://aligno.co/terms-and-conditions-doctors/'
-																	target='_blank'
-																	rel='noopener noreferrer'
-																	className='text-body'>
-																	Terms & Conditions
-																</a>
-															</label>
+														<Checkbox {...propsCheckbox}>
+															I agree all statements in{' '}
+															<a
+																href='https://aligno.co/terms-and-conditions-doctors/'
+																target='_blank'
+																rel='noopener noreferrer'>
+																Terms & Conditions
+															</a>
 														</Checkbox>
 													</Form.Item>
 												</Col>
