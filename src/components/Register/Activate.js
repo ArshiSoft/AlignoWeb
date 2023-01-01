@@ -3,6 +3,7 @@ import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import { API } from '../../class/clsGlobalVariables';
 
 function Activate() {
 	// const navigate = useNavigate()
@@ -15,7 +16,7 @@ function Activate() {
 	const location = useLocation();
 	const params = new URLSearchParams(location.search);
 	const userID = params.get('id');
-	const api = 'https://server.aligno.co/api/user/';
+	const api = API + 'user/';
 
 	const setUserAsActive = async () => {
 		try {
