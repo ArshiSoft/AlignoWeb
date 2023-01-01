@@ -253,35 +253,35 @@ const RxTable = () => {
 		{
 			name: 'Date',
 			omit: false,
-			selector: (patient) => patient.CreatedDate,
+			selector: (patient) => patient.Patient.CreatedDate,
 			sortable: true,
 		},
 		{
 			name: 'Clinic Name',
-			selector: (patient) => patient.clinicname,
+			selector: (patient) => patient.Patient.ClinicName,
 			sortable: true,
 		},
 		{
 			name: 'Doctor Name',
-			selector: (patient) => patient.doctorname,
+			selector: (patient) => patient.Patient.doctorname,
 			sortable: true,
 		},
 		{
 			name: 'Patient Name',
-			selector: (patient) => patient.patientname,
+			selector: (patient) => patient.Patient.PatientName,
 			sortable: true,
 		},
 		{
 			name: 'Patient Email',
-			selector: (patient) => patient.patientemail,
+			selector: (patient) => patient.Patient.PatientEmail,
 		},
 		{
 			name: 'Patient Phone',
 			selector: (patient) => {
-				var link = 'http://wa.me/' + patient.patientnumber;
+				var link = 'http://wa.me/' + patient.Patient.PatientNumber;
 				return (
 					<a href={link} target='_blank'>
-						{patient.patientnumber}
+						{patient.Patient.PatientNumber}
 					</a>
 				);
 			},

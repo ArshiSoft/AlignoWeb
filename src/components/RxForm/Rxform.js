@@ -17,6 +17,7 @@ import {
 	Menu,
 	Row,
 	Select,
+	Upload,
 } from 'antd';
 import Header from '../Dashboard/Modules/Header/Header';
 import AsideMenu from '../Dashboard/Modules/Aside/AsideMenu';
@@ -32,9 +33,29 @@ import {
 } from 'antd';
 import { Typography } from 'antd';
 import { Option } from 'antd/lib/mentions';
-import { API } from '../../class/clsGlobalVariables';
+import { API, MediaSite } from '../../class/clsGlobalVariables';
+import { InboxOutlined, PlusOutlined } from '@ant-design/icons';
+import { Promise } from 'q';
+import Paragraph from 'antd/lib/typography/Paragraph';
+import Icon from '@ant-design/icons/lib/components/Icon';
 const { Title } = Typography;
 const { Content } = Layout;
+
+const normFile = (e) => {
+	console.log('Upload event:', e);
+	if (Array.isArray(e)) {
+		return e;
+	}
+	return e?.fileList;
+};
+
+const getBase64 = (file) =>
+	new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = (error) => reject(error);
+	});
 
 function Rxform() {
 	const navigate = useNavigate();
@@ -50,7 +71,10 @@ function Rxform() {
 	const [form] = Form.useForm();
 
 	const api = API + 'rxform/';
-	const [isAgree, setIsAgree] = useState('false');
+
+	const [previewOpen, setPreviewOpen] = useState(false);
+	const [previewImage, setPreviewImage] = useState('');
+	const [previewTitle, setPreviewTitle] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
 	const history = useNavigate();
@@ -58,6 +82,14 @@ function Rxform() {
 	async function onSubmit(values) {
 		console.log(values);
 		console.log(JSON.stringify(values));
+
+		var fileList = [];
+
+		values.files.forEach((file) => {
+			fileList.push(`${MediaSite}${file.size}-${file.name}`);
+		});
+
+		values.files = undefined;
 
 		const response = await fetch(api, {
 			method: 'POST',
@@ -67,6 +99,7 @@ function Rxform() {
 			body: JSON.stringify({
 				PatientEmail: values.PatientEmail,
 				Patient: values,
+				Files: fileList,
 			}),
 		});
 
@@ -81,6 +114,18 @@ function Rxform() {
 			}
 		}
 	}
+
+	const handleCancel = () => setPreviewOpen(false);
+	const handlePreview = async (file) => {
+		if (!file.url && !file.preview) {
+			file.preview = await getBase64(file.originFileObj);
+		}
+		setPreviewImage(file.url || file.preview);
+		setPreviewOpen(true);
+		setPreviewTitle(
+			file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
+		);
+	};
 
 	const propsCheckboxItem = {
 		valuePropName: 'checked',
@@ -488,6 +533,99 @@ function Rxform() {
 													<div className='form-outline mb-4'></div>
 												</div>
 											</Row>
+											<Row
+												style={{
+													justifyContent: 'center',
+													marginBottom: '30px',
+													marginTop: '15px',
+												}}>
+												<Col
+													xs={{
+														span: 24,
+														offset: 0,
+													}}
+													sm={{
+														span: 24,
+														offset: 0,
+													}}
+													md={{
+														span: 23,
+														offset: 0,
+													}}
+													lg={{
+														span: 23,
+														offset: 0,
+													}}>
+													<Form.Item
+														label='Files'
+														name='files'
+														rules={[
+															{
+																required: true,
+																validator: (_, value) =>
+																	value
+																		? Promise.resolve()
+																		: Promise.reject(
+																				new Error(
+																					'Please select at least one Image!'
+																				)
+																		  ),
+															},
+														]}
+														valuePropName='fileList'
+														getValueFromEvent={normFile}
+														shouldUpdate
+														noStyle>
+														<Upload
+															listType='picture-card'
+															action={`${API}UploadFiles`}
+															multiple
+															onPreview={handlePreview}
+															beforeUpload={(file) => {
+																return true;
+															}}>
+															<div>
+																<PlusOutlined />
+																<div className='ant-upload-text'>Upload</div>
+															</div>
+														</Upload>
+														{/* <Upload.Dragger
+															style={{ width: '100' }}
+															name='files'
+															action='/upload.do'>
+															<p className='ant-upload-drag-icon'>
+																<InboxOutlined />
+															</p>
+															<p className='ant-upload-text'>
+																Click or drag file to this area to upload
+															</p>
+															<p className='ant-upload-hint'>
+																Support for a single or bulk upload.
+															</p>
+														</Upload.Dragger> */}
+													</Form.Item>
+												</Col>
+											</Row>
+											<Row
+												style={{
+													justifyContent: 'left',
+													marginBottom: '15px',
+													marginTop: '15px',
+												}}>
+												<Paragraph
+													style={{
+														textAlign: `left`,
+													}}
+													level={2}>
+													While taking front, right and left side intraoral
+													photographs, pull the cheeks out as much as possible
+													with a spoon pressure to show maximum back teeth and
+													bite all the way together on the back teeth. (WITHOUT
+													PICTURES, CASE CANNOT BE PROCEEDED SO MAKE SURE TO
+													UPLOAD THEM)
+												</Paragraph>
+											</Row>
+											<Divider />
 											<Row>
 												<Title
 													style={{
@@ -1332,6 +1470,18 @@ function Rxform() {
 					<Footer />
 				</Layout>
 			</Layout>
+			<Modal
+				open={previewOpen}
+				title={previewTitle}
+				footer={null}
+				onCancel={handleCancel}>
+				<img
+					style={{
+						width: '100%',
+					}}
+					src={previewImage}
+				/>
+			</Modal>
 		</>
 	);
 }
