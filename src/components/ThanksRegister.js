@@ -2,23 +2,20 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Thanks() {
+function ThanksRegister() {
 	const navigate = useNavigate();
+
 	useEffect(() => {
-		if (!localStorage.getItem('token')) {
-			navigate('/Login');
-		}
-	}, []);
-	// Tab Title
-	useEffect(() => {
-		document.title = 'Aligno-Thanks';
+		document.title = 'Aligno Thanks';
 	}, []);
 
 	return (
 		<>
 			<div class='jumbotron text-center'>
-				<h1 class='display-3'>Thank You!</h1>
-				{/* <p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p> */}
+				<h1 class='display-3'>Welcome!</h1>
+				<p class='lead'>
+					<strong>Please check your email</strong> for activation link.
+				</p>
 				<hr />
 				{/* <p>
     Having trouble? <a href="https://bootstrapcreative.com/">Contact us</a>
@@ -27,13 +24,13 @@ function Thanks() {
 					<a
 						className='btn  btn-sm'
 						style={{ backgroundColor: `#01aba9` }}
-						href='/rx-form/'
+						href='/login'
 						role='button'>
-						Back to RX-Form
+						Back to Login
 					</a>
 				</p>
 			</div>
 		</>
 	);
 }
-export default Thanks;
+export default ThanksRegister;

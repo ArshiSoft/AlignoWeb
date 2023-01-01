@@ -5,15 +5,27 @@ import { useEffect } from 'react';
 import '@fontsource/league-spartan'; // Defaults to weight 400.
 import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 import 'react-phone-input-2/lib/style.css';
-import { Button, Checkbox, Col, Divider, Row, Select, Form, Input } from 'antd';
+import {
+	Button,
+	Checkbox,
+	Col,
+	Divider,
+	Row,
+	Select,
+	Form,
+	Input,
+	message,
+} from 'antd';
 import { Typography } from 'antd';
 import { Option } from 'antd/lib/mentions';
 import { API } from '../../class/clsGlobalVariables';
 import axios from 'axios';
+import { async } from 'q';
 const { Title } = Typography;
 
 function Register() {
 	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 	const [hideDegree, setHideDegree] = useState(true);
 	const [hideSpeciality, setHideSpeciality] = useState(true);
 	const [hideAlignerCases, setHideAlignerCases] = useState(true);
@@ -106,37 +118,52 @@ function Register() {
 		}
 	};
 
+	async function btnRegisterClick(e) {
+		e.preventDefault();
+		setIsLoading(true);
+		form
+			.validateFields()
+			.then(() => {
+				return setTimeout(() => {
+					form.submit();
+				}, 1000);
+			})
+			.catch((ex) => {
+				setIsLoading(false);
+			});
+	}
 	async function onRegister(values) {
 		console.log(values);
 
-		var Password = values.Password;
-		values.Password = undefined;
-		values.ConfirmPassword = undefined;
+		try {
+			var Password = values.Password;
+			values.Password = undefined;
+			values.ConfirmPassword = undefined;
 
-		const response = await fetch(api, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				Email: values.Email,
-				Password: Password,
-				Active: false,
-				User: values,
-			}),
-		});
-
-		const data = await response.json();
-		if (data.status === 'ok') {
-			const mailResponse = await fetch(API + 'sendmail-noreply/', {
+			const response = await fetch(api, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					to: values.Email,
-					subject: 'Activation Email',
-					html: `<!DOCTYPE html>
+					Email: values.Email,
+					Password: Password,
+					Active: false,
+					User: values,
+				}),
+			});
+
+			const data = await response.json();
+			if (data.status === 'ok') {
+				const mailResponse = await fetch(API + 'sendmail-noreply/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						to: values.Email,
+						subject: 'Activation Email',
+						html: `<!DOCTYPE html>
 											<html
 							lang="en"
 							xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -592,13 +619,22 @@ function Register() {
 								<!-- End -->
 							</body>
 						</html>`,
-				}),
-			});
-			if (mailResponse.status) {
-				console.log(mailResponse.json());
+					}),
+				});
+				if (mailResponse.status) {
+					navigate('/thanks-register');
+					console.log(mailResponse.json());
+				}
+			} else {
+				message.warn('Email Taken!');
 			}
+			console.log(data);
+		} catch (ex) {
+			console.log('Error' + ex);
+			message.error('Something went wrong!');
 		}
-		console.log(data);
+
+		setIsLoading(false);
 	}
 
 	return (
@@ -1455,7 +1491,9 @@ function Register() {
 
 								<Row style={{ justifyContent: `center` }}>
 									<Form.Item>
-										<Button htmlType='submit'>Register</Button>
+										<Button loading={isLoading} onClick={btnRegisterClick}>
+											Register
+										</Button>
 									</Form.Item>
 								</Row>
 							</Form>
