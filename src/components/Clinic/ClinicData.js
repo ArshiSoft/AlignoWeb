@@ -12,13 +12,13 @@ const { Content } = Layout;
 
 function ClinicData() {
 const navigate = useNavigate()
-  //   useEffect(()=>{
-  // if(!isToken()){
-  //   navigate('/Login')
-  // }
-  // document.title = 'Aligno-Clinic';
+    useEffect(()=>{
+  if(!isToken()){
+    navigate('/Login')
+  }
+  document.title = 'Aligno-Clinic';
     
-  // },[])
+  },[])
   return (
    <>
    <Layout>
