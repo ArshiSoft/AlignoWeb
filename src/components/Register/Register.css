@@ -11,6 +11,10 @@
     margin-top: 8px;
     height: 100%
 }
+.formwidth {
+    min-width: 320px;
+    padding: 0px !important;
+  }
 .form-div1{
     margin: 0;
     max-width: 125em;

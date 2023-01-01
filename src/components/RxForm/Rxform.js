@@ -85,7 +85,7 @@ function Rxform() {
 			<Layout>
 				<AsideMenu />
 				<Layout>
-					<Header />
+					<Header/>
 					<Content>
 						<Col
 							style={{ alignItems: `center`, height: `100` }}

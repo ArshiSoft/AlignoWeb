@@ -1,103 +1,106 @@
 /* eslint-disable */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../Register/Register.css';
-import { useEffect } from 'react';
-import '@fontsource/league-spartan'; // Defaults to weight 400.
-import '@fontsource/source-sans-pro'; // Defaults to weight 400.
-import Input from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../Register/Register.css";
+import { useEffect } from "react";
+import "@fontsource/league-spartan"; // Defaults to weight 400.
+import "@fontsource/source-sans-pro"; // Defaults to weight 400.
+// import Input from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { Button, Checkbox, Col, Divider, Row, Select, Form, Input } from "antd";
+
+import {} from "antd";
+import { Typography } from "antd";
+import { Option } from "antd/lib/mentions";
+const { Title } = Typography;
 
 function validate() {
-	const pass1 = document.getElementById('pass1');
-	const pass2 = document.getElementById('pass2');
-	if (pass1.value == pass2.value) {
-		document.getElementById('Match').style.display = 'none';
-	} else {
-		document.getElementById('Match').style.display = 'block';
-	}
+  const pass1 = document.getElementById("pass1");
+  const pass2 = document.getElementById("pass2");
+  if (pass1.value == pass2.value) {
+    document.getElementById("Match").style.display = "none";
+  } else {
+    document.getElementById("Match").style.display = "block";
+  }
 }
 
 function Register() {
+  const navigate = useNavigate();
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [gender, setGender] = useState("");
+  const [degree, setDegree] = useState("");
+  const [email, setEmail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [speciality, setSpeciality] = useState("");
+  const [completecases, setCompleteCases] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [phoneinputvalue, setPhoneInputValue] = useState("");
+  const [phone, setPhone] = useState("");
+  const [zip, setZip] = useState("");
+  const [password, setPassword] = useState("");
+  const [showhide, setShowHide] = useState("");
+  const [form] = Form.useForm();
+  // Tab Title
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+    document.title = "Aligno - Register";
+  }, []);
 
-	const navigate = useNavigate()
-	const [firstname, setFirstName] = useState('');
-	const [lastname, setLastName] = useState('');
-	const [gender, setGender] = useState('');
-	const [degree, setDegree] = useState('');
-	const [email, setEmail] = useState('');
-	const [department, setDepartment] = useState('');
-	const [speciality, setSpeciality] = useState('');
-	const [completecases, setCompleteCases] = useState('');
-	const [country, setCountry] = useState('');
-	const [state, setState] = useState('');
-	const [address, setAddress] = useState('');
-	const [city, setCity] = useState('');
-	const [phoneinputvalue, setPhoneInputValue] = useState('');
-	const [phone, setPhone] = useState('');
-	const [zip, setZip] = useState('');
-	const [password, setPassword] = useState('');
-	const [showhide, setShowHide] = useState('');
+  const handleshowhide = (event) => {
+    const getuser = event.target.value;
 
-	// Tab Title
-	useEffect(() => {
-		
-		if (localStorage.getItem('token')) {
-			navigate('/');
-			
-		}
-		document.title = 'Aligno - Register';
-	}, []);
+    setShowHide(getuser);
+  };
 
-	const handleshowhide = (event) => {
-		const getuser = event.target.value;
+  const history = useNavigate();
 
-		setShowHide(getuser);
-	};
+  async function regData(event) {
+    event.preventDefault();
+    const response = await fetch("https://server.aligno.co/api/regform", {
+      // const response = await fetch('http://localhost:1337/api/regform', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        degree,
+        speciality,
+        completecases,
+        email,
+        department,
+        country,
+        state,
+        address,
+        city,
+        phone,
+        zip,
+        gender,
+        password,
+      }),
+    });
 
-	const history = useNavigate();
-
-	async function regData(event) {
-		event.preventDefault();
-		const response = await fetch('https://server.aligno.co/api/regform', {
-		// const response = await fetch('http://localhost:1337/api/regform', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				firstname,
-				lastname,
-				degree,
-				speciality,
-				completecases,
-				email,
-				department,
-				country,
-				state,
-				address,
-				city,
-				phone,
-				zip,
-				gender,
-				password,
-			}),
-		});
-
-		const data = await response.json();
-		if (data.status) {
-			const mailResponse = await fetch(
-				'https://server.aligno.co/api/sendmail-noreply',
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						to: email,
-						subject: 'Activation Email',
-						//html: 'Hello',
-						html: `<!DOCTYPE html>
+    const data = await response.json();
+    if (data.status) {
+      const mailResponse = await fetch(
+        "https://server.aligno.co/api/sendmail-noreply",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: email,
+            subject: "Activation Email",
+            //html: 'Hello',
+            html: `<!DOCTYPE html>
 											<html
 							lang="en"
 							xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -553,430 +556,1282 @@ function Register() {
 								<!-- End -->
 							</body>
 						</html>`,
-					}),
-				}
-			);
-			if (mailResponse.status) {
-				console.log(mailResponse.json());
-				history('/Login');
-			}
-		}
-		console.log(data);
+          }),
+        }
+      );
+      if (mailResponse.status) {
+        console.log(mailResponse.json());
+        history("/Login");
+      }
+    }
+    console.log(data);
+  }
 
-	}
+  return (
+    <>
+      <Col
+        style={{ alignItems: `center`, height: `100` }}
+        className="gradient-custom-3"
+        span={24}>
+        <Row style={{ justifyContent: `center`, alignItems: `center` }}>
+          <Col
+            className="formwidth"
+            style={{ width: `900px` }}
+            xs={{
+              span: 24,
+              offset: 0,
+            }}
+            sm={{
+              span: 18,
+              offset: 0,
+            }}
+            md={{
+              span: 10,
+            }}
+            lg={{
+              span: 10,
+              offset: 0,
+            }}>
+            <Row
+              style={{
+                // margin: `10px`,
+                backgroundColor: `white`,
+                borderRadius: `10px`,
+                padding: `50px`,
+                justifyContent: `center`,
+              }}>
+              <Col
+                style={{ marginBottom: `5px` }}
+                xs={{
+                  span: 24,
+                  offset: 0,
+                }}
+                sm={{
+                  span: 24,
+                  offset: 0,
+                }}
+                md={{
+                  span: 24,
+                }}
+                lg={{
+                  span: 24,
+                }}>
+                <Title
+                  style={{
+                    justifyContent: `center`,
+                    textAlign: `center`,
+                    marginBottom: `15px`,
+                  }}
+                  level={2}>
+                  REGISTER
+                </Title>
+              </Col>
+              <Form
+                layout="vertical"
+                form={form}
+                onFinish={regData}
+                scrollToFirstError>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                    }}
+                    lg={{
+                      span: 11,
+                    }}>
+                    <Form.Item
+                      name="FirstName"
+                      label=" First Name"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="First Name" />
+                    </Form.Item>
+                  </Col>
 
-	return (
-		<>
-			<div className='mask d-flex align-items-center h-100 gradient-custom-3'>
-				<div className=' container h-100'>
-					<div className='row d-flex justify-content-center align-items-center h-100'>
-						<div
-							className='col-12 col-sm-6 col-md-9 col-lg-7 col-sm-6 col-xl-6 formwidth'
-							style={{ width: `900px`, height: `1500px` }}>
-							<div
-								style={{
-									// margin: `10px`,
-									backgroundColor: `white`,
-									borderRadius: `10px`,
-									padding: `50px`,
-								}}>
-								<h2 class='text-uppercase text-center mb-5'>Register</h2>
-								<form onSubmit={regData}>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='validationCustom01'>
-													First Name<span className='required'>*</span>
-												</label>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="LastName"
+                      label="Last Name"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Last Name" />
+                    </Form.Item>
+                    {/* </div>
+                          </div> */}
+                  </Col>
+                </Row>
+                {/* </div> */}
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    <Form.Item
+                      name="Email"
+                      label=" Email"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input type="email" placeholder="ali@gmail.com" />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="PhoneNumber"
+                      label="Phone Number"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input
+                        addonBefore={
+                          <Form.Item noStyle>
+                            <Select
+                              defaultValue="+92"
+                              style={{
+                                width: 70,
+                              }}>
+                              <Option value="92">+92</Option>
+                            </Select>
+                          </Form.Item>
+                        }
+                        style={{
+                          width: "100%",
+                        }}
+                      />
+                    </Form.Item>
 
-												<input
-													id='userNameInput'
-													type='text'
-													onChange={(e) => setFirstName(e.target.value)}
-													value={firstname}
-													placeholder='First Name'
+                    {/* </div> */}
+                  </Col>
+                  {/* </div> */}
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Gender"
+                      label="Select Gender"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select a Gender"
+                        options={[
+                          {
+                            label: "Gender",
+                            options: [
+                              {
+                                label: "Male",
+                                value: "Male",
+                              },
+                              {
+                                label: "Female",
+                                value: "Female",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Department"
+                      label="Department"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        onChange={(e) => {
+                          handleshowhide(e);
+                          setDepartment(e.target.value);
+                        }}
+                        placeholder="Select Department"
+                        options={[
+                          {
+                            label: "Department",
+                            options: [
+                              {
+                                label: "Doctor",
+                                value: "1",
+                              },
+                              {
+                                label: "Patient",
+                                value: "2",
+                              },
+                              {
+                                label: "Saff/CS Department",
+                                value: "3",
+                              },
+                              {
+                                label: "Planning Department",
+                                value: "4",
+                              },
+                              {
+                                label: "Manufacturing Department",
+                                value: "5",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Degree"
+                      label="Degree"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Degree"
+                        options={[
+                          {
+                            label: "Degree",
+                            options: [
+                              {
+                                label: "DDS",
+                                value: "DDS",
+                              },
+                              {
+                                label: "DMD",
+                                value: "DMD",
+                              },
+                              {
+                                label: "MDS",
+                                value: "MDS",
+                              },
+                              {
+                                label: "Not Applicable",
+                                value: "Not Applicable",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Speciality"
+                      label="Speciality"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Speciality"
+                        options={[
+                          {
+                            label: "Speciality",
+                            options: [
+                              {
+                                label: "General Practitioner",
+                                value: "General Practitioner",
+                              },
+                              {
+                                label: "Orthodontist",
+                                value: "Orthodontist",
+                              },
+                              {
+                                label: "Other Specialist",
+                                value: "Other Specialist",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="CompletedAlignerCases"
+                      label="Completed aligner cases"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Completed aligner cases"
+                        options={[
+                          {
+                            label: "Completed aligner cases",
+                            options: [
+                              {
+                                label: "None Completed",
+                                value: "None Completed",
+                              },
+                              {
+                                label: "1-10",
+                                value: "1-10",
+                              },
+                              {
+                                label: "11-50",
+                                value: "11-50",
+                              },
+                              {
+                                label: "51-100",
+                                value: "51-100",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    {/* <Form.Item
+	 name="Speciality"
+	 label="Speciality"
+	 rules={[
+	   {
+		 required: true,
+	   },
+	 ]}>
+	 <Select
+	   placeholder="Select Speciality"
+	   options={[
+		 {
+		   label: "Speciality",
+		   options: [
+			 {
+			   label: "General Practitioner",
+			   value: "General Practitioner",
+			 },
+			 {
+			   label: "Orthodontist",
+			   value: "Orthodontist",
+			 },
+			 {
+			   label: "Other Specialist",
+			   value: "Other Specialist",
+			 },
+			
+		   ],
+		 },
+	   ]}></Select>
+   </Form.Item> */}
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Country"
+                      label="Country"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Country"
+                        options={[
+                          {
+                            label: "Country",
+                            options: [
+                              {
+                                label: "Pakistan",
+                                value: "Pakistan",
+                              },
+                              {
+                                label: "China",
+                                value: "China",
+                              },
+                              {
+                                label: "Nepal",
+                                value: "Nepal",
+                              },
+                              {
+                                label: "England",
+                                value: "England",
+                              },
+                              {
+                                label: "Australia",
+                                value: "Australia",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="State"
+                      label="State or Province"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select State"
+                        options={[
+                          {
+                            label: "State",
+                            options: [
+                              {
+                                label: "Punjab",
+                                value: "Punjab",
+                              },
+                              {
+                                label: "Sindh",
+                                value: "Sindh",
+                              },
+                              {
+                                label: "Balochistan",
+                                value: "Balochistan",
+                              },
+                              {
+                                label: "KPK",
+                                value: "KPK",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 23,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 23,
+                      offset: 0,
+                    }}>
+                    <Form.Item
+                      name="Address"
+                      label="Addess"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Enter Your Address" />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="City"
+                      label="City"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Enter Your City" />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="ZipCode"
+                      label="Zip/Postal Code"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Enter Your Zip/Postal Code" />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Password"
+                      label="Password"
+                      
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input type="password" placeholder="Enter Your Password" />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="CFMPASSWORD"
+                      label="Confirm Password"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input type="password" placeholder="Confirm Password" />
+                    </Form.Item>
+                  </Col>
+                </Row>
 
-													className='form-control form-control-lg'
-													required
-												/>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													Last Name <span className='required'>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setLastName(e.target.value)}
-													name='lastname'
-													placeholder='Last Name'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-											</div>
-										</div>
-									</div>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    justify="start"
+                    style={{
+                      alignContent: `start`,
+                      marginTop: `20px`,
+                      marginBottom: `20px`,
+                    }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 23,
+                    }}
+                    lg={{
+                      span: 23,
+                      offset: 0,
+                    }}>
+                    <Form.Item
+                      rules={[
+                        {
+                          required: true,
+                          message: "You Must agree to Terms & Conditions!",
+                        },
+                      ]}>
+                      <Checkbox>
+                        <label for="DoctorNotes">
+                          I agree all statements in{" "}
+                          <a
+                            href="https://aligno.co/terms-and-conditions-doctors/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-body">
+                            Terms & Conditions
+                          </a>
+                        </label>
+                      </Checkbox>
+                    </Form.Item>
+                  </Col>
+                </Row>
 
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													Email <span className='required'>*</span>
-												</label>
-												<input
-													type='email'
-													onChange={(e) => setEmail(e.target.value)}
-													name='email'
-													placeholder='Enter Your Email'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-													required
-												/>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cg'>
-													Phone Number <span className='required'>*</span>
-												</label>
-												<Input
-													country={'pk'}
-													value={phone}
-													name='patientnumber'
-													required
-													onChange={
-														((e) => {
-															setPhoneInputValue(e.target.value);
-														},
-															setPhone)
-													}
-													inputStyle={{
-														width: '100%',
-														minHeight: 'calc(1.5em + 1rem + 2px)',
-														fontSize: '1.25rem',
-														borderRadius: '.5rem',
-													}}
-												/>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example4cdg'>
-													Select Gender <span className='required'>*</span>
-												</label>
-												<select
-													className='form-select form-select-lg'
-													required
-													onChange={(e) => setGender(e.target.value)}
-													aria-label='Default select example'>
-													<option value='' disabled selected>
-														Gender
-													</option>
-													<option value='Male'>Male</option>
-													<option value='Female'>Female</option>
-												</select>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Department <span className='required'>*</span>
-												</label>
-												<select
-													className='form-select form-select-lg'
-													required
-													onChange={(e) => {
-														handleshowhide(e);
-														setDepartment(e.target.value);
-													}}
-													aria-label='Default select example'
-													placeholder=''>
-													<option value='' disabled selected>
-														Select Department
-													</option>
-													<option value='1'>Doctor</option>
-													<option value='2'>Patient</option>
-													<option value='3'>Staff/CS Department</option>
-													<option value='4'>Planning Department</option>
-													<option value='5'>Manufacturing Department</option>
-												</select>
-											</div>
-										</div>
-									</div>
+                <Row style={{ justifyContent: `center` }}>
+                  <Form.Item>
+                    <Button htmlType="submit">Submit</Button>
+                  </Form.Item>
+                </Row>
+              </Form>
+            </Row>
+          </Col>
+        </Row>
+      </Col>
+      {/* <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div className=" container h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div
+              className="col-12 col-sm-6 col-md-9 col-lg-7 col-sm-6 col-xl-6 formwidth"
+              style={{ width: `900px`, height: `1500px` }}>
+              <div
+                style={{
+                  // margin: `10px`,
+                  backgroundColor: `white`,
+                  borderRadius: `10px`,
+                  padding: `50px`,
+                }}>
+                <h2 class="text-uppercase text-center mb-5">Register</h2>
+                <form onSubmit={regData}>
+                  <div class="row align-items-start">
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="validationCustom01">
+                          First Name<span className="required">*</span>
+                        </label>
 
-									{showhide === '1' && (
-										<div>
-											<div class='row align-items-start'>
-												<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-													<div className='form-outline mb-4'>
-														<label className='form-label' for='form3Example1cg'>
-															Degree <span className='required'>*</span>
-														</label>
-														<select
-															onChange={(e) => setDegree(e.target.value)}
-															className='form-select form-select-lg'
-															required
-															aria-label='Default select example'
-															placeholder='Degree'>
-															<option value='' disabled selected>
-																Degree
-															</option>
-															<option value='DDS'>DDS</option>
-															<option value='DMD'>DMD</option>
-															<option value='MDS'>MDS</option>
-															<option value='Not Applicable'>
-																Not Applicable
-															</option>
-														</select>
-													</div>
-												</div>
-												<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-													<div className='form-outline mb-4'>
-														<label className='form-label' for='form3Example1cg'>
-															Speciality <span className='required'>*</span>
-														</label>
-														<select
-															onChange={(e) => setSpeciality(e.target.value)}
-															className='form-select form-select-lg'
-															required
-															aria-label='Default select example'
-															placeholder='Speciality'>
-															<option value='' disabled selected>
-																Speciality
-															</option>
-															<option value='General Practitioner'>
-																General Practitioner
-															</option>
-															<option value='Orthodontist'>Orthodontist</option>
-															<option value='Other specialist'>
-																Other specialist
-															</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class='row align-items-start'>
-												<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-													<div className='form-outline mb-4'>
-														<label className='form-label' for='form3Example1cg'>
-															Completed aligner cases{' '}
-															<span className='required'>*</span>
-														</label>
-														<select
-															onChange={(e) => setCompleteCases(e.target.value)}
-															class='form-select form-select-lg'
-															required
-															aria-label='Default select example'
-															placeholder='Completed aligner cases'>
-															<option value='' disabled selected>
-																Completed aligner cases
-															</option>
-															<option value='None Completed'>
-																None Completed
-															</option>
-															<option value='1-10'>1-10</option>
-															<option value='11-50'>11-50</option>
-															<option value='51-100'>51-100</option>
-														</select>
-													</div>
-												</div>
-											</div>
-										</div>
-									)}
-									<div class='row align-items-start mt-4'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Country <span className='required'>*</span>
-												</label>
-												<select
-													onChange={(e) => setCountry(e.target.value)}
-													class='form-select form-select-lg'
-													required
-													aria-label='Default select example'
-													placeholder='Country'>
-													<option value='' disabled selected>
-														Country
-													</option>
-													<option value='Pakistan'>Pakistan</option>
-													<option value='Afghanistan'>Afghanistan</option>
-													<option value='Nepal'>Nepal</option>
-													<option value='Iran'>Iran</option>
-												</select>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													State or Province <span className='required'>*</span>
-												</label>
-												<select
-													onChange={(e) => setState(e.target.value)}
-													class='form-select form-select-lg'
-													required
-													aria-label='Default select example'
-													placeholder='State or Province'>
-													<option value='' disabled selected>
-														State or Province
-													</option>
-													<option value='Punjab'>Punjab</option>
-													<option value='Sindh'>Sindh</option>
-													<option value='Balochistan'>Balochistan</option>
-													<option value='California'>California</option>
-													<option value='Arizona'>Arizona</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													Address <span className='required'>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setAddress(e.target.value)}
-													name='patientid'
-													placeholder='Address'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-											</div>
-										</div>
-									</div>
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example1cg'>
-													City <span className='required'>*</span>
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setCity(e.target.value)}
-													name='City'
-													placeholder='City'
-													id='form3Example1cg'
-													className='form-control form-control-lg'
-													required
-												/>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													ZIP/Postal code
-												</label>
-												<input
-													type='text'
-													onChange={(e) => setZip(e.target.value)}
-													name='nameofpatient'
-													placeholder='ZIP/Postal code'
-													id='form3Example3cg'
-													className='form-control form-control-lg'
-												/>
-											</div>
-										</div>
-									</div>
+                        <input
+                          id="userNameInput"
+                          type="text"
+                          onChange={(e) => setFirstName(e.target.value)}
+                          value={firstname}
+                          placeholder="First Name"
+                          className="form-control form-control-lg"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example3cg">
+                          Last Name <span className="required">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          onChange={(e) => setLastName(e.target.value)}
+                          name="lastname"
+                          placeholder="Last Name"
+                          id="form3Example3cg"
+                          className="form-control form-control-lg"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-									<div class='row align-items-start'>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													Password <span className='required'>*</span>
-												</label>
-												<input
-													type='password'
-													onKeyUp={() => validate()}
-													onChange={(e) => setPassword(e.target.value)}
-													name='nameofpatient'
-													placeholder='Enter Password'
-													id='pass1'
-													className='form-control form-control-lg'
-													required
-												/>
-											</div>
-										</div>
-										<div class='col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6'>
-											<div className='form-outline mb-4'>
-												<label className='form-label' for='form3Example3cg'>
-													Confirm Password <span className='required'>*</span>
-												</label>
-												<input
-													type='password'
-													onKeyUp={() => validate()}
-													onChange={(e) => set(e.target.value)}
-													name=''
-													placeholder='Enter Password'
-													id='pass2'
-													className={`form-control form-control-lg `}
-													required
-												/>
-												<p
-													style={{ color: `red`, marginLeft: `7px` }}
-													id='Match'>
-													{' '}
-													Password not Match
-												</p>
-											</div>
-										</div>
-									</div>
+                  <div class="row align-items-start">
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example3cg">
+                          Email <span className="required">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          onChange={(e) => setEmail(e.target.value)}
+                          name="email"
+                          placeholder="Enter Your Email"
+                          id="form3Example3cg"
+                          className="form-control form-control-lg"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example4cg">
+                          Phone Number <span className="required">*</span>
+                        </label>
+                        <Input
+                          country={"pk"}
+                          value={phone}
+                          name="patientnumber"
+                          required
+                          onChange={
+                            ((e) => {
+                              setPhoneInputValue(e.target.value);
+                            },
+                            setPhone)
+                          }
+                          inputStyle={{
+                            width: "100%",
+                            minHeight: "calc(1.5em + 1rem + 2px)",
+                            fontSize: "1.25rem",
+                            borderRadius: ".5rem",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-start">
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example4cdg">
+                          Select Gender <span className="required">*</span>
+                        </label>
+                        <select
+                          className="form-select form-select-lg"
+                          required
+                          onChange={(e) => setGender(e.target.value)}
+                          aria-label="Default select example">
+                          <option value="" disabled selected>
+                            Gender
+                          </option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example1cg">
+                          Department <span className="required">*</span>
+                        </label>
+                        <select
+                          className="form-select form-select-lg"
+                          required
+                          onChange={(e) => {
+                            handleshowhide(e);
+                            setDepartment(e.target.value);
+                          }}
+                          aria-label="Default select example"
+                          placeholder="">
+                          <option value="" disabled selected>
+                            Select Department
+                          </option>
+                          <option value="1">Doctor</option>
+                          <option value="2">Patient</option>
+                          <option value="3">Staff/CS Department</option>
+                          <option value="4">Planning Department</option>
+                          <option value="5">Manufacturing Department</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
 
-									{/*  */}
-									<div class='row align-items-start'>
-										<div class='col'>
-											<div className='form-check d-flex  mb-5'>
-												<input
-													className='form-check-input me-2'
-													required
-													type='checkbox'
-													id='form2Example3cg'
-												/>
-												<label
-													className='form-check-label'
-													for='form2Example3g'>
-													I agree all statements in{' '}
-													<a
-														href='https://aligno.co/terms-and-conditions-doctors/'
-														target='_blank'
-														rel='noopener noreferrer'
-														className='text-body'>
-														<u>Terms of service</u>
-													</a>
-												</label>
-											</div>
-										</div>
-									</div>
-									<div className='d-flex justify-content-center'>
-										<button
-											type='submit'
-											value='Register'
-											className='btn btn-success btn-block btn-lg gradient-custom-4 text-body'>
-											Register
-										</button>
-									</div>
+                  {showhide === "1" && (
+                    <div>
+                      <div class="row align-items-start">
+                        <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                          <div className="form-outline mb-4">
+                            <label className="form-label" for="form3Example1cg">
+                              Degree <span className="required">*</span>
+                            </label>
+                            <select
+                              onChange={(e) => setDegree(e.target.value)}
+                              className="form-select form-select-lg"
+                              required
+                              aria-label="Default select example"
+                              placeholder="Degree">
+                              <option value="" disabled selected>
+                                Degree
+                              </option>
+                              <option value="DDS">DDS</option>
+                              <option value="DMD">DMD</option>
+                              <option value="MDS">MDS</option>
+                              <option value="Not Applicable">
+                                Not Applicable
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                          <div className="form-outline mb-4">
+                            <label className="form-label" for="form3Example1cg">
+                              Speciality <span className="required">*</span>
+                            </label>
+                            <select
+                              onChange={(e) => setSpeciality(e.target.value)}
+                              className="form-select form-select-lg"
+                              required
+                              aria-label="Default select example"
+                              placeholder="Speciality">
+                              <option value="" disabled selected>
+                                Speciality
+                              </option>
+                              <option value="General Practitioner">
+                                General Practitioner
+                              </option>
+                              <option value="Orthodontist">Orthodontist</option>
+                              <option value="Other specialist">
+                                Other specialist
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row align-items-start">
+                        <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                          <div className="form-outline mb-4">
+                            <label className="form-label" for="form3Example1cg">
+                              Completed aligner cases{" "}
+                              <span className="required">*</span>
+                            </label>
+                            <select
+                              onChange={(e) => setCompleteCases(e.target.value)}
+                              class="form-select form-select-lg"
+                              required
+                              aria-label="Default select example"
+                              placeholder="Completed aligner cases">
+                              <option value="" disabled selected>
+                                Completed aligner cases
+                              </option>
+                              <option value="None Completed">
+                                None Completed
+                              </option>
+                              <option value="1-10">1-10</option>
+                              <option value="11-50">11-50</option>
+                              <option value="51-100">51-100</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <div class="row align-items-start mt-4">
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example1cg">
+                          Country <span className="required">*</span>
+                        </label>
+                        <select
+                          onChange={(e) => setCountry(e.target.value)}
+                          class="form-select form-select-lg"
+                          required
+                          aria-label="Default select example"
+                          placeholder="Country">
+                          <option value="" disabled selected>
+                            Country
+                          </option>
+                          <option value="Pakistan">Pakistan</option>
+                          <option value="Afghanistan">Afghanistan</option>
+                          <option value="Nepal">Nepal</option>
+                          <option value="Iran">Iran</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example1cg">
+                          State or Province <span className="required">*</span>
+                        </label>
+                        <select
+                          onChange={(e) => setState(e.target.value)}
+                          class="form-select form-select-lg"
+                          required
+                          aria-label="Default select example"
+                          placeholder="State or Province">
+                          <option value="" disabled selected>
+                            State or Province
+                          </option>
+                          <option value="Punjab">Punjab</option>
+                          <option value="Sindh">Sindh</option>
+                          <option value="Balochistan">Balochistan</option>
+                          <option value="California">California</option>
+                          <option value="Arizona">Arizona</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-start">
+                    <div class="col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example1cg">
+                          Address <span className="required">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          onChange={(e) => setAddress(e.target.value)}
+                          name="patientid"
+                          placeholder="Address"
+                          id="form3Example1cg"
+                          className="form-control form-control-lg"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-start">
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example1cg">
+                          City <span className="required">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          onChange={(e) => setCity(e.target.value)}
+                          name="City"
+                          placeholder="City"
+                          id="form3Example1cg"
+                          className="form-control form-control-lg"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example3cg">
+                          ZIP/Postal code
+                        </label>
+                        <input
+                          type="text"
+                          onChange={(e) => setZip(e.target.value)}
+                          name="nameofpatient"
+                          placeholder="ZIP/Postal code"
+                          id="form3Example3cg"
+                          className="form-control form-control-lg"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-									{/* <p className='text-center text-muted mt-5 mb-0'>
+                  <div class="row align-items-start">
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example3cg">
+                          Password <span className="required">*</span>
+                        </label>
+                        <input
+                          type="password"
+                          onKeyUp={() => validate()}
+                          onChange={(e) => setPassword(e.target.value)}
+                          name="nameofpatient"
+                          placeholder="Enter Password"
+                          id="pass1"
+                          className="form-control form-control-lg"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" for="form3Example3cg">
+                          Confirm Password <span className="required">*</span>
+                        </label>
+                        <input
+                          type="password"
+                          onKeyUp={() => validate()}
+                          onChange={(e) => set(e.target.value)}
+                          name=""
+                          placeholder="Enter Password"
+                          id="pass2"
+                          className={`form-control form-control-lg `}
+                          required
+                        />
+                        <p
+                          style={{ color: `red`, marginLeft: `7px` }}
+                          id="Match">
+                          {" "}
+                          Password not Match
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/*  */}
+      {/* <div class="row align-items-start">
+                    <div class="col">
+                      <div className="form-check d-flex  mb-5">
+                        <input
+                          className="form-check-input me-2"
+                          required
+                          type="checkbox"
+                          id="form2Example3cg"
+                        />
+                        <label
+                          className="form-check-label"
+                          for="form2Example3g">
+                          I agree all statements in{" "}
+                          <a
+                            href="https://aligno.co/terms-and-conditions-doctors/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-body">
+                            <u>Terms of service</u>
+                          </a>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      value="Register"
+                      className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                      Register
+                    </button>
+                  </div> */}
+      {/* <p className='text-center text-muted mt-5 mb-0'>
 										Have already an account?{' '}
 										<a href='#!' className='fw-bold text-body'>
 											<u>Login here</u>
 										</a>
 									</p> */}
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+      {/* </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}{" "}
+      */
+    </>
+  );
 }
-
-
 
 export default Register;
