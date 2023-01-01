@@ -6,6 +6,7 @@ import '@fontsource/league-spartan'; // Defaults to weight 400.
 import '@fontsource/source-sans-pro'; // Defaults to weight 400.
 import Input2 from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+
 import { getCurrentDate } from '../../class/clsGeneralVariables';
 import {
 	Button,
