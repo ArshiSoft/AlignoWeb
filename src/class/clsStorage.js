@@ -12,12 +12,12 @@ export const userGroupID = 'UserGroupID';
 //#region Local Storage Functions
 
 export function SetUserInfoInLocalStorage(user) {
-	// localStorage.setItem(clinicID, user.ClinicID);
-	// localStorage.setItem(userEmail, user.Email);
-	// localStorage.setItem(userPhone, user.Phone);
-	// localStorage.setItem(userFirstName, user.FirstName);
-	// localStorage.setItem(userLastName, user.LastName);
-	// localStorage.setItem(userGroupID, user.Department);
+	localStorage.setItem(clinicID, user.Clinic);
+	localStorage.setItem(userEmail, user.Email);
+	localStorage.setItem(userPhone, user.PhoneNumber);
+	localStorage.setItem(userFirstName, user.FirstName);
+	localStorage.setItem(userLastName, user.LastName);
+	localStorage.setItem(userGroupID, user.Department);
 }
 
 //#endregion Local Storage Functions
