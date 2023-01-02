@@ -10,7 +10,7 @@ const DashFooter = ()=>{
     return(
         <>
         <Layout>
-        <Footer style={{ textAlign: 'center',marginTop:`210px` }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
         </>
     )

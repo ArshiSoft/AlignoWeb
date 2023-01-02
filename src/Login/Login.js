@@ -87,7 +87,7 @@ function Login() {
 	return (
 		<>
 			<Col
-				style={{ alignItems: `center`, height: `100` }}
+				style={{ alignItems: `center`, height: `100vh` }}
 				className='gradient-custom-3'>
 				<Row
 					style={{

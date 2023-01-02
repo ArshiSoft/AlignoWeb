@@ -129,23 +129,7 @@ function ClinicForm() {
                               />
                             </div>
                           </div>
-                          {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6">
-                            <div className="form-outline mb-4">
-                              <label
-                                className="form-label"
-                                for="form3Example3cg">
-                                ZIP/Postal code
-                              </label>
-                              <input
-                                type="text"
-                                onChange={(e) => setZip(e.target.value)}
-                                name="nameofpatient"
-                                placeholder="ZIP/Postal code"
-                                id="form3Example3cg"
-                                className="form-control form-control-lg"
-                              />
-                            </div>
-                          </div> */}
+                        
                         </div>
 
                         {/*  */}
@@ -181,14 +165,7 @@ function ClinicForm() {
                             Register
                           </button>
                         </div>
-
-                        {/* <p className='text-center text-muted mt-5 mb-0'>
-										Have already an account?{' '}
-										<a href='#!' className='fw-bold text-body'>
-											<u>Login here</u>
-										</a>
-									</p> */}
-                      </form>
+</form>
                     </div>
                   </div>
                 </div>

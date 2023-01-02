@@ -1,169 +1,169 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../Register/Register.css';
-import { useEffect } from 'react';
-import '@fontsource/league-spartan'; // Defaults to weight 400.
-import '@fontsource/source-sans-pro'; // Defaults to weight 400.
-import 'react-phone-input-2/lib/style.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../Register/Register.css";
+import { useEffect } from "react";
+import "@fontsource/league-spartan"; // Defaults to weight 400.
+import "@fontsource/source-sans-pro"; // Defaults to weight 400.
+import "react-phone-input-2/lib/style.css";
 import {
-	Button,
-	Checkbox,
-	Col,
-	Divider,
-	Row,
-	Select,
-	Form,
-	Input,
-	message,
-} from 'antd';
-import { Typography } from 'antd';
-import { Option } from 'antd/lib/mentions';
-import { API } from '../../class/clsGlobalVariables';
-import axios from 'axios';
-import { async } from 'q';
+  Button,
+  Checkbox,
+  Col,
+  Divider,
+  Row,
+  Select,
+  Form,
+  Input,
+  message,
+} from "antd";
+import { Typography } from "antd";
+import { Option } from "antd/lib/mentions";
+import { API } from "../../class/clsGlobalVariables";
+import axios from "axios";
+import { async } from "q";
 const { Title } = Typography;
 
 function Register() {
-	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(false);
-	const [hideDegree, setHideDegree] = useState(true);
-	const [hideSpeciality, setHideSpeciality] = useState(true);
-	const [hideAlignerCases, setHideAlignerCases] = useState(true);
-	const [hideClinic, setHideClinic] = useState(true);
-	const [clinic, setClinic] = useState([]);
-	const [clinicList, setClinicList] = useState([]);
-	const [form] = Form.useForm();
-	const api = API + 'regform/';
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [hideDegree, setHideDegree] = useState(true);
+  const [hideSpeciality, setHideSpeciality] = useState(true);
+  const [hideAlignerCases, setHideAlignerCases] = useState(true);
+  const [hideClinic, setHideClinic] = useState(true);
+  const [clinic, setClinic] = useState([]);
+  const [clinicList, setClinicList] = useState([]);
+  const [form] = Form.useForm();
+  const api = API + "regform/";
 
-	React.useEffect(() => {
-		const timeout = setTimeout(() => {
-			fetchClinicList();
-		}, 200);
-		return () => clearTimeout(timeout);
-	}, []);
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      fetchClinicList();
+    }, 200);
+    return () => clearTimeout(timeout);
+  }, []);
 
-	useEffect(() => {
-		fetchClinicList();
-	}, []);
+  useEffect(() => {
+    fetchClinicList();
+  }, []);
 
-	const clinicOptions = clinicList.map((clinic) => {
-		return <option value={clinic._id}>{clinic.clinicName}</option>;
-	});
+  const clinicOptions = clinicList.map((clinic) => {
+    return <option value={clinic._id}>{clinic.clinicName}</option>;
+  });
 
-	const onClinicChange = (value) => {
-		setClinic(clinicList.find((clinic) => clinic._id == value));
-		console.log(clinic);
-	};
+  const onClinicChange = (value) => {
+    setClinic(clinicList.find((clinic) => clinic._id == value));
+    console.log(clinic);
+  };
 
-	const onDepartmentChange = (value) => {
-		switch (value) {
-			case '1': {
-				//Doctor
-				setHideDegree(false);
-				setHideSpeciality(false);
-				setHideAlignerCases(false);
-				setHideClinic(false);
-				break;
-			}
-			case '2': {
-				//Patient
-				setHideDegree(true);
-				setHideSpeciality(true);
-				setHideAlignerCases(true);
-				setHideClinic(false);
-				break;
-			}
-			case '3': {
-				//Staff
-				setHideDegree(true);
-				setHideSpeciality(true);
-				setHideAlignerCases(true);
-				setHideClinic(false);
-				break;
-			}
-			case '4': {
-				//Planning
-				setHideDegree(true);
-				setHideSpeciality(true);
-				setHideAlignerCases(true);
-				setHideClinic(true);
-				break;
-			}
-			case '5': {
-				//Manufacturing
-				setHideDegree(true);
-				setHideSpeciality(true);
-				setHideAlignerCases(true);
-				setHideClinic(true);
-				break;
-			}
-			default: {
-				setHideDegree(true);
-				setHideSpeciality(true);
-				setHideAlignerCases(true);
-				setHideClinic(true);
-				break;
-			}
-		}
-	};
+  const onDepartmentChange = (value) => {
+    switch (value) {
+      case "1": {
+        //Doctor
+        setHideDegree(false);
+        setHideSpeciality(false);
+        setHideAlignerCases(false);
+        setHideClinic(false);
+        break;
+      }
+      case "2": {
+        //Patient
+        setHideDegree(true);
+        setHideSpeciality(true);
+        setHideAlignerCases(true);
+        setHideClinic(false);
+        break;
+      }
+      case "3": {
+        //Staff
+        setHideDegree(true);
+        setHideSpeciality(true);
+        setHideAlignerCases(true);
+        setHideClinic(false);
+        break;
+      }
+      case "4": {
+        //Planning
+        setHideDegree(true);
+        setHideSpeciality(true);
+        setHideAlignerCases(true);
+        setHideClinic(true);
+        break;
+      }
+      case "5": {
+        //Manufacturing
+        setHideDegree(true);
+        setHideSpeciality(true);
+        setHideAlignerCases(true);
+        setHideClinic(true);
+        break;
+      }
+      default: {
+        setHideDegree(true);
+        setHideSpeciality(true);
+        setHideAlignerCases(true);
+        setHideClinic(true);
+        break;
+      }
+    }
+  };
 
-	const fetchClinicList = async () => {
-		try {
-			const response = await axios.get(API + 'clinicform/');
-			setClinicList(response.data.userdata);
-			console.log(response);
-			console.log(clinicList);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  const fetchClinicList = async () => {
+    try {
+      const response = await axios.get(API + "clinicform/");
+      setClinicList(response.data.userdata);
+      console.log(response);
+      console.log(clinicList);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-	async function btnRegisterClick(e) {
-		e.preventDefault();
-		setIsLoading(true);
-		form
-			.validateFields()
-			.then(() => {
-				return setTimeout(() => {
-					form.submit();
-				}, 1000);
-			})
-			.catch((ex) => {
-				setIsLoading(false);
-			});
-	}
-	async function onRegister(values) {
-		console.log(values);
+  async function btnRegisterClick(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    form
+      .validateFields()
+      .then(() => {
+        return setTimeout(() => {
+          form.submit();
+        }, 1000);
+      })
+      .catch((ex) => {
+        setIsLoading(false);
+      });
+  }
+  async function onRegister(values) {
+    console.log(values);
 
-		try {
-			var Password = values.Password;
-			values.Password = undefined;
-			values.ConfirmPassword = undefined;
+    try {
+      var Password = values.Password;
+      values.Password = undefined;
+      values.ConfirmPassword = undefined;
 
-			const response = await fetch(api, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					Email: values.Email,
-					Password: Password,
-					Active: false,
-					User: values,
-				}),
-			});
+      const response = await fetch(api, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Email: values.Email,
+          Password: Password,
+          Active: false,
+          User: values,
+        }),
+      });
 
-			const data = await response.json();
-			if (data.status === 'ok') {
-				const mailResponse = await fetch(API + 'sendmail-noreply/', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						to: values.Email,
-						subject: 'Activation Email',
-						html: `<!DOCTYPE html>
+      const data = await response.json();
+      if (data.status === "ok") {
+        const mailResponse = await fetch(API + "sendmail-noreply/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: values.Email,
+            subject: "Activation Email",
+            html: `<!DOCTYPE html>
 											<html
 							lang="en"
 							xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -619,890 +619,899 @@ function Register() {
 								<!-- End -->
 							</body>
 						</html>`,
-					}),
-				});
-				if (mailResponse.status) {
-					navigate('/thanks-register');
-					console.log(mailResponse.json());
-				}
-			} else {
-				message.warn('Email Taken!');
-			}
-			console.log(data);
-		} catch (ex) {
-			console.log('Error' + ex);
-			message.error('Something went wrong!');
-		}
+          }),
+        });
+        if (mailResponse.status) {
+          navigate("/thanks-register");
+          console.log(mailResponse.json());
+        }
+      } else {
+        message.warn("Email Taken!");
+      }
+      console.log(data);
+    } catch (ex) {
+      console.log("Error" + ex);
+      message.error("Something went wrong!");
+    }
 
-		setIsLoading(false);
-	}
+    setIsLoading(false);
+  }
 
-	return (
-		<>
-			<Col
-				style={{ alignItems: `center`, height: `100` }}
-				className='gradient-custom-3'
-				span={24}>
-				<Row style={{ justifyContent: `center`, alignItems: `center` }}>
-					<Col
-						className='formwidth'
-						style={{ width: `900px` }}
-						xs={{
-							span: 24,
-							offset: 0,
-						}}
-						sm={{
-							span: 18,
-							offset: 0,
-						}}
-						md={{
-							span: 18,
-						}}
-						lg={{
-							span: 18,
-							offset: 0,
-						}}>
-						<Row
-							style={{
-								// margin: `10px`,
-								backgroundColor: `white`,
-								borderRadius: `10px`,
-								padding: `50px`,
-								justifyContent: `center`,
-							}}>
-							<Col
-								style={{ marginBottom: `5px` }}
-								xs={{
-									span: 24,
-									offset: 0,
-								}}
-								sm={{
-									span: 24,
-									offset: 0,
-								}}
-								md={{
-									span: 24,
-								}}
-								lg={{
-									span: 24,
-								}}>
-								<Title
-									style={{
-										justifyContent: `center`,
-										textAlign: `center`,
-										marginBottom: `15px`,
-									}}
-									level={2}>
-									REGISTER
-								</Title>
-							</Col>
-							<Form
-								layout='vertical'
-								form={form}
-								onFinish={onRegister}
-								scrollToFirstError>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-										}}
-										lg={{
-											span: 11,
-										}}>
-										<Form.Item
-											name='FirstName'
-											label=' First Name'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input placeholder='First Name' />
-										</Form.Item>
-									</Col>
-
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										<Form.Item
-											name='LastName'
-											label='Last Name'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input placeholder='Last Name' />
-										</Form.Item>
-										{/* </div>
+  return (
+    <>
+      <Col
+        style={{ alignItems: `center`, height: `100` }}
+        className="gradient-custom-3"
+        span={24}
+        >
+        <Row style={{ justifyContent: `center`, alignItems: `center` }}>
+          <Col
+            className="formwidth"
+           
+            xs={{
+              span: 24,
+              offset: 0,
+            }}
+            sm={{
+              span: 18,
+              offset: 0,
+            }}
+            md={{
+              span: 13,
+            }}
+            lg={{
+              span: 13,
+              offset: 0,
+            }}
+            >
+            <Row
+            
+              style={{
+                // margin: `10px`,
+                display:`block`,
+                backgroundColor: `white`,
+                borderRadius: `10px`,
+                padding: `50px`,
+                justifyContent: `center`,
+                
+              }}>
+              <Col
+                style={{ marginBottom: `5px` }}
+                xs={{
+                  span: 24,
+                  offset: 0,
+                }}
+                sm={{
+                  span: 24,
+                  offset: 0,
+                }}
+                md={{
+                  span: 24,
+                }}
+                lg={{
+                  span: 24,
+                }}>
+                <Title
+                  style={{
+                    justifyContent: `center`,
+                    textAlign: `center`,
+                    marginBottom: `15px`,
+                  }}
+                  level={2}>
+                  REGISTER
+                </Title>
+              </Col>
+              <Form
+                layout="vertical"
+                form={form}
+                onFinish={onRegister}
+                scrollToFirstError
+              
+				>
+        <Row 
+        
+        style={{ justifyContent: `center` }}>
+                  <Col  
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                    }}
+                    lg={{
+                      span: 11,
+                    }}>
+                    <Form.Item
+                      name="FirstName"
+                      label=" First Name"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="First Name" />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    >
+                    <Form.Item
+                      name="LastName"
+                      label="Last Name"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Last Name" />
+                    </Form.Item>
+                    {/* </div>
                           </div> */}
-									</Col>
-								</Row>
-								{/* </div> */}
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										<Form.Item
-											name='Email'
-											label=' Email'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input type='email' placeholder='ali@gmail.com' />
-										</Form.Item>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										<Form.Item
-											name='PhoneNumber'
-											label='Phone Number'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input
-												addonBefore={
-													<Form.Item noStyle>
-														<Select
-															defaultValue='+92'
-															style={{
-																width: 70,
-															}}>
-															<Option value='92'>+92</Option>
-														</Select>
-													</Form.Item>
-												}
-												style={{
-													width: '100%',
-												}}
-											/>
-										</Form.Item>
+                  </Col>
+                </Row>
+               
+                {/* </div> */}
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    <Form.Item
+                      name="Email"
+                      label=" Email"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input type="email" placeholder="ali@gmail.com" />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="PhoneNumber"
+                      label="Phone Number"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input
+                        addonBefore={
+                          <Form.Item noStyle>
+                            <Select
+                              defaultValue="+92"
+                              style={{
+                                width: 70,
+                              }}>
+                              <Option value="92">+92</Option>
+                            </Select>
+                          </Form.Item>
+                        }
+                        style={{
+                          width: "100%",
+                        }}
+                      />
+                    </Form.Item>
 
-										{/* </div> */}
-									</Col>
-									{/* </div> */}
-								</Row>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											name='Gender'
-											label='Select Gender'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Select
-												placeholder='Select a Gender'
-												options={[
-													{
-														label: 'Gender',
-														options: [
-															{
-																label: 'Male',
-																value: 'Male',
-															},
-															{
-																label: 'Female',
-																value: 'Female',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											name='Department'
-											label='Department'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Select
-												placeholder='Select Department'
-												onChange={onDepartmentChange}
-												options={[
-													{
-														label: 'Department',
-														options: [
-															{
-																label: 'Doctor',
-																value: '1',
-															},
-															{
-																label: 'Patient',
-																value: '2',
-															},
-															{
-																label: 'Saff/CS Department',
-																value: '3',
-															},
-															{
-																label: 'Planning Department',
-																value: '4',
-															},
-															{
-																label: 'Manufacturing Department',
-																value: '5',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-								</Row>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											name='Degree'
-											shouldUpdate
-											label='Degree'
-											hidden={hideDegree}
-											rules={[
-												{
-													required: !hideDegree,
-												},
-											]}>
-											<Select
-												placeholder='Select Degree'
-												options={[
-													{
-														label: 'Degree',
-														options: [
-															{
-																label: 'DDS',
-																value: 'DDS',
-															},
-															{
-																label: 'DMD',
-																value: 'DMD',
-															},
-															{
-																label: 'MDS',
-																value: 'MDS',
-															},
-															{
-																label: 'Not Applicable',
-																value: 'Not Applicable',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											hidden={hideSpeciality}
-											shouldUpdate
-											name='Speciality'
-											label='Speciality'
-											rules={[
-												{
-													required: !hideSpeciality,
-												},
-											]}>
-											<Select
-												placeholder='Select Speciality'
-												options={[
-													{
-														label: 'Speciality',
-														options: [
-															{
-																label: 'General Practitioner',
-																value: 'General Practitioner',
-															},
-															{
-																label: 'Orthodontist',
-																value: 'Orthodontist',
-															},
-															{
-																label: 'Other Specialist',
-																value: 'Other Specialist',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-								</Row>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
+                    {/* </div> */}
+                  </Col>
+                  {/* </div> */}
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+				 <Form.Item
+                      name="Gender"
+                      label="Select Gender"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select a Gender"
+                        options={[
+                          {
+                            label: "Gender",
+                            options: [
+                              {
+                                label: "Male",
+                                value: "Male",
+                              },
+                              {
+                                label: "Female",
+                                value: "Female",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Department"
+                      label="Department"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Department"
+                        onChange={onDepartmentChange}
+                        options={[
+                          {
+                            label: "Department",
+                            options: [
+                              {
+                                label: "Doctor",
+                                value: "1",
+                              },
+                              {
+                                label: "Patient",
+                                value: "2",
+                              },
+                              {
+                                label: "Saff/CS Department",
+                                value: "3",
+                              },
+                              {
+                                label: "Planning Department",
+                                value: "4",
+                              },
+                              {
+                                label: "Manufacturing Department",
+                                value: "5",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Degree"
+                      shouldUpdate
+                      label="Degree"
+                      hidden={hideDegree}
+                      rules={[
+                        {
+                          required: !hideDegree,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Degree"
+                        options={[
+                          {
+                            label: "Degree",
+                            options: [
+                              {
+                                label: "DDS",
+                                value: "DDS",
+                              },
+                              {
+                                label: "DMD",
+                                value: "DMD",
+                              },
+                              {
+                                label: "MDS",
+                                value: "MDS",
+                              },
+                              {
+                                label: "Not Applicable",
+                                value: "Not Applicable",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}
+					>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      hidden={hideSpeciality}
+                      shouldUpdate
+                      name="Speciality"
+                      label="Speciality"
+                      rules={[
+                        {
+                          required: !hideSpeciality,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Speciality"
+                        options={[
+                          {
+                            label: "Speciality",
+                            options: [
+                              {
+                                label: "General Practitioner",
+                                value: "General Practitioner",
+                              },
+                              {
+                                label: "Orthodontist",
+                                value: "Orthodontist",
+                              },
+                              {
+                                label: "Other Specialist",
+                                value: "Other Specialist",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
 
-										<Form.Item
-											name='Clinic'
-											label='Clinic'
-											style={{ margin: '0px' }}
-											hidden={hideClinic}
-											rules={[
-												{
-													required: !hideClinic,
-												},
-											]}
-											shouldUpdate>
-											<Select
-												placeholder='Select Clinic'
-												onChange={onClinicChange}>
-												{clinicOptions}
-											</Select>
-										</Form.Item>
-										<label
-											style={{ margintop: '0px', marginleft: '2px' }}
-											for='Clinic'>
-											{clinic.address && !hideClinic
-												? `${clinic.address}, ${clinic.city}, ${clinic.country}`
-												: ''}
-										</label>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										<Form.Item
-											shouldUpdate
-											name='CompletedAlignerCases'
-											label='Completed aligner cases'
-											hidden={hideAlignerCases}
-											rules={[
-												{
-													required: !hideAlignerCases,
-												},
-											]}>
-											<Select
-												placeholder='Completed aligner cases'
-												options={[
-													{
-														label: 'Completed aligner cases',
-														options: [
-															{
-																label: 'None Completed',
-																value: 'None Completed',
-															},
-															{
-																label: '1-10',
-																value: '1-10',
-															},
-															{
-																label: '11-50',
-																value: '11-50',
-															},
-															{
-																label: '51-100',
-																value: '51-100',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-								</Row>
-								<Divider />
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											name='Country'
-											label='Country'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Select
-												placeholder='Select Country'
-												options={[
-													{
-														label: 'Country',
-														options: [
-															{
-																label: 'Pakistan',
-																value: 'Pakistan',
-															},
-															{
-																label: 'China',
-																value: 'China',
-															},
-															{
-																label: 'Nepal',
-																value: 'Nepal',
-															},
-															{
-																label: 'England',
-																value: 'England',
-															},
-															{
-																label: 'Australia',
-																value: 'Australia',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										<Form.Item
-											name='State'
-											label='State or Province'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Select
-												placeholder='Select State'
-												options={[
-													{
-														label: 'State',
-														options: [
-															{
-																label: 'Punjab',
-																value: 'Punjab',
-															},
-															{
-																label: 'Sindh',
-																value: 'Sindh',
-															},
-															{
-																label: 'Balochistan',
-																value: 'Balochistan',
-															},
-															{
-																label: 'KPK',
-																value: 'KPK',
-															},
-														],
-													},
-												]}></Select>
-										</Form.Item>
-									</Col>
-								</Row>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 23,
-											offset: 0,
-										}}
-										lg={{
-											span: 23,
-											offset: 0,
-										}}>
-										<Form.Item
-											name='Address'
-											label='Address'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input placeholder='Enter Your Address' />
-										</Form.Item>
-									</Col>
-								</Row>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											name='City'
-											label='City'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input placeholder='Enter Your City' />
-										</Form.Item>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										<Form.Item name='ZipCode' label='Zip/Postal Code'>
-											<Input placeholder='Enter Your Zip/Postal Code' />
-										</Form.Item>
-									</Col>
-								</Row>
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 0,
-										}}
-										lg={{
-											span: 11,
-											offset: 0,
-										}}>
-										{/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
-										{/* <div className="form-outline mb-4"> */}
-										<Form.Item
-											name='Password'
-											label='Password'
-											rules={[
-												{
-													required: true,
-												},
-											]}>
-											<Input
-												type='password'
-												placeholder='Enter Your Password'
-											/>
-										</Form.Item>
-									</Col>
-									<Col
-										style={{ marginBottom: `5px` }}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 11,
-											offset: 1,
-										}}
-										lg={{
-											span: 11,
-											offset: 1,
-										}}>
-										<Form.Item
-											name='ConfirmPassword'
-											label='Confirm Password'
-											rules={[
-												{
-													required: true,
-													validator: (_, value) =>
-														value === form.getFieldValue('Password')
-															? Promise.resolve()
-															: Promise.reject(
-																	new Error('Password does not match!')
-															  ),
-												},
-											]}>
-											<Input type='password' placeholder='Confirm Password' />
-										</Form.Item>
-									</Col>
-								</Row>
+                    <Form.Item
+                      name="Clinic"
+                      label="Clinic"
+                      style={{ margin: "0px" }}
+                      hidden={hideClinic}
+                      rules={[
+                        {
+                          required: !hideClinic,
+                        },
+                      ]}
+                      shouldUpdate>
+                      <Select
+                        placeholder="Select Clinic"
+                        onChange={onClinicChange}>
+                        {clinicOptions}
+                      </Select>
+                    </Form.Item>
+                    <label
+                      style={{ margintop: "0px", marginleft: "2px" }}
+                      for="Clinic">
+                      {clinic.address && !hideClinic
+                        ? `${clinic.address}, ${clinic.city}, ${clinic.country}`
+                        : ""}
+                    </label>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      shouldUpdate
+                      name="CompletedAlignerCases"
+                      label="Completed aligner cases"
+                      hidden={hideAlignerCases}
+                      rules={[
+                        {
+                          required: !hideAlignerCases,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Completed aligner cases"
+                        options={[
+                          {
+                            label: "Completed aligner cases",
+                            options: [
+                              {
+                                label: "None Completed",
+                                value: "None Completed",
+                              },
+                              {
+                                label: "1-10",
+                                value: "1-10",
+                              },
+                              {
+                                label: "11-50",
+                                value: "11-50",
+                              },
+                              {
+                                label: "51-100",
+                                value: "51-100",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Divider />
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Country"
+                      label="Country"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select Country"
+                        options={[
+                          {
+                            label: "Country",
+                            options: [
+                              {
+                                label: "Pakistan",
+                                value: "Pakistan",
+                              },
+                              {
+                                label: "China",
+                                value: "China",
+                              },
+                              {
+                                label: "Nepal",
+                                value: "Nepal",
+                              },
+                              {
+                                label: "England",
+                                value: "England",
+                              },
+                              {
+                                label: "Australia",
+                                value: "Australia",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="State"
+                      label="State or Province"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select
+                        placeholder="Select State"
+                        options={[
+                          {
+                            label: "State",
+                            options: [
+                              {
+                                label: "Punjab",
+                                value: "Punjab",
+                              },
+                              {
+                                label: "Sindh",
+                                value: "Sindh",
+                              },
+                              {
+                                label: "Balochistan",
+                                value: "Balochistan",
+                              },
+                              {
+                                label: "KPK",
+                                value: "KPK",
+                              },
+                            ],
+                          },
+                        ]}></Select>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 23,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 23,
+                      offset: 0,
+                    }}>
+                    <Form.Item
+                      name="Address"
+                      label="Address"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Enter Your Address" />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="City"
+                      label="City"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input placeholder="Enter Your City" />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item name="ZipCode" label="Zip/Postal Code">
+                      <Input placeholder="Enter Your Zip/Postal Code" />
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 0,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 0,
+                    }}>
+                    {/* <div class="col-sm-12 col-12 col-md-6 col-lg-6 col-xl-6"> */}
+                    {/* <div className="form-outline mb-4"> */}
+                    <Form.Item
+                      name="Password"
+                      label="Password"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Input
+                        type="password"
+                        placeholder="Enter Your Password"
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col
+                    style={{ marginBottom: `5px` }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 11,
+                      offset: 1,
+                    }}
+                    lg={{
+                      span: 11,
+                      offset: 1,
+                    }}>
+                    <Form.Item
+                      name="ConfirmPassword"
+                      label="Confirm Password"
+                      rules={[
+                        {
+                          required: true,
+                          validator: (_, value) =>
+                            value === form.getFieldValue("Password")
+                              ? Promise.resolve()
+                              : Promise.reject(
+                                  new Error("Password does not match!")
+                                ),
+                        },
+                      ]}>
+                      <Input type="password" placeholder="Confirm Password" />
+                    </Form.Item>
+                  </Col>
+                </Row>
 
-								<Row style={{ justifyContent: `center` }}>
-									<Col
-										justify='start'
-										style={{
-											alignContent: `start`,
-											marginTop: `20px`,
-											marginBottom: `20px`,
-										}}
-										xs={{
-											span: 24,
-											offset: 0,
-										}}
-										sm={{
-											span: 24,
-											offset: 0,
-										}}
-										md={{
-											span: 23,
-										}}
-										lg={{
-											span: 23,
-											offset: 0,
-										}}>
-										<Form.Item
-											name='agreement'
-											valuePropName='checked'
-											rules={[
-												{
-													validator: (_, value) =>
-														value
-															? Promise.resolve()
-															: Promise.reject(
-																	new Error(
-																		'You Must agree to Terms & Conditions!'
-																	)
-															  ),
-												},
-											]}>
-											<Checkbox>
-												I agree all statements in{' '}
-												<a
-													href='https://aligno.co/terms-and-conditions-doctors/'
-													target='_blank'
-													rel='noopener noreferrer'>
-													Terms & Conditions
-												</a>
-											</Checkbox>
-										</Form.Item>
-									</Col>
-								</Row>
+                <Row style={{ justifyContent: `center` }}>
+                  <Col
+                    justify="start"
+                    style={{
+                      alignContent: `start`,
+                      marginTop: `20px`,
+                      marginBottom: `20px`,
+                    }}
+                    xs={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    sm={{
+                      span: 24,
+                      offset: 0,
+                    }}
+                    md={{
+                      span: 23,
+                    }}
+                    lg={{
+                      span: 23,
+                      offset: 0,
+                    }}>
+                    <Form.Item
+                      name="agreement"
+                      valuePropName="checked"
+                      rules={[
+                        {
+                          validator: (_, value) =>
+                            value
+                              ? Promise.resolve()
+                              : Promise.reject(
+                                  new Error(
+                                    "You Must agree to Terms & Conditions!"
+                                  )
+                                ),
+                        },
+                      ]}>
+                      <Checkbox>
+                        I agree all statements in{" "}
+                        <a
+                          href="https://aligno.co/terms-and-conditions-doctors/"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          Terms & Conditions
+                        </a>
+                      </Checkbox>
+                    </Form.Item>
+                  </Col>
+                </Row>
 
-								<Row style={{ justifyContent: `center` }}>
-									<Form.Item>
-										<Button loading={isLoading} onClick={btnRegisterClick}>
-											Register
-										</Button>
-									</Form.Item>
-								</Row>
-							</Form>
-						</Row>
-					</Col>
-				</Row>
-			</Col>
-		</>
-	);
+                <Row style={{ justifyContent: `center` }}>
+                  <Form.Item>
+                    <Button loading={isLoading} onClick={btnRegisterClick}>
+                      Register
+                    </Button>
+                  </Form.Item>
+                </Row>
+              </Form>
+            </Row>
+          </Col>
+        </Row>
+      </Col>
+    </>
+  );
 }
 
 export default Register;
