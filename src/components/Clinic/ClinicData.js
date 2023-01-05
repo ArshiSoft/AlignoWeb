@@ -21,10 +21,10 @@ function ClinicData() {
 	return (
 		<>
 			<Layout>
-				<AsideMenu />
+				<AsideMenu/>
 				<Layout>
 					<Header />
-					<Content  style={{marginBottom:`340px`}}>
+					<Content  style={{marginBottom:`400px`}}>
 						<ClinicTable />
 					</Content>
 					<Footer/>

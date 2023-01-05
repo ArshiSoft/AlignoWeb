@@ -18,7 +18,7 @@ function getItem(label, key, icon, children, type) {
 const DashContent = () => {
     return (
         <>
-            <Layout>
+            <Layout style={{marginTop:`180px`}}>
                 <Content 
                 // className="site-layout-background"
                 //     style={{

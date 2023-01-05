@@ -640,7 +640,7 @@ function Register() {
   return (
     <>
       <Col
-        style={{ alignItems: `center`, height: `100` }}
+        style={{ alignItems: `center`, height:`100`}}
         className="gradient-custom-3"
         span={24}
         >
@@ -688,7 +688,7 @@ function Register() {
                 md={{
                   span: 24,
                 }}
-                lg={{
+                lg={{ 
                   span: 24,
                 }}>
                 <Title
