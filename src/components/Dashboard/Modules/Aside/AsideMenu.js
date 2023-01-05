@@ -67,7 +67,7 @@ const items = [
   getItem(
     "Candidate",
     "Cand",
-    <Link to="/Candidate" className="mb-1">
+    <Link to="/Am-I-a-Candidate" className="mb-1">
       <UserOutlined />
     </Link>
 	
