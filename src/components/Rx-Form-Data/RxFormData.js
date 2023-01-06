@@ -31,7 +31,7 @@ function RxFormData() {
    <AsideMenu/>
     <Layout>
       <Header />
-      <Content style={{marginBottom:`340px`}}>
+      <Content style={{marginBottom:`500px`}}>
         <RxTable/>
       </Content>
       <Footer/>

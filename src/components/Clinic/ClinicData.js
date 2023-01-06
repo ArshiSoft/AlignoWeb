@@ -24,7 +24,7 @@ function ClinicData() {
 				<AsideMenu/>
 				<Layout>
 					<Header />
-					<Content  style={{marginBottom:`400px`}}>
+					<Content  style={{marginBottom:`600px`}}>
 						<ClinicTable />
 					</Content>
 					<Footer/>
