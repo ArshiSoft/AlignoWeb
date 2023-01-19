@@ -19,6 +19,8 @@ import Example from './components/PrintTesting/Example';
 import OldNavbar from './components/Navbar/OldNavbar';
 import ClinicForm from './components/Clinic/ClinicForm';
 import ClinicData from './components/Clinic/ClinicData';
+import Quiz from './components/Candidate/Quiz';
+import ThanksCandidate from './components/ThanksCandidate';
 
 function App() {
 	// if(localStorage.JwtToken){
@@ -56,11 +58,13 @@ function App() {
 					<Route path='/Rx-form' element={<Rxform />} />
 					<Route path='/thanks' element={<Thanks />} />
 					<Route path='/thanks-register' element={<ThanksRegister />} />
+					<Route path='/thanks-candidate' element={<ThanksCandidate />} />
 					<Route path='/' element={<Dashboard />} />
 					<Route path='/Navbar' element={<Navbar />} />
 					<Route path='/OldNavbar' element={<OldNavbar />} />
 					<Route path='/Rx-view' element={<RxFormData />} />
 					<Route path='/Am-I-a-Candidate' element={<Candidate />} />
+					<Route path='/quiz' element={<Quiz />} />
 					<Route path='/activate' element={<Activate />} />
 					<Route path='/exampleprint' element={<Example />} />
 					<Route path='*' element={<PageNotFound />} />
