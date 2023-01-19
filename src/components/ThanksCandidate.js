@@ -12,7 +12,7 @@ function ThanksCandidate() {
 	return (
 		<>
 			<div class='jumbotron text-center'>
-				<h1 class='display-3'>Thank You for submitting!</h1>
+				<h1 class='display-3'>Thank you for submitting your response!</h1>
 				<p class='lead'>
 					<strong>Our team will get back to you shortly!</strong>
 				</p>
